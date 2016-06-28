@@ -1,6 +1,6 @@
 <?php
 
-class Modelo_FichaAlumno extends CI_Model {
+class Modelo_Alumno extends CI_Model {
 
 	function __construct(){
 

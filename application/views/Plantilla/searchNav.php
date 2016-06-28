@@ -1,10 +1,11 @@
+<?php if ($this->session->userdata('login_ok') == TRUE){ ?>
 			<div class="main-content">
 				<div class="main-content-inner">
 					<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="#">Home</a>
+								<a href="Administrador">Home</a>
 							</li>
 
 							<li>
@@ -21,3 +22,4 @@
 							</form>
 						</div><!-- /.nav-search -->
 					</div>
+<?php } ?>

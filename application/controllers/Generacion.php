@@ -10,46 +10,56 @@ class Generacion extends CI_Controller {
 
   public function index(){
 
-		$data['arrGen'] = $this->Modelo_Generacion->get_Generacion();
+		if(!$this->session->userdata('login_ok')){
+			redirect('Principal','refresh');
+		}else{
 
-    $data['titulo'] = "Lista de Generaciones";
-    $data['content'] = "Admin/Lista_Generaciones";
+			$data['arrGen'] = $this->Modelo_Generacion->get_Generacion();
 
-      $this->load->view('Plantilla', $data);
+		    $data['titulo'] = "Lista de Generaciones";
+		    $data['content'] = "Admin/Lista_Generaciones";
+
+		      $this->load->view('Plantilla', $data);
+		     }
   }
 
 	function Registrar_Generacion(){
 
-    $data['titulo'] = "Registro de Generaciones";
-    $data['content'] = "Admin/frm_registroGeneracion";
+		if(!$this->session->userdata('login_ok')){
+			redirect('Principal','refresh');
+		}else{
 
-		$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|max_length[30]');
+		    $data['titulo'] = "Registro de Generaciones";
+		    $data['content'] = "Admin/frm_registroGeneracion";
 
-		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
+			$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|max_length[30]');
 
-		if ($this->form_validation->run() == FALSE) // validation hasn't been passed
-		{
-			$this->load->view('Plantilla', $data);
-		}
-		else // passed validation proceed to post success logic
-		{
-		 	// build array for the model
+			$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
-			$form_data = array(
-                  'id' => set_value(0),
-					       	'nombre' => set_value('nombre')
-						);
-
-			// run insert model to write data to db
-
-			if ($this->Modelo_Generacion->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
+			if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 			{
-				redirect('Generacion/success');   // or whatever logic needs to occur
+				$this->load->view('Plantilla', $data);
 			}
-			else
+			else // passed validation proceed to post success logic
 			{
-			echo 'An error occurred saving your information. Please try again later';
-			// Or whatever error handling is necessary
+			 	// build array for the model
+
+				$form_data = array(
+	                  'id' => set_value(0),
+						       	'nombre' => set_value('nombre')
+							);
+
+				// run insert model to write data to db
+
+				if ($this->Modelo_Generacion->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
+				{
+					redirect('Generacion/success');   // or whatever logic needs to occur
+				}
+				else
+				{
+				echo 'An error occurred saving your information. Please try again later';
+				// Or whatever error handling is necessary
+				}
 			}
 		}
 	}

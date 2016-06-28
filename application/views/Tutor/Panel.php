@@ -24,7 +24,7 @@
 							<div class="icon">
 								<i class="ion ion-person-add"></i>
 							</div>
-							<a href="Grupo" class="small-box-footer">
+							<a href="Grupo/Mi_Grupo" class="small-box-footer">
 								 Ir a Mi Grupo <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>
@@ -38,7 +38,7 @@
 							<div class="icon">
 								<i class="ion ion-ios-people"></i>
 							</div>
-							<a href="Canalizacion" class="small-box-footer">
+							<a href="Canalizacion/lista_canalizaciones" class="small-box-footer">
 								 Ver Lista <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>

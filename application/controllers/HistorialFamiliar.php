@@ -26,11 +26,12 @@ class HistorialFamiliar extends CI_Controller {
 		 	// build array for the model
 
 			$form_data = array(
+							'id' => set_value(0),
 					       	'situacionesFamiliares' => set_value('situacionesFamiliares'),
 					       	'integrantes' => set_value('integrantes'),
 					       	'lugar' => set_value('lugar'),
 					       	'relacionPaterna' => set_value('relacionPaterna')
-						);
+							);
 
 			// run insert model to write data to db
 

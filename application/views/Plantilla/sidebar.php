@@ -1,3 +1,4 @@
+<?php if ($this->session->userdata('login_ok') == TRUE){ ?>
 			<div id="sidebar" class="sidebar responsive sidebar-fixed">
       <!--
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
@@ -52,7 +53,7 @@
 
 						<ul class="submenu">
                             <li class="">
-                <a href="../Grupo">
+                <a href="Grupo/Mi_Grupo">
                   <i class="menu-icon fa fa-caret-right"></i>
                   Mi Grupo
                 </a>
@@ -213,3 +214,5 @@
 					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
 				</script>
 			</div>
+
+<?php } ?>

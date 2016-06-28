@@ -11,8 +11,8 @@ class Direccion extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model('Modelo_Direccion');
 	}
-	function index()
-	{
+	function index(){
+		
 		$this->form_validation->set_rules('calle', 'Calle', 'required|trim|max_length[45]');
 		$this->form_validation->set_rules('numero', 'Numero', 'required|trim|is_numeric|max_length[5]');
 		$this->form_validation->set_rules('colonia', 'Colonia', 'required|trim|max_length[45]');

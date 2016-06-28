@@ -19,8 +19,13 @@ class Modelo_Grupo extends CI_Model {
 	}
 
 	function get_Grupo(){
-		$this->db->select('id,nombre,estado,especialidad_id,semestre_id,tutor_id,generacion_id,turno_id');
+		$this->db->select('grupo.*, grupo.nombre as grup, especialidad.nombre as esp, turno.nombreTurno, semestre.nombreSemestre, tutor.nombre as tut, tutor.apellidoP, tutor.apellidoM, generacion.nombre as generacion');
 		$this->db->from('grupo');
+		$this->db->join('especialidad','especialidad.id = especialidad_id');
+		$this->db->join('turno','turno.id = turno_id');
+		$this->db->join('semestre','semestre.id = semestre_id');
+		$this->db->join('tutor','tutor.id = tutor_id');
+		$this->db->join('generacion', 'generacion.id = generacion_id');
 	if(isset($datos['idG'])){
 		$this->db->where('id', $datos['id']);
 	}

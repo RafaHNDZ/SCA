@@ -8,18 +8,28 @@ class Personal extends CI_Controller{
 		}
 	public function index(){
 
-		$data['titulo'] = "Lista de Personal";
-		$data['content'] = "Admin/Lista_Personal";
-		$data['arrTut'] = $this->Modelo_Tutor->get_Tutor();
+		if(!$this->session->userdata('login_ok')){
+			redirect('Principal','refresh');
+		}else{
 
-			$this->load->view('Plantilla',$data);
+			$data['titulo'] = "Lista de Personal";
+			$data['content'] = "Admin/Lista_Personal";
+			$data['arrTut'] = $this->Modelo_Tutor->get_Tutor();
+
+				$this->load->view('Plantilla',$data);
+
+			}
 
 	}
 
 	public function Registrar_Personal(){
 
-				$data['titulo'] = "Registro de Personal";
-				$data['content'] = "Admin/frm_registroPersonal";
+	if(!$this->session->userdata('login_ok')){
+		redirect('Principal','refresh');
+	}else{
+
+			$data['titulo'] = "Registro de Personal";
+			$data['content'] = "Admin/frm_registroPersonal";
 
 
 			$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|max_length[30]');
@@ -50,8 +60,7 @@ class Personal extends CI_Controller{
 							'email' => set_value('email'),
 							'password' => set_value('password')
 							);
-				var_dump($form_data);
-				// run insert model to write data to db
+
 
 				if ($this->Modelo_Tutor->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
 				{
@@ -61,8 +70,7 @@ class Personal extends CI_Controller{
 				// Or whatever error handling is necessary
 				}
 			}
-
-
+		}
 	}
 
 	public function success(){

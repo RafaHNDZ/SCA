@@ -11,49 +11,59 @@ class Semestre extends CI_Controller{
 
   public function index(){
 
-      $data['arrSem'] = $this->Modelo_Semestre->get_Semestre();
+    if(!$this->session->userdata('login_ok')){
+      redirect('Principal','refresh');
+    }else{
+
+        $data['arrSem'] = $this->Modelo_Semestre->get_Semestre();
 
         $data['titulo'] = "Lista de Semestres";
         $data['content'] = "Admin/Lista_Semestres";
 
-          $this->load->view('Plantilla', $data);
+            $this->load->view('Plantilla', $data);
+        }
 }
 
-function Registrar_Semestre(){
+  public function Registrar_Semestre(){
 
-  $data['titulo'] = "Registro de Semestre";
-  $data['content'] = "Admin/frm_registroSemestre";
+    if(!$this->session->userdata('login_ok')){
+      redirect('Principal','refresh');
+    }else{
 
-  $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|max_length[20]');
+      $data['titulo'] = "Registro de Semestre";
+      $data['content'] = "Admin/frm_registroSemestre";
 
-  $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
+      $this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|max_length[20]');
 
-  if ($this->form_validation->run() == FALSE) // validation hasn't been passed
-  {
-    $this->load->view('Plantilla', $data);
-  }
-  else // passed validation proceed to post success logic
-  {
-    // build array for the model
+      $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
-    $form_data = array(
-            'id' => set_value(0),
-            'nombreSemestre' => set_value('nombre')
-          );
+      if ($this->form_validation->run() == FALSE) // validation hasn't been passed
+      {
+        $this->load->view('Plantilla', $data);
+      }
+      else // passed validation proceed to post success logic
+      {
+        // build array for the model
 
-    // run insert model to write data to db
+        $form_data = array(
+                'id' => set_value(0),
+                'nombreSemestre' => set_value('nombre')
+              );
 
-    if ($this->Modelo_Semestre->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
-    {
-      redirect('Semestre/success');   // or whatever logic needs to occur
+        // run insert model to write data to db
+
+        if ($this->Modelo_Semestre->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
+        {
+          redirect('Semestre/success');   // or whatever logic needs to occur
+        }
+        else
+        {
+        echo 'An error occurred saving your information. Please try again later';
+        // Or whatever error handling is necessary
+        }
+      }
     }
-    else
-    {
-    echo 'An error occurred saving your information. Please try again later';
-    // Or whatever error handling is necessary
-    }
   }
-}
 
 public function del_Semestre($id){
   $this->Modelo_Semestre->del_Semestre($id);

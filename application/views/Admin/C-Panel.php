@@ -38,7 +38,7 @@
 							<div class="icon">
 								<i class="ion ion-ios-people"></i>
 							</div>
-							<a href="" class="small-box-footer">
+							<a href="Grupo" class="small-box-footer">
 								 Mas Información <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>
@@ -52,7 +52,7 @@
 							<div class="icon">
 								<i class="fa fa-graduation-cap"></i>
 							</div>
-							<a href="" class="small-box-footer">
+							<a href="Personal" class="small-box-footer">
 								 Mas Información <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>
@@ -66,7 +66,7 @@
 							<div class="icon">
 								<i class="fa fa-hdd-o"></i>
 							</div>
-							<a href="" class="small-box-footer">
+							<a href="Canalizacion" class="small-box-footer">
 								 Mas Información <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>
@@ -83,7 +83,9 @@
 									<div class="progress-bar" style="width:70%"></div>
 								</div>
 								<span class="progress-description">
-									Descripcion de la Barra de Progreso
+									<a href="SesionGrupal" class="small-box-footer white text-center">
+										 Mas Información <i class="fa fa-arrow-circle-right"></i>
+									</a>
 								</span>
 							</div>
 						</div>
@@ -100,7 +102,9 @@
 									<div class="progress-bar" style="width:70%"></div>
 								</div>
 								<span class="progress-description">
-									Descripcion de la Barra de Progreso
+									<a href="SesionGrupal" class="small-box-footer white text-center">
+										 Mas Información <i class="fa fa-arrow-circle-right"></i>
+									</a>
 								</span>
 							</div>
 						</div>
@@ -117,7 +121,9 @@
 									<div class="progress-bar" style="width:70%"></div>
 								</div>
 								<span class="progress-description">
-									Descripcion de la Barra de Progreso
+									<a href="SesionGrupal" class="small-box-footer white text-center">
+										 Mas Información <i class="fa fa-arrow-circle-right"></i>
+									</a>
 								</span>
 							</div>
 						</div>
@@ -134,7 +140,9 @@
 									<div class="progress-bar" style="width:70%"></div>
 								</div>
 								<span class="progress-description">
-									Descripcion de la Barra de Progreso
+									<a href="SesionGrupal" class="small-box-footer white text-center">
+										 Mas Información <i class="fa fa-arrow-circle-right"></i>
+									</a>
 								</span>
 							</div>
 						</div>

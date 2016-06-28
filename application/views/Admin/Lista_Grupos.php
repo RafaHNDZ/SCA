@@ -28,7 +28,7 @@
 									<tbody>
 								<?php foreach($arrGrup as $Grupo){?>
 										<tr>
-											<td><?php echo $Grupo['nombre'] ?></td>
+											<td><?php echo $Grupo['grup'] ?></td>
 											<td>
 												<?php switch ($Grupo['estado']) {
 													case '1':
@@ -40,11 +40,11 @@
 														break;
 												} ?>
 											</td>
-											<td><?php echo $Grupo['especialidad_id'] ?></td>
-											<td><?php echo $Grupo['turno_id'] ?></td>
-											<td><?php echo $Grupo['semestre_id'] ?></td>
-											<td><?php echo $Grupo['tutor_id'] ?></td>
-											<td><?php echo $Grupo['generacion_id'] ?></td>
+											<td><?php echo $Grupo['esp'] ?></td>
+											<td><?php echo $Grupo['nombreTurno'] ?></td>
+											<td><?php echo $Grupo['nombreSemestre'] ?></td>
+											<td><?php echo $Grupo['tut']." ".$Grupo['apellidoP']." ".$Grupo['apellidoM'] ?></td>
+											<td><?php echo $Grupo['generacion'] ?></td>
 											<td>
 												<div class="btn-group">
 													<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#Modal"> Modificar </a>

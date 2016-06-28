@@ -5,9 +5,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     public function index(){
 
-      $data['titulo'] = "Panel del Tutores";
-      $data['content'] = "Tutor/Panel";
+	if(!$this->session->userdata('login_ok')){
+		redirect('Principal','refresh');
+	}else{
 
-        $this->load->view('Plantilla', $data);
+	      $data['titulo'] = "Panel del Tutores";
+	      $data['content'] = "Tutor/Panel";
+
+	        $this->load->view('Plantilla', $data);
+	    }
     }
   }

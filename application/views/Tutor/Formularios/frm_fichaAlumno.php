@@ -20,7 +20,7 @@
           <div role="tabpanel" class="tab-pane active" id="home">
             <?php
             $attributes = array('class' => 'form-horizontal', 'id' => '');
-            echo form_open('FichaAlumno/Regitrar_Ficha', $attributes); ?>
+            echo form_open('Alumno/Regitrar_Ficha', $attributes); ?>
 
             <div class="form-group">
                     <label for="nombre" class="col-sm-3 control-label no-padding-right">Nombre <span class="required">*</span></label>
@@ -43,7 +43,7 @@
             <div class="form-group">
                     <label for="fechaNacimiento"class="col-sm-3 control-label no-padding-right">Fecha de Nacimiento</label>
                     <?php echo form_error('fechaNacimiento'); ?>
-                    <input id="fechaNacimiento" type="text" name="fechaNacimiento"  value="<?php echo set_value('fechaNacimiento'); ?>" class="col-xs-10 col-sm-5" />
+                    <input id="fechaNacimiento" type="date" name="fechaNacimiento"  value="<?php echo set_value('fechaNacimiento'); ?>" class="col-xs-10 col-sm-5" />
             </div>
 
             <div class="form-group">
@@ -61,14 +61,13 @@
             <div class="form-group">
                     <label for="grupo" class="col-sm-3 control-label no-padding-right">Grupo <span class="required">*</span></label>
                     <?php echo form_error('grupo'); ?>
-
-                    <?php // Change the values in this array to populate your dropdown as required ?>
-                    <?php $options = array(
-                                                              ''  => 'Please Select',
-                                                              'example_value1'    => 'example option 1'
-                                                            ); ?>
-
-                    <?php echo form_dropdown('grupo', $options, set_value('grupo'),'class="col-xs-10 col-sm-3"')?>
+                    <select name="grupo" id="grupo" class="col-xs-10 col-sm-2">
+                          <option value="">Selecciona una Opcion</option>
+                      <?php foreach($arrGrupo as $Grupo){ ?>
+                          <option value="<?php echo $Grupo['id']?>"><?php echo $Grupo['grup']?></option>
+                          option
+                      <?php } ?>  
+                    </select>
             </div>
 
 <!-- Formulario de Direccion ............................................................................................................ -->
@@ -111,38 +110,39 @@
                 <?php echo form_error('situacionesFamiliares'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'situacionesFamiliares', 'rows' => '5', 'cols' => '80', 'value' => set_value('situacionesFamiliares') ) )?>
+                <?php echo form_textarea( array( 'name' => 'situacionesFamiliares','class' => 'col-xs-10 col-sm-5', 'rows' => '5', 'cols' => '80', 'value' => set_value('situacionesFamiliares') ) )?>
               </div>
               <div class="form-group">
                       <label for="integrantes" class="col-sm-3 control-label no-padding-right">Integrantes de tu familia <span class="required">*</span></label>
                 <?php echo form_error('integrantes'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'integrantes', 'rows' => '5' ,'class'=>'"col-xs-10 col-sm-5"', 'cols' => '80', 'value' => set_value('integrantes') ) )?>
+                <?php echo form_textarea( array( 'name' => 'integrantes', 'rows' => '5' ,'class'=>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('integrantes') ) )?>
               </div>
               <div class="form-group">
                       <label for="lugar" class="col-sm-3 control-label no-padding-right">Lugar que ocupas en la familia <span class="required">*</span></label>
                       <?php echo form_error('lugar'); ?>
-
-                      <?php // Change the values in this array to populate your dropdown as required ?>
                       <?php $options = array(
-                                                                ''  => 'Please Select',
-                                                                'example_value1'    => 'example option 1'
-                                                              ); ?>
+                                             ''  => 'Selecciona una Opcion',
+                                             '1'    => 'Soy el hijo mayor',
+                                             '2'    => 'Soy el hijo mediano',
+                                             '3'    => 'Soy el hijo más joven'
+                                             ); ?>
 
-                      <?php echo form_dropdown('lugar', $options, set_value('lugar') ,'class="col-xs-10 col-sm-5"')?>
+                      <?php echo form_dropdown('lugar', $options, set_value('lugar') ,'class="col-xs-10 col-sm-3"')?>
               </div>
 
               <div class="form-group" class="col-sm-3 control-label no-padding-right">
                       <label for="relacionPaterna" class="col-sm-3 control-label no-padding-right">Como calificas la relacion con tus padres <span class="required">*</span></label>
                       <?php echo form_error('relacionPaterna'); ?>
-
-                      <?php // Change the values in this array to populate your dropdown as required ?>
                       <?php $options = array(
-                                                                ''  => 'Please Select',
-                                                                'example_value1'    => 'example option 1'
-                                                              ); ?>
-
+                                             ''  => 'Selecciona una Opcion',
+                                             '1'    => 'Muy Buena',
+                                             '2'    => 'Buena',
+                                             '3'    => 'Regular',
+                                             '4'    => 'Mala',
+                                             '5'    => 'Muy Mala'
+                                             ); ?>
                       <?php echo form_dropdown('relacionPaterna', $options, set_value('relacionPaterna') ,'class="col-xs-10 col-sm-5"')?>
               </div>
             </div>
@@ -160,16 +160,16 @@
                 <?php echo form_textarea( array( 'name' => 'enfermedades', 'rows' => '5', 'class' =>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('enfermedades') ) )?>
               </div>
               <div class="form-group">
-                      <label for="tratamiento" class="col-sm-3 control-label no-padding-right">Tratamiento <span class="required">*</span></label>
+                      <label for="tratamiento" class="col-sm-3 control-label no-padding-right">¿Recibes algun tipo de tratamiento? <span class="required">*</span></label>
                       <?php echo form_error('tratamiento'); ?>
 
-                      <?php // Change the values in this array to populate your dropdown as required ?>
                       <?php $options = array(
-                                                                ''  => 'Please Select',
-                                                                'example_value1'    => 'example option 1'
-                                                              ); ?>
+                                             ''  => 'Elije una Opcion',
+                                             '1' => 'Si',
+                                             '2' => 'No'
+                                             ); ?>
 
-                      <?php echo form_dropdown('tratamiento', $options, set_value('tratamiento'))?>
+                      <?php echo form_dropdown('tratamiento', $options, set_value('tratamiento'),'class="col-xs-10 col-sm-3"')?>
               </div>
 
               <div class="form-group">
@@ -189,13 +189,11 @@
               <div class="form-group">
                       <label for="hospitalizacion" class="col-sm-3 control-label no-padding-right">Has tenido alguna Hospitalización <span class="required">*</span></label>
                       <?php echo form_error('hospitalizacion'); ?>
-
-                      <?php // Change the values in this array to populate your dropdown as required ?>
                       <?php $options = array(
-                                                                ''  => 'Please Select',
-                                                                'example_value1'    => 'example option 1'
-                                                              ); ?>
-
+                                             ''  => 'Elije una Opcion',
+                                             '1' => 'Si',
+                                             '2' => 'No'
+                                             ); ?>
                       <?php echo form_dropdown('hospitalizacion', $options, set_value('hospitalizacion'))?>
               </div>
 
@@ -209,13 +207,11 @@
               <div class="form-group">
                       <label for="operaciones" class="col-sm-3 control-label no-padding-right">Has tenido alguna intervencion quirurjica <span class="required">*</span></label>
                       <?php echo form_error('operaciones'); ?>
-
-                      <?php // Change the values in this array to populate your dropdown as required ?>
                       <?php $options = array(
-                                                                ''  => 'Please Select',
-                                                                'example_value1'    => 'example option 1'
-                                                              ); ?>
-
+                                             ''  => 'Elije una Opcion',
+                                             '1' => 'Si',
+                                             '2' => 'No'
+                                             ); ?>
                       <?php echo form_dropdown('operaciones', $options, set_value('operaciones'))?>
               </div>
 
@@ -249,47 +245,43 @@
             <div class="form-horizontal">
               <div class="form-group">
                       <label for="dependeDe" class="col-sm-3 control-label no-padding-right">Dependes economicamente de <span class="required">*</span></label>
-                      <?php echo form_error('dependeDe'); ?>
-
-                      <?php // Change the values in this array to populate your dropdown as required ?>
                       <?php $options = array(
-                                                                ''  => 'Please Select',
-                                                                'example_value1'    => 'example option 1'
-                                                              ); ?>
-
+                                             ''  => 'Elije una Opcion',
+                                             '1' => 'Mis padres',
+                                             '2' => 'De mi mismo'
+                                             ); ?>
                       <?php echo form_dropdown('dependeDe', $options, set_value('dependeDe'))?>
+                      <?php echo form_error('dependeDe'); ?>
               </div>
 
               <div class="form-group">
                       <label for="viveCon" class="col-sm-3 control-label no-padding-right">Actualmente vives con <span class="required">*</span></label>
-                      <?php echo form_error('viveCon'); ?>
-
-                      <?php // Change the values in this array to populate your dropdown as required ?>
                       <?php $options = array(
-                                                                ''  => 'Please Select',
-                                                                'example_value1'    => 'example option 1'
-                                                              ); ?>
-
+                                             ''  => 'Elije una Opcion',
+                                             '1' => 'Mi madre',
+                                             '2' => 'Mi padre',
+                                             '3' => 'Ambos',
+                                             '4' => 'Otros parientes'
+                                             ); ?>
                       <?php echo form_dropdown('viveCon', $options, set_value('viveCon'))?>
+                      <?php echo form_error('viveCon'); ?>
               </div>
 
               <div class="form-group">
                       <label for="ingresoFamiliarMensual" class="col-sm-3 control-label no-padding-right">Ingresos Familiares <span class="required">*</span></label>
-                      <?php echo form_error('ingresoFamiliarMensual'); ?>
-                      <input id="ingresoFamiliarMensual" type="text" name="ingresoFamiliarMensual" maxlength="6" value="<?php echo set_value('ingresoFamiliarMensual'); ?>"  />
+                      <input class="col-xs-10 col-sm-5" id="ingresoFamiliarMensual" type="text" name="ingresoFamiliarMensual" maxlength="6" value="<?php echo set_value('ingresoFamiliarMensual'); ?>"  /> 
+                      <?php echo form_error('ingresoFamiliarMensual'); ?>                      
               </div>
 
               <div class="form-group">
                       <label for="trabajo" class="col-sm-3 control-label no-padding-right">Tienes algun trabajo <span class="required">*</span></label>
-                      <?php echo form_error('trabajo'); ?>
-
-                      <?php // Change the values in this array to populate your dropdown as required ?>
                       <?php $options = array(
-                                                                ''  => 'Please Select',
-                                                                'example_value1'    => 'example option 1'
-                                                              ); ?>
-
+                                             ''  => 'Elije una Opcion',
+                                             '1' => 'Si',
+                                             '2' => 'No'
+                                             ); ?>
                       <?php echo form_dropdown('trabajo', $options, set_value('trabajo'))?>
+                      <?php echo form_error('trabajo'); ?>
               </div>
 
               <div class="form-group">

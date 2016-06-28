@@ -11,6 +11,10 @@ class Grupo extends CI_Controller{
 
 	public function index(){
 
+		if(!$this->session->userdata('login_ok')){
+			redirect('Principal','refresh');
+		}else{
+
 		$data['arrGrup'] = $this->Modelo_Grupo->get_Grupo();
 
 		$data['titulo'] = "Lista de Grupos";
@@ -18,9 +22,14 @@ class Grupo extends CI_Controller{
 		$data['Esp'] = $this->Modelo_Especialidad->get_especialidades($data);
 
 			$this->load->view('Plantilla', $data);
+		}
 	}
 
 	public function Registrar_Grupo(){
+
+		if(!$this->session->userdata('login_ok')){
+			redirect('Principal','refresh');
+		}else{
 
 		$this->load->model('Modelo_Especialidad');
 		$this->load->model('Modelo_Turno');
@@ -70,7 +79,7 @@ class Grupo extends CI_Controller{
 
 			if ($this->Modelo_Grupo->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
 			{
-				redirect('Admin/frm_registroGrupo/success');   // or whatever logic needs to occur
+				redirect('Grupo');   // or whatever logic needs to occur
 			}
 			else
 			{
@@ -78,10 +87,25 @@ class Grupo extends CI_Controller{
 			// Or whatever error handling is necessary
 			}
 		}
+
+	}
 	}
 
-function del_Grupo($id){
-	$this->Modelo_Grupo->delete($id);
-}
+	public function Mi_Grupo(){
+
+		if(!$this->session->userdata('login_ok')){
+			redirect('Principal','refresh');
+		}else{
+
+		$data['titulo'] = "Lista de Grupos";
+		$data['content'] = "Tutor/Listas/Lista_Grupo";
+
+		$this->load->view('Plantilla', $data);		
+		}
+	}
+
+	public function del_Grupo($id){
+		$this->Modelo_Grupo->delete($id);
+	}
 
 }
