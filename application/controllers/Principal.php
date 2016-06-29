@@ -29,6 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			          'usuario_id'  => $us->id,
 			          'privilegios' => $us->privilegios,
 			          'nombre' => $us->nombre,
+			          'grupo' => $us->idGrupo,
 			          'login_ok' => TRUE
 			        );
 				}

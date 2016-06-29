@@ -1,3 +1,28 @@
+<?php if ($this->session->userdata('login_ok') == TRUE){ ?>
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="Administrador">Home</a>
+							</li>
+
+							<li>
+								<a class="active"><?php echo $titulo; ?></a>
+							</li>
+						</ul><!-- /.breadcrumb -->
+
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Buscar ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- /.nav-search -->
+					</div>
+<?php } ?>
 <div class="page-content">
 	<div class="row">
 		<div class="box box-primary box-solid">
@@ -17,13 +42,20 @@
 										<tr>
 											<th>Nombre Alumno</th>
 											<th>Fecha de Nacimiento</th>
+											<th>Telefono</th>
+											<th>Matricula</th>
+											<th>Grupo</th>
+											<th>Opciones</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php foreach($arrFicha as $ficha){ ?>
 										<tr>
 											<td><?php echo $ficha['nombre']." ".$ficha['apellidoP']." ".$ficha['apellidoM']; ?></td>
-											<td>2</td>
+											<td><?php echo $ficha['fechaNacimiento'] ?></td>
+											<td><?php echo $ficha['telefono'] ?></td>
+											<td><?php echo $ficha['matricula'] ?></td>
+											<td><?php echo $ficha['nombreGrupo'] ?></td>
 											<td class="center">
 											<div class="btn-group">
 												<button data-toggle="dropdown" class="btn btn-primary dropdown-toogle">

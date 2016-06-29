@@ -16,7 +16,13 @@ class SesionPrivada extends CI_Controller {
       $this->load->view('Plantilla', $data);
   }
 
-	function Registro_SesionPrivada(){
+	function Registro_SesionPrivada($id_alumno){
+
+	if($id_alumno != null){		
+	$data['idA'] = $id_alumno;
+	}else{
+	$data['idA'] = 0;	
+	}
     $data['titulo'] = "Registro de Sesión Privada";
     $data['content'] = "Tutor/Formularios/frm_sesionPrivada";
 

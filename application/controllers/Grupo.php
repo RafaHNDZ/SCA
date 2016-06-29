@@ -7,6 +7,7 @@ class Grupo extends CI_Controller{
 			parent::__construct();
 			$this->load->model('Modelo_Grupo');
 			$this->load->model('Modelo_Especialidad');
+			$this->load->model('Modelo_Calendario');
 		}
 
 	public function index(){
@@ -16,7 +17,7 @@ class Grupo extends CI_Controller{
 		}else{
 
 		$data['arrGrup'] = $this->Modelo_Grupo->get_Grupo();
-
+		$data['Calendario'] = $this->Modelo_Calendario->genera_calendario();
 		$data['titulo'] = "Lista de Grupos";
 		$data['content'] = "Admin/Lista_Grupos";
 		$data['Esp'] = $this->Modelo_Especialidad->get_especialidades($data);
@@ -91,12 +92,13 @@ class Grupo extends CI_Controller{
 	}
 	}
 
-	public function Mi_Grupo(){
+	public function Mi_Grupo($id_grupo){
 
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
 
+		$data['alumnos'] = $this->Modelo_Grupo->lista_grupo($id_grupo);
 		$data['titulo'] = "Lista de Grupos";
 		$data['content'] = "Tutor/Listas/Lista_Grupo";
 

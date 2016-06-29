@@ -1,3 +1,43 @@
+<?php if ($this->session->userdata('login_ok') == TRUE){ ?>
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="Administrador">Home</a>
+							</li>
+
+							<li>
+								<a class="active"><?php echo $titulo; ?></a>
+							</li>
+						</ul><!-- /.breadcrumb -->
+
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Buscar ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- /.nav-search -->
+					</div>
+<?php } ?>
+
+<?php 
+	$ng =0;
+	foreach($numGrupos as $g){
+		$ng++;
+	}
+
+	$na =0;
+	foreach($numAlumnos as $a){
+		$na++;
+	}
+	$nt =0;
+	foreach($numTutores as $t){
+		$nt++;
+	} ?>
 <div class="page-content">
 	<div class="row">
 		<div class="page-header">
@@ -18,13 +58,13 @@
 					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
 						<div class="small-box bg-aqua">
 							<div class="inner">
-								<h3>20</h3>
+								<h3><?php echo $na ?></h3>
 								<p>Alumnos Registrados</p>
 							</div>
 							<div class="icon">
 								<i class="ion ion-person-add"></i>
 							</div>
-							<a href="" class="small-box-footer">
+							<a href="Alumno" class="small-box-footer">
 								 Mas Información <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>
@@ -32,7 +72,7 @@
 					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
 						<div class="small-box bg-aqua">
 							<div class="inner">
-								<h3>20</h3>
+								<h3><?php echo $ng ?></h3>
 								<p>Grupos Registrados</p>
 							</div>
 							<div class="icon">
@@ -46,7 +86,7 @@
 					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
 						<div class="small-box bg-aqua">
 							<div class="inner">
-								<h3>20</h3>
+								<h3><?php echo $nt ?></h3>
 								<p>Tutores del Sistema</p>
 							</div>
 							<div class="icon">

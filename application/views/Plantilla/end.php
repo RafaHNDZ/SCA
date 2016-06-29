@@ -20,7 +20,7 @@
 
 		<script>
 			$(document).ready(function(){
-				$('#tabla').DataTable({
+				$('#tabl').DataTable({
 		      "paging": true,
 		      "lengthChange": true,
 		      "searching": true,

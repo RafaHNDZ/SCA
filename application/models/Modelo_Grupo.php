@@ -37,6 +37,34 @@ class Modelo_Grupo extends CI_Model {
 			}
 	}
 
+	public function lista_grupo($id_grupo){
+
+		$this->db->select('id, nombre, apellidoP, apellidoM, matricula');
+		$this->db->from('alumno');
+		$this->db->where('grupo_id',$id_grupo);
+		$consulta = $this->db->get();
+
+			if($consulta != null){
+				return $resultado = $consulta->result_array();
+			}else{
+				return null;
+			}
+	}
+
+	public function num_grupos(){
+
+		 $this->db->select('id, COUNT(id) as total');
+		 $this->db->group_by('id'); 
+		 $this->db->order_by('total', 'desc'); 
+		 $consulta = $this->db->get('grupo', 10);
+
+			if($consulta != null){
+				return $resultado = $consulta->result_array();
+			}else{
+				return null;
+			}
+	}
+
 	function delete($id){
 		$this->db->where('id',$id);
 		if($this->db->delete('grupo') == true){

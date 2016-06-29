@@ -22,7 +22,7 @@ class Alumno extends CI_Controller {
 		}else{
 
 		$data['arrFicha'] = $this->Modelo_Alumno->get_Ficha();
-
+			$data['Calendario'] = $this->Modelo_Calendario->genera_calendario();
 		    $data['titulo'] = "Lista de Fichas";
 		    $data['content'] = "Tutor/Listas/Lista_Fichas";
 
