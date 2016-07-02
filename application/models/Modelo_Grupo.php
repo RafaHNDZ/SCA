@@ -37,13 +37,15 @@ class Modelo_Grupo extends CI_Model {
 			}
 	}
 
-	public function lista_grupo($id_grupo){
+	public function lista_grupo($id){
 
-		$this->db->select('id, nombre, apellidoP, apellidoM, matricula');
-		$this->db->from('alumno');
-		$this->db->where('grupo_id',$id_grupo);
+		//$consulta = $this->db->query('select grupo.id, grupo.nombre, alumno.* from grupo inner join alumno on alumno.grupo_id = grupo.id where  grupo.tutor_id = "$id"');
+		$this->db->select('grupo.id, grupo.nombre as nombreGrupo, alumno.*');
+		$this->db->from('grupo');
+		$this->db->join('alumno','alumno.grupo_id = grupo.id');
+		$this->db->where('grupo.tutor_id',$id);
 		$consulta = $this->db->get();
-
+		
 			if($consulta != null){
 				return $resultado = $consulta->result_array();
 			}else{

@@ -47,13 +47,13 @@ class Grupo extends CI_Controller{
 		$data['arrTut'] = $this->Modelo_Tutor->get_Tutor($data);
 		$data['arrGen'] = $this->Modelo_Generacion->get_Generacion($data);
 
-		$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|max_length[40]');
-		$this->form_validation->set_rules('estado', 'Estado', 'required|trim|max_length[1]');
-		$this->form_validation->set_rules('especialidad', 'Especialidad', 'required|trim|max_length[1]');
-		$this->form_validation->set_rules('turno', 'Turno', 'required|trim|max_length[1]');
-		$this->form_validation->set_rules('semestre', 'Semestre', 'required|trim|max_length[1]');
-		$this->form_validation->set_rules('generacion', 'Generacion', 'required|trim|max_length[1]');
-		$this->form_validation->set_rules('tutor', 'Tutor', 'required|trim|max_length[1]');
+		$this->form_validation->set_rules('nombre', 'Nombre', 'xss_clean|required|trim|max_length[40]');
+		$this->form_validation->set_rules('estado', 'Estado', 'xss_clean|required|trim|max_length[1]');
+		$this->form_validation->set_rules('especialidad', 'Especialidad', 'xss_clean|required|trim|max_length[1]');
+		$this->form_validation->set_rules('turno', 'Turno', 'xss_clean|required|trim|max_length[1]');
+		$this->form_validation->set_rules('semestre', 'Semestre', 'xss_clean|required|trim|max_length[1]');
+		$this->form_validation->set_rules('generacion', 'Generacion', 'xss_clean|required|trim|max_length[1]');
+		$this->form_validation->set_rules('tutor', 'Tutor', 'xss_clean|required|trim|max_length[1]');
 
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
@@ -92,13 +92,14 @@ class Grupo extends CI_Controller{
 	}
 	}
 
-	public function Mi_Grupo($id_grupo){
+	public function Mi_Grupo(){
 
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
+		$id_tutor = $this->session->userdata('usuario_id');
 
-		$data['alumnos'] = $this->Modelo_Grupo->lista_grupo($id_grupo);
+		$data['alumnos'] = $this->Modelo_Grupo->lista_grupo($id_tutor);
 		$data['titulo'] = "Lista de Grupos";
 		$data['content'] = "Tutor/Listas/Lista_Grupo";
 

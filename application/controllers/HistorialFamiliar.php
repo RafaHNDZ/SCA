@@ -10,10 +10,10 @@ class HistorialFamiliar extends CI_Controller {
 
 	function registrarHistorialFamiliar(){
 
-		$this->form_validation->set_rules('situacionesFamiliares', 'Situaciones Familiares', 'required|trim|max_length[300]');
-		$this->form_validation->set_rules('integrantes', 'Integrantes de tu familia', 'required|trim|max_length[300]');
-		$this->form_validation->set_rules('lugar', 'Lugar que ocupas en la familia', 'required|trim|max_length[1]');
-		$this->form_validation->set_rules('relacionPaterna', 'Como calificas la relacion con tus padres', 'required|trim|max_length[1]');
+		$this->form_validation->set_rules('situacionesFamiliares', 'Situaciones Familiares', 'xss_clean|required|trim|max_length[300]');
+		$this->form_validation->set_rules('integrantes', 'Integrantes de tu familia', 'xss_clean|required|trim|max_length[300]');
+		$this->form_validation->set_rules('lugar', 'Lugar que ocupas en la familia', 'xss_clean|required|trim|max_length[1]');
+		$this->form_validation->set_rules('relacionPaterna', 'Como calificas la relacion con tus padres', 'xss_clean|required|trim|max_length[1]');
 
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 

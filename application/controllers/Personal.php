@@ -32,13 +32,13 @@ class Personal extends CI_Controller{
 			$data['content'] = "Admin/frm_registroPersonal";
 
 
-			$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|max_length[30]');
-			$this->form_validation->set_rules('apellido_paterno', 'Apellido Paterno', 'required|trim|max_length[40]');
-			$this->form_validation->set_rules('apellido_materno', 'Apellido Materno', 'required|trim|max_length[40]');
-			$this->form_validation->set_rules('privilegios', 'Privilegios', 'required|max_length[1]');
-			$this->form_validation->set_rules('estado', 'Estado', 'required|max_length[1]');
-			$this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[40]');
-			$this->form_validation->set_rules('password', 'Contraseña', 'required|trim|max_length[30]');
+			$this->form_validation->set_rules('nombre', 'Nombre', 'xss_clean|required|trim|max_length[30]');
+			$this->form_validation->set_rules('apellido_paterno', 'Apellido Paterno', 'xss_clean|required|trim|max_length[40]');
+			$this->form_validation->set_rules('apellido_materno', 'Apellido Materno', 'xss_clean|required|trim|max_length[40]');
+			$this->form_validation->set_rules('privilegios', 'Privilegios', 'xss_clean|required|max_length[1]');
+			$this->form_validation->set_rules('estado', 'Estado', 'xss_clean|required|max_length[1]');
+			$this->form_validation->set_rules('email', 'Email', 'xss_clean|required|trim|max_length[40]');
+			$this->form_validation->set_rules('password', 'Contraseña', 'xss_clean|required|trim|max_length[30]');
 
 			$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
@@ -52,8 +52,8 @@ class Personal extends CI_Controller{
 
 				$form_data = array(
 							'id' => set_value(0),
-              'nombre' => set_value('nombre'),
-              'apellidoP' => set_value('apellido_paterno'),
+              				'nombre' => set_value('nombre'),
+              				'apellidoP' => set_value('apellido_paterno'),
 							'apellidoM' => set_value('apellido_materno'),
 							'privilegios' => set_value('privilegios'),
 							'estado' => set_value('estado'),
@@ -64,7 +64,7 @@ class Personal extends CI_Controller{
 
 				if ($this->Modelo_Tutor->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
 				{
-					redirect('Registrar_Persona/success');   // or whatever logic needs to occur
+					redirect('Personal');   // or whatever logic needs to occur
 				}else{
 				echo 'An error occurred saving your information. Please try again later';
 				// Or whatever error handling is necessary

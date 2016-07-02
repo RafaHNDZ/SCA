@@ -32,7 +32,7 @@ class Generacion extends CI_Controller {
 		    $data['titulo'] = "Registro de Generaciones";
 		    $data['content'] = "Admin/frm_registroGeneracion";
 
-			$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|max_length[30]');
+			$this->form_validation->set_rules('nombre', 'Nombre', 'xss_clean|required|trim|max_length[30]');
 
 			$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 

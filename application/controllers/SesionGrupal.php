@@ -29,17 +29,17 @@ class SesionGrupal extends CI_Controller {
 			$data['titulo'] = "Registro de Sesión Grupal";
 	    	$data['content'] = "Tutor/Formularios/frm_sesionGrupal";
 
-			$this->form_validation->set_rules('nombreTutor', 'Nombre del Tutor', 'required|trim|is_numeric|max_length[1]');
-			$this->form_validation->set_rules('grupo', 'Grupo', 'required|trim|is_numeric|max_length[1]');
-			$this->form_validation->set_rules('turno', 'Turno', 'required|trim|is_numeric');
-			$this->form_validation->set_rules('mes', 'Mes', 'required|trim|is_numeric|max_length[1]');
-			$this->form_validation->set_rules('numeroSesion', 'Numero de la Sesión', 'required|trim|is_numeric|max_length[2]');
-			$this->form_validation->set_rules('fecha', 'Fecha', 'required');
-			$this->form_validation->set_rules('objetivo', 'Objetivo', 'required|trim|max_length[200]');
-			$this->form_validation->set_rules('problematica', 'Problematica', 'required|trim|max_length[200]');
-			$this->form_validation->set_rules('remediales', 'Actividades Remediales', 'required|trim|max_length[200]');
-			$this->form_validation->set_rules('resultados', 'Resultados', 'required|trim|max_length[200]');
-			$this->form_validation->set_rules('observaciones', 'Observaciones', 'required|trim|max_length[200]');
+			$this->form_validation->set_rules('nombreTutor', 'Nombre del Tutor', 'xss_clean|required|trim|is_numeric|max_length[1]');
+			$this->form_validation->set_rules('grupo', 'Grupo', 'xss_clean|required|trim|is_numeric|max_length[1]');
+			$this->form_validation->set_rules('turno', 'Turno', 'xss_clean|required|trim|is_numeric');
+			$this->form_validation->set_rules('mes', 'Mes', 'xss_clean|required|trim|is_numeric|max_length[1]');
+			$this->form_validation->set_rules('numeroSesion', 'Numero de la Sesión', 'xss_clean|required|trim|is_numeric|max_length[2]');
+			$this->form_validation->set_rules('fecha', 'Fecha', 'xss_clean|required');
+			$this->form_validation->set_rules('objetivo', 'Objetivo', 'xss_clean|required|trim|max_length[200]');
+			$this->form_validation->set_rules('problematica', 'Problematica', 'xss_clean|required|trim|max_length[200]');
+			$this->form_validation->set_rules('remediales', 'Actividades Remediales', 'xss_clean|required|trim|max_length[200]');
+			$this->form_validation->set_rules('resultados', 'Resultados', 'xss_clean|required|trim|max_length[200]');
+			$this->form_validation->set_rules('observaciones', 'Observaciones', 'xss_clean|required|trim|max_length[200]');
 
 			$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 

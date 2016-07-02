@@ -8,7 +8,7 @@ class Modelo_Alumno extends CI_Model {
 		$this->load->model('Modelo_Calendario');
 	}
 
-	function SaveForm($form_data){
+  public function SaveForm($form_data){
 
 		$this->db->insert('alumno', $form_data);
 
@@ -44,6 +44,22 @@ class Modelo_Alumno extends CI_Model {
 			}else{
 				return null;
 			}
+	}
+
+	public function get_alumno_data($id){
+		$this->db->select('alumno.id, alumno.nombre as nomAlu, alumno.apellidoP, alumno.apellidoM, alumno.grupo_id, grupo.nombre, turno.nombreTurno');
+		$this->db->from('alumno');
+		$this->db->where('alumno.matricula',$id);
+		$this->db->join('grupo','grupo.id = alumno.grupo_id');
+		$this->db->join('turno','turno.id = grupo.turno_id');
+		$consulta = $this->db->get();
+		
+		if($consulta != null){
+			$resultado = $consulta->result_array();
+			return $resultado;
+		}else{
+			return "Sin Resultados";
+		}
 	}
 
 }

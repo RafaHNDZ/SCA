@@ -49,7 +49,7 @@
 							<div class="icon">
 								<i class="ion ion-person-add"></i>
 							</div>
-							<a href="Grupo/Mi_Grupo/<?php echo $this->session->userdata('grupo') ?>" class="small-box-footer">
+							<a href="Grupo/Mi_Grupo" class="small-box-footer">
 								 Ir a Mi Grupo <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>

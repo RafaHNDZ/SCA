@@ -24,47 +24,39 @@
           </div>
 <?php } ?>
 <div class="page-content">
+
 	<div class="row">
 		<div class="page-header">
 			<h1 class="page-title"><?php echo $titulo;?></h1>
 		</div>
-      <?php if($idA != null){ ?>
+
 		<div class="col-xs-12">
       <?php // Change the css classes to suit your needs
 
       $attributes = array('class' => 'form-horizontal', 'id' => '');
-      echo form_open('SesionPrivada', $attributes); ?>
+      echo form_open('SesionPrivada/Registro_SesionPrivada', $attributes); ?>
+
+      <div class="form-group">
+              <label for="Matricula" class="col-sm-3 control-label no-padding-right">Buscar por Matricula: </label>
+              <input class="col-xs-10 col-sm-2" type="number" name="busqueda" id="busqueda" value="" placeholder="" maxlength="30" autocomplete="off" onKeyUp="buscar();" /><div id="resultadoBusqueda" class="col-xs-10 col-sm-3"></div>
+      </div>
 
       <div class="form-group">
               <label for="nombreAlumno" class="col-sm-3 control-label no-padding-right">Nombre del Alumno <span class="required">*</span></label>
               <?php echo form_error('nombreAlumno'); ?>
-              <input class="col-xs-10 col-sm-5" id="nombreAlumno" type="text" name="nombreAlumno" maxlength="110" value="<?php echo set_value('nombreAlumno'); ?>"  />
+              <input class="col-xs-10 col-sm-5" id="nombreAlumno" type="text" name="nombreAlumno" maxlength="110" value=""  />
       </div>
 
       <div class="form-group">
-              <label for="grupo" class="col-sm-3 control-label no-padding-right">Grupo <span class="required">*</span></label>
-              <?php echo form_error('grupo'); ?>
-
-              <?php // Change the values in this array to populate your dropdown as required ?>
-              <?php $options = array(
-                                                        ''  => 'Please Select',
-                                                        'example_value1'    => 'example option 1'
-                                                      ); ?>
-
-              <?php echo form_dropdown('grupo', $options, set_value('grupo'),'class="col-xs-10 col-sm-5"')?>
+              <label for="nombreGrupo" class="col-sm-3 control-label no-padding-right">Grupo <span class="required">*</span></label>
+              <input class="col-xs-10 col-sm-5" id="nombreGrupo" type="text" name="nombreGrupo" maxlength="110" value=""  />
+              <?php echo form_error('nombreGrupo'); ?>
       </div>
 
       <div class="form-group">
-              <label for="turno" class="col-sm-3 control-label no-padding-right">Turno <span class="required">*</span></label>
-              <?php echo form_error('turno'); ?>
-
-              <?php // Change the values in this array to populate your dropdown as required ?>
-              <?php $options = array(
-                                                        ''  => 'Please Select',
-                                                        'example_value1'    => 'example option 1'
-                                                      ); ?>
-
-              <?php echo form_dropdown('turno', $options, set_value('turno'),'class="col-xs-10 col-sm-5"')?>
+              <label for="nombreTurno" class="col-sm-3 control-label no-padding-right">Turno <span class="required">*</span></label>
+              <?php echo form_error('nombreTurno'); ?>
+              <input class="col-xs-10 col-sm-5" id="nombreTurno" type="text" name="nombreTurno" maxlength="110" value=""  />
       </div>
 
       <div class="form-group">
@@ -78,35 +70,35 @@
       	<?php echo form_error('objetivo'); ?>
 
 
-      	<?php echo form_textarea( array( 'name' => 'objetivo', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('objetivo') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'objetivo', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('objetivo') ) )?>
       </div>
       <div class="form-group">
               <label for="problematica" class="col-sm-3 control-label no-padding-right">Problematica <span class="required">*</span></label>
       	<?php echo form_error('problematica'); ?>
 
 
-      	<?php echo form_textarea( array( 'name' => 'problematica', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('problematica') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'problematica', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('problematica') ) )?>
       </div>
       <div class="form-group">
               <label for="seguimiento" class="col-sm-3 control-label no-padding-right">Seguimiento <span class="required">*</span></label>
       	<?php echo form_error('seguimiento'); ?>
 
 
-      	<?php echo form_textarea( array( 'name' => 'seguimiento', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('seguimiento') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'seguimiento', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('seguimiento') ) )?>
       </div>
       <div class="form-group">
               <label for="resultados" class="col-sm-3 control-label no-padding-right">Resultados <span class="required">*</span></label>
       	<?php echo form_error('resultados'); ?>
 
 
-      	<?php echo form_textarea( array( 'name' => 'resultados', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('resultados') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'resultados', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('resultados') ) )?>
       </div>
       <div class="form-group">
               <label for="observaciones" class="col-sm-3 control-label no-padding-right">Observaciones <span class="required">*</span></label>
       	<?php echo form_error('observaciones'); ?>
 
 
-      	<?php echo form_textarea( array( 'name' => 'observaciones', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('observaciones') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'observaciones', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('observaciones') ) )?>
       </div>
 
       <div class="form-group">
@@ -118,13 +110,27 @@
       <?php echo form_close(); ?>
 
 		</div>
-      <?php }else{ ?>
-                    <div class="callout callout-warning">
-                      <h4>I am a warning callout!</h4>
-
-                      <p>This is a yellow callout.</p>
-                    </div>
-      <?php } ?>
 	</div>
 </div>
 </div>
+<script>
+
+$(document).ready(function() {
+    $("#resultadoBusqueda").html('<p>JQUERY VACIO</p>');
+});
+  function buscar() {
+      var textoBusqueda = $("input#busqueda").val();
+   
+       if (textoBusqueda != "") {
+          $.post("<?php echo base_url();?>index.php/SesionPrivada/alumno_data", {id: textoBusqueda}, function(data) {
+              $("#resultadoBusqueda").html(data);
+              <?php echo $alumno?>
+              });
+       } else { 
+          $("#resultadoBusqueda").html('<p>JQUERY VACIO</p>');
+          $("#nombreAlumno").val();
+          };
+    };
+
+</script>
+

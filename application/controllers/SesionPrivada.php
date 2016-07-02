@@ -6,6 +6,7 @@ class SesionPrivada extends CI_Controller {
 
  		parent::__construct();
 		$this->load->model('Modelo_SesionPrivada');
+		$this->load->model('Modelo_Alumno');
 	}
 
   function index(){
@@ -16,25 +17,21 @@ class SesionPrivada extends CI_Controller {
       $this->load->view('Plantilla', $data);
   }
 
-	function Registro_SesionPrivada($id_alumno){
+	function Registro_SesionPrivada(){
 
-	if($id_alumno != null){		
-	$data['idA'] = $id_alumno;
-	}else{
-	$data['idA'] = 0;	
-	}
     $data['titulo'] = "Registro de Sesión Privada";
     $data['content'] = "Tutor/Formularios/frm_sesionPrivada";
+   // $data['arrAlu'] = $this->Modelo_Alumno->get_alumno_data($id_alumno);
 
-		$this->form_validation->set_rules('nombreAlumno', 'Nombre del Alumno', 'required|trim|max_length[110]');
-		$this->form_validation->set_rules('grupo', 'Grupo', 'required|trim|is_numeric|max_length[1]');
-		$this->form_validation->set_rules('turno', 'Turno', 'required|trim|is_numeric|max_length[1]');
-		$this->form_validation->set_rules('fecha', 'Fecha', 'required');
-		$this->form_validation->set_rules('objetivo', 'Objetivo', 'required|trim|max_length[200]');
-		$this->form_validation->set_rules('problematica', 'Problematica', 'required|trim|max_length[200]');
-		$this->form_validation->set_rules('seguimiento', 'Seguimiento', 'required|trim|max_length[200]');
-		$this->form_validation->set_rules('resultados', 'Resultados', 'required|trim|max_length[200]');
-		$this->form_validation->set_rules('observaciones', 'Observaciones', 'required|trim|max_length[200]');
+		$this->form_validation->set_rules('nombreAlumno', 'Nombre del Alumno', 'xss_clean|required|trim|max_length[110]');
+		$this->form_validation->set_rules('grupo', 'Grupo', 'xss_clean|required|trim|is_numeric|max_length[1]');
+		$this->form_validation->set_rules('turno', 'Turno', 'xss_clean|required|trim|is_numeric|max_length[1]');
+		$this->form_validation->set_rules('fecha', 'Fecha', 'xss_clean|required');
+		$this->form_validation->set_rules('objetivo', 'Objetivo', 'xss_clean|required|trim|max_length[200]');
+		$this->form_validation->set_rules('problematica', 'Problematica', 'xss_clean|required|trim|max_length[200]');
+		$this->form_validation->set_rules('seguimiento', 'Seguimiento', 'xss_clean|required|trim|max_length[200]');
+		$this->form_validation->set_rules('resultados', 'Resultados', 'xss_clean|required|trim|max_length[200]');
+		$this->form_validation->set_rules('observaciones', 'Observaciones', 'xss_clean|required|trim|max_length[200]');
 
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
@@ -71,6 +68,21 @@ class SesionPrivada extends CI_Controller {
 			}
 		}
 	}
+
+		public function alumno_data(){
+
+			$id = $this->input->post('id');
+
+			if(strlen($id) < 11){
+
+			$alumno = $this->Modelo_Alumno->get_alumno_data($id);
+
+				return $alumno;
+			}else{
+				echo "Matricula Invalida";
+			}
+		}
+
 	function success()
 	{
 			echo 'this form has been successfully submitted with all validation being passed. All messages or logic here. Please note

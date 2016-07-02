@@ -5,9 +5,12 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="Administrador">Home</a>
+								<a href="../Administrador">Home</a>
 							</li>
 
+							<li>
+								<a href="../Especialidad">Lista de Especialidades</a>
+							</li>
 							<li>
 								<a class="active"><?php echo $titulo; ?></a>
 							</li>
@@ -43,7 +46,7 @@
 
 			<div class="form-group">
 				<div class="col-sm-3 control-label no-padding-right">
-			        <?php echo form_submit( 'submit', 'Submit'); ?>					
+			        <?php echo form_submit( 'submit', 'Enviar','class="btn btn-success"'); ?>					
 				</div>
 			</div>
 

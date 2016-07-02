@@ -22,28 +22,6 @@
 
 				<div class="navbar-buttons pull-right" role="navigation">
 					<ul class="nav ace-nav">
-						<li class="grey">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<i class="ace-icon fa fa-calendar"></i>
-							</a>
-
-							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close" >
-								<li class="dropdown-header">
-									<i class="ace-icon fa fa-calendar"></i>
-									Mi Calendario
-								</li>
-
-								<li class="dropdown-content" >
-									<ul>
-										<div class ="row">
-											<div class="col-xs-12">
-												<?php echo $Calendario; ?>
-											</div>
-										</div>
-									</ul>
-								</li>
-							</ul>
-						</li>
 				<!--
 						<li class="purple">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">

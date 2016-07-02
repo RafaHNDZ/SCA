@@ -11,7 +11,7 @@ class Modelo_Calendario extends CI_Model {
 		     $prefs = array (
 				            'start_day'    => 'monday',
 				            'month_type'   => 'long',
-				            'day_type'     => 'short'
+				            'day_type'     => 'long'
 				        	);
 		    $prefs['template'] = '
 

@@ -14,12 +14,9 @@
 						</ul><!-- /.breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
-							<form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Buscar ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="ace-icon fa fa-search nav-search-icon"></i>
-								</span>
-							</form>
+							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+							  Ver Calendario
+							</button>
 						</div><!-- /.nav-search -->
 					</div>
 <?php } ?>
@@ -264,4 +261,23 @@
           </div><!-- box -->
         </div>
 	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Calendario de Actividades</h4>
+      </div>
+      <div class="modal-body">
+        <?php echo $Calendario; ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        <button type="button" disabled="disabled" class="btn btn-primary">Nuevo Evento</button>
+      </div>
+    </div>
+  </div>
 </div>

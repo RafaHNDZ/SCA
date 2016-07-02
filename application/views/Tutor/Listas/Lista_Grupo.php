@@ -27,16 +27,16 @@
 	<div class="row">
 		<div class="box box-primary box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Grupo "X"</h3>
+              <h3 class="box-title"><?php echo $alumnos->nombreGrupo ?></h3>
             	<div class="box-tools pull-right">
-                	<a href="../../Alumno/Regitrar_Ficha" class="btn btn-box-tool btn-success">Registrar Nuevo Alumno</a>
+                	<!--<a href="../Alumno/Regitrar_Ficha" class="btn btn-box-tool btn-success">Registrar Nuevo Alumno</a> -->
               </div>
             </div>
             <div class="box-body">
 		         <div class="row">
             <?php
-        if($alumnos != null){
-             foreach($alumnos as $alumno){ ?>
+        if($alumnos){
+             foreach($alumnos as $alumno){?>
 		           <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 		            <div class="box box-primary box-solid">
 		              <div class="box-header with-border">
@@ -64,7 +64,7 @@
 										<div class="divider"></div>
 									</li>
 									<li>
-										<a href="" class="btn btn-danger btn-sm">Registrar a Baja</a>
+										<a href="" class="btn btn-danger btn-xs">Registrar a Baja</a>
 									</li>
 								</ul>
 						</div>
@@ -74,9 +74,9 @@
 		      <?php }
 		      }else{ ?>
 		      	<div class="callout callout-warning">
-                <h4>I am a warning callout!</h4>
+                <h4>!Alto¡</h4>
 
-                <p>This is a yellow callout.</p>
+                <p>No se encontraron datos del grupo</p>
               </div>
 		      <?php	} ?>
 		         </div>

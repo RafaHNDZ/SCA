@@ -23,26 +23,11 @@
 		<!-- Ion Icons -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
-		<![endif]-->
-
-		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace-ie.min.css" />
-		<![endif]-->
-
 		<!-- inline styles related to this page -->
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/AdminLTE.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/_all-skins.css">
 		<!-- ace settings handler -->
 		<script src="<?php echo base_url();?>assets/js/ace-extra.min.js"></script>
-
-		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
-
-		<!--[if lte IE 8]>
-		<script src="<?php echo base_url();?>assets/js/html5shiv.min.js"></script>
-		<script src="<?php echo base_url();?>assets/js/respond.min.js"></script>
-		<![endif]-->
 		
 	</head>
 

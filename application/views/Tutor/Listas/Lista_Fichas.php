@@ -29,7 +29,7 @@
             <div class="box-header with-border">
               <h3 class="box-title"><?php echo $titulo;?></h3>
             	<div class="box-tools pull-right">
-                	<a href="FichaAlumno/Regitrar_Ficha" class="btn btn-box-tool btn-success">Nueva Ficha de Alumno</a>
+                	<a href="Alumno/Regitrar_Ficha" class="btn btn-box-tool btn-success">Nueva Ficha de Alumno</a>
               </div>
             </div>
             <div class="box-body">

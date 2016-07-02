@@ -5,9 +5,12 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="Administrador">Home</a>
+								<a href="../Administrador">Home</a>
 							</li>
 
+							<li>
+								<a href="../Generacion"><?php echo $titulo; ?></a>
+							</li>
 							<li>
 								<a class="active"><?php echo $titulo; ?></a>
 							</li>

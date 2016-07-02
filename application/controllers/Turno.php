@@ -32,7 +32,7 @@ class Turno extends CI_Controller {
 			$data['titulo'] = "Registro de Turno";
 			$data['content'] = "Admin/frm_registroTurno";
 
-			$this->form_validation->set_rules('nombreTurno', 'Nombre', 'required|trim|max_length[20]');
+			$this->form_validation->set_rules('nombreTurno', 'Nombre', 'xss_clean|required|trim|max_length[20]');
 
 			$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 

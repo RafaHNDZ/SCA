@@ -13,9 +13,9 @@ class Direccion extends CI_Controller {
 	}
 	function index(){
 		
-		$this->form_validation->set_rules('calle', 'Calle', 'required|trim|max_length[45]');
-		$this->form_validation->set_rules('numero', 'Numero', 'required|trim|is_numeric|max_length[5]');
-		$this->form_validation->set_rules('colonia', 'Colonia', 'required|trim|max_length[45]');
+		$this->form_validation->set_rules('calle', 'Calle', 'xss_clean|required|trim|max_length[45]');
+		$this->form_validation->set_rules('numero', 'Numero', 'xss_clean|required|trim|is_numeric|max_length[5]');
+		$this->form_validation->set_rules('colonia', 'Colonia', 'xss_clean|required|trim|max_length[45]');
 		$this->form_validation->set_rules('codigoPostal', 'Codigo Postal', 'max_length[6]');
 
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');

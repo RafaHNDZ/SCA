@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			          'usuario_id'  => $us->id,
 			          'privilegios' => $us->privilegios,
 			          'nombre' => $us->nombre,
-			          'grupo' => $us->idGrupo,
+			          //'grupo' => $us->idGrupo,
 			          'login_ok' => TRUE
 			        );
 				}
@@ -45,6 +45,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        		redirect('Tutor','refresh');
 		        		break;
 		        } 
+			}else{
+				return  "error";
 			}
 		
 		}

@@ -32,16 +32,16 @@ class Canalizacion extends CI_Controller {
 		    $data['titulo'] = "Registro de Canalización";
 		    $data['content'] = "Tutor/Formularios/frm_canalizacion";
 
-				$this->form_validation->set_rules('fecha', 'Fecha', 'required');
-				$this->form_validation->set_rules('numeroControl', 'Numero de Control', 'required|trim|is_numeric|max_length[10]');
-				$this->form_validation->set_rules('nombreAlumno', 'Nombre del Alumno', 'required|trim|max_length[110]');
-				$this->form_validation->set_rules('semestre', 'Semestre', 'required|max_length[1]');
-				$this->form_validation->set_rules('edad', 'Edad', 'required|trim|is_numeric|max_length[2]');
-				$this->form_validation->set_rules('nonbreTutor', 'Nonbre del Tutor', 'required|trim|max_length[110]');
-				$this->form_validation->set_rules('especialidad', 'Especialidad', 'required');
-				$this->form_validation->set_rules('problematica', 'Problematica', 'required|trim|max_length[200]');
-				$this->form_validation->set_rules('servicio', 'Servicio Solicitado', 'required|trim|max_length[200]');
-				$this->form_validation->set_rules('observaciones', 'Observaciones', 'required|trim|max_length[200]');
+				$this->form_validation->set_rules('fecha', 'Fecha', 'xss_clean|required');
+				$this->form_validation->set_rules('numeroControl', 'Numero de Control', 'xss_clean|required|trim|is_numeric|max_length[10]');
+				$this->form_validation->set_rules('nombreAlumno', 'Nombre del Alumno', 'xss_clean|required|trim|max_length[110]');
+				$this->form_validation->set_rules('semestre', 'Semestre', 'xss_clean|required|max_length[1]');
+				$this->form_validation->set_rules('edad', 'Edad', 'xss_clean|required|trim|is_numeric|max_length[2]');
+				$this->form_validation->set_rules('nonbreTutor', 'Nonbre del Tutor', 'xss_clean|required|trim|max_length[110]');
+				$this->form_validation->set_rules('especialidad', 'Especialidad', 'xss_clean|required');
+				$this->form_validation->set_rules('problematica', 'Problematica', 'xss_clean|required|trim|max_length[200]');
+				$this->form_validation->set_rules('servicio', 'Servicio Solicitado', 'xss_clean|required|trim|max_length[200]');
+				$this->form_validation->set_rules('observaciones', 'Observaciones', 'xss_clean|required|trim|max_length[200]');
 
 				$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 

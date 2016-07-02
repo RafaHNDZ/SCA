@@ -35,7 +35,7 @@ public function Registrar_Especialidad(){
 			$data['titulo'] = "Lista de Grupos";
 			$data['content'] = "Admin/frm_registroEspecialidad";
 
-			$this->form_validation->set_rules('nombre', 'Nombre', 'required|trim|max_length[30]');
+			$this->form_validation->set_rules('nombre', 'Nombre', 'xss_clean|required|trim|max_length[30]');
 
 			$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
