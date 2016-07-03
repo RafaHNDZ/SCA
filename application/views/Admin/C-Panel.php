@@ -62,7 +62,7 @@
 								<i class="ion ion-person-add"></i>
 							</div>
 							<a href="Alumno" class="small-box-footer">
-								 Mas Información <i class="fa fa-arrow-circle-right"></i>
+								 Más Información <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 								<i class="ion ion-ios-people"></i>
 							</div>
 							<a href="Grupo" class="small-box-footer">
-								 Mas Información <i class="fa fa-arrow-circle-right"></i>
+								 Más Información <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>
 					</div>
@@ -90,7 +90,7 @@
 								<i class="fa fa-graduation-cap"></i>
 							</div>
 							<a href="Personal" class="small-box-footer">
-								 Mas Información <i class="fa fa-arrow-circle-right"></i>
+								 Más Información <i class="fa fa-arrow-circle-right"></i>
 							</a>
 						</div>
 					</div>
@@ -114,14 +114,14 @@
 								<i class="fa fa-exclamation"></i>
 							</span>
 							<div class="info-box-content">
-								<span class="info-box-text">Canalizacíones</span>
+								<span class="info-box-text">Canalizaciones</span>
 								<span class="info-box-number">12,00</span>
 								<div class="progress">
 									<div class="progress-bar" style="width:70%"></div>
 								</div>
 								<span class="progress-description">
 									<a href="SesionGrupal" class="small-box-footer white text-center">
-										 Mas Información <i class="fa fa-arrow-circle-right"></i>
+										 Más Información <i class="fa fa-arrow-circle-right"></i>
 									</a>
 								</span>
 							</div>
@@ -140,7 +140,7 @@
 								</div>
 								<span class="progress-description">
 									<a href="SesionGrupal" class="small-box-footer white text-center">
-										 Mas Información <i class="fa fa-arrow-circle-right"></i>
+										 Más Información <i class="fa fa-arrow-circle-right"></i>
 									</a>
 								</span>
 							</div>
@@ -159,7 +159,7 @@
 								</div>
 								<span class="progress-description">
 									<a href="SesionGrupal" class="small-box-footer white text-center">
-										 Mas Información <i class="fa fa-arrow-circle-right"></i>
+										 Más Información <i class="fa fa-arrow-circle-right"></i>
 									</a>
 								</span>
 							</div>
@@ -178,7 +178,7 @@
 								</div>
 								<span class="progress-description">
 									<a href="SesionGrupal" class="small-box-footer white text-center">
-										 Mas Información <i class="fa fa-arrow-circle-right"></i>
+										 Más Información <i class="fa fa-arrow-circle-right"></i>
 									</a>
 								</span>
 							</div>
@@ -207,7 +207,7 @@
 			            <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
 			            <div class="info-box-content">
 			              <span class="info-box-text">Tutor</span>
-			              <span class="info-box-text">Contról de Personal</span>
+			              <span class="info-box-text">Control de Personal</span>
 			            </div>
 			          </div>
 			        </a>
@@ -218,7 +218,7 @@
 			            <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
 			            <div class="info-box-content">
 			              <span class="info-box-text">Grupos</span>
-			              <span class="info-box-text">Contról de Grupos</span>
+			              <span class="info-box-text">Control de Grupos</span>
 			            </div>
 			          </div>
 			        </a>
@@ -229,7 +229,7 @@
 			            <span class="info-box-icon bg-aqua"><i class="fa fa-calendar"></i></span>
 			            <div class="info-box-content">
 			              <span class="info-box-text">Generaciónes</span>
-			              <span class="info-box-text">Contról de Generaciónes</span>
+			              <span class="info-box-text">Control de Generaciónes</span>
 			            </div>
 			          </div>
 			        </a>

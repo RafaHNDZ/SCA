@@ -41,7 +41,7 @@
 									<thead>
 										<tr>
 											<th>Nombre</th>
-											<th>Contról</th>
+											<th>Control</th>
 										</tr>
 									</thead>
 									<tbody>

@@ -46,7 +46,7 @@
 											<th>Turno</th>
 											<th>Semestre</th>
 											<th>Tutor</th>
-											<th>Generacion</th>
+											<th>Generación</th>
 											<th>Acciones</th>
 										</tr>
 									</thead>
