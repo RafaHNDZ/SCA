@@ -29,5 +29,21 @@ class Modelo_SesionGrupal extends CI_Model {
 				return null;
 			}
 	}
+
+	public function num_canalizacionesGrupales(){
+
+	 $this->db->select('id, COUNT(id) as total');
+	 $this->db->from('sesiongrupal');
+	 $this->db->group_by('id');
+	 $this->db->order_by('total', 'desc');
+	 $consulta = $this->db->get();
+
+		if($consulta != null){
+			return $resultado = $consulta->result_array();
+		}else{
+			return null;
+		}
+	}
+
 }
 ?>

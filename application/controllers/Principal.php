@@ -37,12 +37,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        $this->session->set_userdata($datasession);
 
 		        switch ($us->privilegios) {
-		        	case '1':
+		        	case '2':
 		        		redirect('Administrador','refresh');
 		        		break;
 		        	
-		        	default:
+		        	case'1':
 		        		redirect('Tutor','refresh');
+		        		break;
+		        	default:
+		        		exit('Usuario no Identificado.');
 		        		break;
 		        } 
 			}else{

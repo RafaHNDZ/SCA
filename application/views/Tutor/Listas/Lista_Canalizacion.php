@@ -42,13 +42,14 @@
 										<tr>
 											<th>Fecha</th>
 											<th>Nombre Alumno</th>
+											<th>Nombre del Tutor</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php foreach($arrCan as $can){ ?>
 										<tr>
-											<td><?php echo $cab['fecha']; ?></td>
-											<td>2</td>
+											<td><?php echo $can['fecha']; ?></td>
+											<td><?php echo $can['nombreAlumno']; ?></td>
 											<td>3</td>
 											<td>4</td>
 											<td class="center">

@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
- 
+
 class Modelo_Calendario extends CI_Model {
 
 	public function __construct(){
@@ -11,11 +11,11 @@ class Modelo_Calendario extends CI_Model {
 		     $prefs = array (
 				            'start_day'    => 'monday',
 				            'month_type'   => 'long',
-				            'day_type'     => 'long'
+				            'day_type'     => 'long',
 				        	);
 		    $prefs['template'] = '
 
-							        {table_open}<table border="0" class="table table-striped table-bordered table-hover">{/table_open}
+							        {table_open}<table border="1" class="table table-striped table-bordered table-responsive">{/table_open}
 
 							        {heading_row_start}<tr>{/heading_row_start}
 
@@ -54,6 +54,6 @@ class Modelo_Calendario extends CI_Model {
 
 		 	$this->load->library('calendar', $prefs);
 
-		 	return $this->calendar->generate();
+		 	return $this->calendar->generate($this->uri->segment(3),$this->uri->segment(4));
 	}
 }

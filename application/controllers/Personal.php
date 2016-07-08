@@ -11,13 +11,22 @@ class Personal extends CI_Controller{
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
+			switch ($this->session->userdata('privilegios')) {
+				case '1':
+					redirect('Tutor','refresh');
+					break;
+				case '2':
+					$data['titulo'] = "Lista de Personal";
+					$data['content'] = "Admin/Lista_Personal";
+					$data['arrTut'] = $this->Modelo_Tutor->get_Tutor();
 
-			$data['titulo'] = "Lista de Personal";
-			$data['content'] = "Admin/Lista_Personal";
-			$data['arrTut'] = $this->Modelo_Tutor->get_Tutor();
+						$this->load->view('Plantilla',$data);
+				break;
 
-				$this->load->view('Plantilla',$data);
-
+			default:
+				exit('El usuario no esta identificado.');
+				break;
+		}
 			}
 
 	}
@@ -73,11 +82,8 @@ class Personal extends CI_Controller{
 		}
 	}
 
-	public function success(){
-
-			echo 'this form has been successfully submitted with all validation being passed. All messages or logic here. Please note
-			sessions have not been used and would need to be added in to suit your app';
-
+	public function logout(){
+		redirect('Principal/logout','refresh');
 	}
 
 }

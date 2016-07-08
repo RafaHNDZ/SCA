@@ -15,7 +15,11 @@ class Grupo extends CI_Controller{
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
-
+			switch ($this->session->userdata('privilegios')) {
+				case '1':
+					redirect('Tutor','refresh');
+					break;
+				case '2':
 		$data['arrGrup'] = $this->Modelo_Grupo->get_Grupo();
 		$data['Calendario'] = $this->Modelo_Calendario->genera_calendario();
 		$data['titulo'] = "Lista de Grupos";
@@ -23,6 +27,12 @@ class Grupo extends CI_Controller{
 		$data['Esp'] = $this->Modelo_Especialidad->get_especialidades($data);
 
 			$this->load->view('Plantilla', $data);
+			break;
+
+		default:
+			exit('El usuario no esta identificado.');
+			break;
+	}
 		}
 	}
 
@@ -103,12 +113,16 @@ class Grupo extends CI_Controller{
 		$data['titulo'] = "Lista de Grupos";
 		$data['content'] = "Tutor/Listas/Lista_Grupo";
 
-		$this->load->view('Plantilla', $data);		
+		$this->load->view('Plantilla', $data);
 		}
 	}
 
 	public function del_Grupo($id){
 		$this->Modelo_Grupo->delete($id);
+	}
+
+	public function logout(){
+		redirect('Principal/logout','refresh');
 	}
 
 }

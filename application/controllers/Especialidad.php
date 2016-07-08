@@ -13,14 +13,24 @@ public function index(){
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
+			switch ($this->session->userdata('privilegios')) {
+				case '1':
+					redirect('Tutor','refresh');
+					break;
+				case '2':
+					$data['titulo'] = "Lista de Especialidades";
+					$data['content'] = "Admin/Lista_Especialidades";
+					$data['arrEsp'] = $this->Modelo_Especialidad->get_especialidades($data);
 
-		$data['titulo'] = "Lista de Especialidades";
-		$data['content'] = "Admin/Lista_Especialidades";
-		$data['arrEsp'] = $this->Modelo_Especialidad->get_especialidades($data);
+						$this->load->view('Plantilla', $data);
+			break;
 
-			$this->load->view('Plantilla', $data);
+		default:
+			exit('El usuario no esta identificado.');
+			break;
+	}
 		}
-	}	
+	}
 
 public function Registrar_Especialidad(){
 
@@ -76,6 +86,10 @@ public function Registrar_Especialidad(){
 			echo 'this form has been successfully submitted with all validation being passed. All messages or logic here. Please note
 			sessions have not been used and would need to be added in to suit your app';
 
+	}
+
+	public function logout(){
+		redirect('Principal/logout','refresh');
 	}
 
 }

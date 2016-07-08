@@ -13,13 +13,23 @@ class Canalizacion extends CI_Controller {
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
-
-			$data['arrCan'] = $this->Modelo_Canalizacion->get_canalizacion();
-
+			switch ($this->session->userdata('privilegios')) {
+				case '1':
+					redirect('Tutor','refresh');
+					break;
+				case '2':
+				
+				$data['arrCan'] = $this->Modelo_Canalizacion->get_canalizacion();
 		    $data['titulo'] = "Lista de Canalizaciones";
 		    $data['content'] = "Tutor/Listas/Lista_Canalizacion";
 
 		      $this->load->view('Plantilla', $data);
+					break;
+
+				default:
+					exit('El usuario no esta identificado.');
+					break;
+			}
   			}
   }
 
@@ -87,6 +97,10 @@ class Canalizacion extends CI_Controller {
 					sessions have not been used and would need to be added in to suit your app';
 			}
 
+	}
+
+	public function logout(){
+		redirect('Principal/logout','refresh');
 	}
 }
 ?>

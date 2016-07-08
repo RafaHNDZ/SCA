@@ -20,17 +20,26 @@ class Alumno extends CI_Controller {
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
+			switch ($this->session->userdata('privilegios')) {
+				case '1':
+					redirect('Tutor','refresh');
+					break;
+				case '2':
+					$data['arrFicha'] = $this->Modelo_Alumno->get_Ficha();
+					$data['Calendario'] = $this->Modelo_Calendario->genera_calendario();
+			    $data['titulo'] = "Lista de Fichas";
+			    $data['content'] = "Tutor/Listas/Lista_Fichas";
 
-		$data['arrFicha'] = $this->Modelo_Alumno->get_Ficha();
-			$data['Calendario'] = $this->Modelo_Calendario->genera_calendario();
-		    $data['titulo'] = "Lista de Fichas";
-		    $data['content'] = "Tutor/Listas/Lista_Fichas";
+			      $this->load->view('Plantilla', $data);
+						break;
 
-		      $this->load->view('Plantilla', $data);
-
-  			}
-
+					default:
+						exit('El usuario no esta identificado.');
+						break;
+				}
   	}
+
+  }
 
 	function Regitrar_Ficha(){
 
@@ -88,8 +97,8 @@ class Alumno extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 
 			$this->load->view('Plantilla', $data);
-		
-		}else{		 	
+
+		}else{
 
 			$form_data = array(
 								'id' => set_value(0),
@@ -102,25 +111,25 @@ class Alumno extends CI_Controller {
 						       	'grupo_id' => set_value('grupo')
 						);
 
-			
+
 
 			if ($this->Modelo_Alumno->SaveForm($form_data) == TRUE){
-   
+
 
 			}else{
 
 			echo 'An error occurred saving your information. Please try again later';
-			
+
 			}
 		}
-		
+
 
 
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
 		if ($this->form_validation->run() == FALSE){
-			
-		}else{	
+
+		}else{
 
 			$form_data = array(
 							   'idDireccion' => set_value(0),
@@ -129,15 +138,15 @@ class Alumno extends CI_Controller {
 						       'colonia' => set_value('colonia'),
 						       'codigoPostal' => set_value('codigoPostal'),
 						       'id_alumno' => set_value('matricula')
-							  );		
+							  );
 
 			if ($this->Modelo_Direccion->SaveForm($form_data) == TRUE){
- 
+
 
 			}else{
 
 			echo 'An error occurred saving your information. Please try again later';
-			
+
 			}
 		}
 
@@ -192,14 +201,14 @@ class Alumno extends CI_Controller {
 					       	'necesitaTrabajo' => set_value('necesitaTrabajo'),
 					       	'causaTrabajo' => set_value('causaTrabajo'),
 					       	'alumno_id' => set_value('matricula')
-						);		
+						);
 
-			if ($this->Modelo_HistorialEconomico->SaveForm($form_data) == TRUE){   
+			if ($this->Modelo_HistorialEconomico->SaveForm($form_data) == TRUE){
 
 			}else{
 
 			echo 'An error occurred saving your information. Please try again later';
-			
+
 			}
 		}
 
@@ -209,7 +218,7 @@ class Alumno extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
 		if ($this->form_validation->run() == FALSE){
-		
+
 		}else{
 
 			$form_data = array(
@@ -222,12 +231,12 @@ class Alumno extends CI_Controller {
 					       	'alumno_id' => set_value('matricula')
 						);
 
-			if ($this->Modelo_HistorialAcademico->SaveForm($form_data) == TRUE){ 
+			if ($this->Modelo_HistorialAcademico->SaveForm($form_data) == TRUE){
 
 			}else{
 
 			echo 'An error occurred saving your information. Please try again later';
-			
+
 			}
 		}
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
@@ -263,5 +272,9 @@ class Alumno extends CI_Controller {
 	}
 
 }
+
+	public function logout(){
+		redirect('Principal/logout','refresh');
+	}
 
 }

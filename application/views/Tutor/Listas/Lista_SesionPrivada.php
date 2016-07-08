@@ -7,7 +7,6 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="Administrador">Home</a>
 							</li>
-
 							<li>
 								<a class="active"><?php echo $titulo; ?></a>
 							</li>

@@ -26,10 +26,25 @@ function get_canalizacion(){
 	$this->db->from('canalizacion');
 	$consulta = $this->db->get();
 	if($consulta != null){
-	return $resultado = $consulta->result();
+	return $resultado = $consulta->result_array();
 		}else{
 			return null;
 		}
 	}
+
+	public function num_canalizaciones(){
+
+	 $this->db->select('id, COUNT(id) as total');
+	 $this->db->from('canalizacion');
+	 $this->db->group_by('id');
+	 $this->db->order_by('total', 'desc');
+	 $consulta = $this->db->get();
+
+		if($consulta != null){
+			return $resultado = $consulta->result_array();
+		}else{
+			return null;
+		}
+}
 
 }

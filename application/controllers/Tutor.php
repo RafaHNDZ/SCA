@@ -15,4 +15,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	        $this->load->view('Plantilla', $data);
 	    }
     }
+
+    public function logout(){
+      redirect('Principal/logout','refresh');
+    }
+    	
   }

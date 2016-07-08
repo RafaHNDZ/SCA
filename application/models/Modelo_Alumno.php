@@ -35,8 +35,8 @@ class Modelo_Alumno extends CI_Model {
 		public function num_alumnos(){
 
 		 $this->db->select('id, COUNT(id) as total');
-		 $this->db->group_by('id'); 
-		 $this->db->order_by('total', 'desc'); 
+		 $this->db->group_by('id');
+		 $this->db->order_by('total', 'desc');
 		 $consulta = $this->db->get('alumno', 10);
 
 			if($consulta != null){
@@ -53,10 +53,11 @@ class Modelo_Alumno extends CI_Model {
 		$this->db->join('grupo','grupo.id = alumno.grupo_id');
 		$this->db->join('turno','turno.id = grupo.turno_id');
 		$consulta = $this->db->get();
-		
-		if($consulta != null){
-			$resultado = $consulta->result_array();
-			return $resultado;
+
+		if($consulta){
+			$resultado = $consulta->result();
+			echo var_dump($resultado);
+			return json_encode($resultado);
 		}else{
 			return "Sin Resultados";
 		}

@@ -14,13 +14,23 @@ class Semestre extends CI_Controller{
     if(!$this->session->userdata('login_ok')){
       redirect('Principal','refresh');
     }else{
-
+    switch ($this->session->userdata('privilegios')) {
+      case '1':
+        redirect('Tutor','refresh');
+        break;
+      case '2':
         $data['arrSem'] = $this->Modelo_Semestre->get_Semestre();
 
         $data['titulo'] = "Lista de Semestres";
         $data['content'] = "Admin/Lista_Semestres";
 
             $this->load->view('Plantilla', $data);
+        break;
+
+      default:
+        exit('El usuario no esta identificado.');
+        break;
+    }
         }
 }
 
@@ -65,9 +75,13 @@ class Semestre extends CI_Controller{
     }
   }
 
-public function del_Semestre($id){
-  $this->Modelo_Semestre->del_Semestre($id);
-  redirect('index','refresh');
-}
+  public function del_Semestre($id){
+    $this->Modelo_Semestre->del_Semestre($id);
+    redirect('index','refresh');
+  }
+
+  public function logout(){
+    redirect('Principal/logout','refresh');
+  }
 
 }

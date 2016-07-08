@@ -49,7 +49,7 @@
 												<td><?php echo $Tut['nombre']." ".$Tut['apellidoP']." ".$Tut['apellidoM'] ?></td>
 												<td>
 													<?php switch ($Tut['privilegios']) {
-														case '1':
+														case '2':
 															?> <button type="button" name="button" class="btn btn-warning">Administrador</button> <?php
 															break;
 
@@ -60,7 +60,7 @@
 												</td>
 												<td>
 													<?php switch ($Tut['estado']) {
-														case '2':
+														case '1':
 															?> <button type="button" name="button" class="btn btn-success">Activo</button> <?php
 															break;
 

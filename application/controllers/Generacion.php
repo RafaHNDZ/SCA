@@ -13,13 +13,23 @@ class Generacion extends CI_Controller {
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
+			switch ($this->session->userdata('privilegios')) {
+				case '1':
+					redirect('Tutor','refresh');
+					break;
+				case '2':
+					$data['arrGen'] = $this->Modelo_Generacion->get_Generacion();
 
-			$data['arrGen'] = $this->Modelo_Generacion->get_Generacion();
+			    $data['titulo'] = "Lista de Generaciones";
+			    $data['content'] = "Admin/Lista_Generaciones";
 
-		    $data['titulo'] = "Lista de Generaciones";
-		    $data['content'] = "Admin/Lista_Generaciones";
+			      $this->load->view('Plantilla', $data);
+					break;
 
-		      $this->load->view('Plantilla', $data);
+				default:
+					exit('El usuario no esta identificado.');
+					break;
+			}
 		     }
   }
 
@@ -68,10 +78,8 @@ class Generacion extends CI_Controller {
 		$this->Modelo_Generacion->delete($id);
 	}
 
-	function success()
-	{
-			echo 'this form has been successfully submitted with all validation being passed. All messages or logic here. Please note
-			sessions have not been used and would need to be added in to suit your app';
+	public function logout(){
+		redirect('Principal/logout','refresh');
 	}
+
 }
-?>

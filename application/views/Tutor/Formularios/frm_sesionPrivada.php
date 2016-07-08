@@ -5,9 +5,12 @@
             <ul class="breadcrumb">
               <li>
                 <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="Administrador">Home</a>
+                <a href="../Administrador">Home</a>
               </li>
 
+              <li>
+                <a class="../SesionPrivada">Lista de Sesiones Privadas</a>
+              </li>
               <li>
                 <a class="active"><?php echo $titulo; ?></a>
               </li>
@@ -120,17 +123,17 @@ $(document).ready(function() {
 });
   function buscar() {
       var textoBusqueda = $("input#busqueda").val();
-   
+
        if (textoBusqueda != "") {
+
           $.post("<?php echo base_url();?>index.php/SesionPrivada/alumno_data", {id: textoBusqueda}, function(data) {
               $("#resultadoBusqueda").html(data);
-              <?php echo $alumno?>
+              $("#nombreAlumno").val(data);
               });
-       } else { 
+       } else {
           $("#resultadoBusqueda").html('<p>JQUERY VACIO</p>');
           $("#nombreAlumno").val();
           };
     };
 
 </script>
-
