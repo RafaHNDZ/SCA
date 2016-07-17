@@ -20,13 +20,12 @@ class Direccion extends CI_Controller {
 
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
-		if ($this->form_validation->run() == FALSE) // validation hasn't been passed
+		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('direccion_view');
 		}
-		else // passed validation proceed to post success logic
+		else
 		{
-		 	// build array for the model
 
 			$form_data = array(
 					       	'calle' => set_value('calle'),
@@ -35,21 +34,16 @@ class Direccion extends CI_Controller {
 					       	'codigoPostal' => set_value('codigoPostal')
 						);
 
-			// run insert model to write data to db
-
-			if ($this->Modelo_Direccion->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
-			{
-				redirect('Direccion/success');   // or whatever logic needs to occur
+			if ($this->Modelo_Direccion->SaveForm($form_data) == TRUE){
+				redirect('Direccion/success');
 			}
-			else
-			{
-			echo 'An error occurred saving your information. Please try again later';
-			// Or whatever error handling is necessary
+			else{
+				echo 'An error occurred saving your information. Please try again later';
+
 			}
 		}
 	}
-	function success()
-	{
+	function success(){
 			echo 'this form has been successfully submitted with all validation being passed. All messages or logic here. Please note
 			sessions have not been used and would need to be added in to suit your app';
 	}

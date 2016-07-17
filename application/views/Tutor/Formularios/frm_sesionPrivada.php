@@ -27,7 +27,12 @@
           </div>
 <?php } ?>
 <div class="page-content">
+<?php $id = $this->input->post('id');
+  if($id != null){
+    $data = $this->Modelo_Alumno->get_alumno_data($id);
+    foreach($data as $dato){
 
+    } ?>
 	<div class="row">
 		<div class="page-header">
 			<h1 class="page-title"><?php echo $titulo;?></h1>
@@ -40,64 +45,59 @@
       echo form_open('SesionPrivada/Registro_SesionPrivada', $attributes); ?>
 
       <div class="form-group">
-              <label for="Matricula" class="col-sm-3 control-label no-padding-right">Buscar por Matricula: </label>
-              <input class="col-xs-10 col-sm-2" type="number" name="busqueda" id="busqueda" value="" placeholder="" maxlength="30" autocomplete="off" onKeyUp="buscar();" /><div id="resultadoBusqueda" class="col-xs-10 col-sm-3"></div>
+        <label for="nombreAlumno" class="col-sm-3 control-label no-padding-right">Nombre del Alumno <span class="required">*</span></label>
+        <?php echo form_error('nombreAlumno'); ?>
+        <input class="col-xs-10 col-sm-5" readonly="readonly" id="nombreAlumno" type="text" name="nombreAlumno" maxlength="110" value="<?php echo $dato['nomAlu']." ".$dato['apellidoP']." ".$dato['apellidoM']; ?>"  />
       </div>
 
       <div class="form-group">
-              <label for="nombreAlumno" class="col-sm-3 control-label no-padding-right">Nombre del Alumno <span class="required">*</span></label>
-              <?php echo form_error('nombreAlumno'); ?>
-              <input class="col-xs-10 col-sm-5" id="nombreAlumno" type="text" name="nombreAlumno" maxlength="110" value=""  />
+        <label for="nombreGrupo" class="col-sm-3 control-label no-padding-right">Grupo <span class="required">*</span></label>
+        <input class="col-xs-10 col-sm-5" readonly="readonly" id="nombreGrupo" type="text" name="nombreGrupo" maxlength="110" value="<?php echo $dato['nombreGrupo']; ?>"  />
+        <?php echo form_error('nombreGrupo'); ?>
       </div>
 
       <div class="form-group">
-              <label for="nombreGrupo" class="col-sm-3 control-label no-padding-right">Grupo <span class="required">*</span></label>
-              <input class="col-xs-10 col-sm-5" id="nombreGrupo" type="text" name="nombreGrupo" maxlength="110" value=""  />
-              <?php echo form_error('nombreGrupo'); ?>
+        <label for="nombreTurno" class="col-sm-3 control-label no-padding-right">Turno <span class="required">*</span></label>
+        <?php echo form_error('nombreTurno'); ?>
+        <input class="col-xs-10 col-sm-5" readonly="readonly" id="nombreTurno" type="text" name="nombreTurno" maxlength="110" value="<?php echo $dato['nombreTurno'];?>"  />
       </div>
 
       <div class="form-group">
-              <label for="nombreTurno" class="col-sm-3 control-label no-padding-right">Turno <span class="required">*</span></label>
-              <?php echo form_error('nombreTurno'); ?>
-              <input class="col-xs-10 col-sm-5" id="nombreTurno" type="text" name="nombreTurno" maxlength="110" value=""  />
+        <label for="fecha" class="col-sm-3 control-label no-padding-right">Fecha <span class="required">*</span></label>
+        <?php echo form_error('fecha'); ?>
+        <input class="col-xs-10 col-sm-5" readonly="readonly" id="fecha" type="text" name="fecha"  value="<?php echo date('Y-m-d'); ?>"  />
       </div>
 
       <div class="form-group">
-              <label for="fecha" class="col-sm-3 control-label no-padding-right">Fecha <span class="required">*</span></label>
-              <?php echo form_error('fecha'); ?>
-              <input class="col-xs-10 col-sm-5" id="fecha" type="text" name="fecha"  value="<?php echo set_value('fecha'); ?>"  />
-      </div>
-
-      <div class="form-group">
-              <label for="objetivo" class="col-sm-3 control-label no-padding-right">Objetivo <span class="required">*</span></label>
+        <label for="objetivo" class="col-sm-3 control-label no-padding-right">Objetivo <span class="required">*</span></label>
       	<?php echo form_error('objetivo'); ?>
 
 
       	<?php echo form_textarea( array('required' => 'required', 'name' => 'objetivo', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('objetivo') ) )?>
       </div>
       <div class="form-group">
-              <label for="problematica" class="col-sm-3 control-label no-padding-right">Problematica <span class="required">*</span></label>
+        <label for="problematica" class="col-sm-3 control-label no-padding-right">Problematica <span class="required">*</span></label>
       	<?php echo form_error('problematica'); ?>
 
 
       	<?php echo form_textarea( array('required' => 'required', 'name' => 'problematica', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('problematica') ) )?>
       </div>
       <div class="form-group">
-              <label for="seguimiento" class="col-sm-3 control-label no-padding-right">Seguimiento <span class="required">*</span></label>
+        <label for="seguimiento" class="col-sm-3 control-label no-padding-right">Seguimiento <span class="required">*</span></label>
       	<?php echo form_error('seguimiento'); ?>
 
 
       	<?php echo form_textarea( array('required' => 'required', 'name' => 'seguimiento', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('seguimiento') ) )?>
       </div>
       <div class="form-group">
-              <label for="resultados" class="col-sm-3 control-label no-padding-right">Resultados <span class="required">*</span></label>
+        <label for="resultados" class="col-sm-3 control-label no-padding-right">Resultados <span class="required">*</span></label>
       	<?php echo form_error('resultados'); ?>
 
 
       	<?php echo form_textarea( array('required' => 'required', 'name' => 'resultados', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('resultados') ) )?>
       </div>
       <div class="form-group">
-              <label for="observaciones" class="col-sm-3 control-label no-padding-right">Observaciones <span class="required">*</span></label>
+        <label for="observaciones" class="col-sm-3 control-label no-padding-right">Observaciones <span class="required">*</span></label>
       	<?php echo form_error('observaciones'); ?>
 
 
@@ -110,7 +110,11 @@
         </div>
       </div>
 
-      <?php echo form_close(); ?>
+      <?php echo form_close();
+    }else{
+      echo '<script>  sec_Warning(); </script>';
+      ?> <a class="btn btn-primary" href="javascript:window.history.back();">&laquo; Volver atrás</a> <?php
+    } ?>
 
 		</div>
 	</div>

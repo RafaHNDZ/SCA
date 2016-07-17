@@ -32,6 +32,7 @@
 			<h1 class="page-title"><?php echo $titulo;?></h1>
 		</div>
 		<div class="col-xs-12">
+      <?php echo $this->input->post('id'); ?>
       <?php // Change the css classes to suit your needs
 
       $attributes = array('class' => 'form-horizontal', 'id' => '');
@@ -117,8 +118,8 @@
 
       <div class="form-group">
 				<div class="col-sm-3 control-label no-padding-right">
-					<?php echo form_submit( 'submit', 'Enviar', 'class="btn btn-success"'); ?>
-				</div>              
+					<?php echo form_submit( 'submit', 'Enviar', 'class="btn btn-success"','id="enviar"'); ?>
+				</div>
       </div>
 
       <?php echo form_close(); ?>

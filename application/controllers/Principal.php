@@ -12,48 +12,62 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			$data['titulo'] = "Login";
 			$data['content'] = "login";
+			$data['alerta'] = FALSE;
 
 				$this->load->view('Plantilla', $data);
 		}
 
 		public function inicio_sesion(){
 
+			$data['titulo'] = "Login";
+			$data['content'] = "login";
+			
+				$this->form_validation->set_rules('email', 'Correo', 'required|xss_clean');
+				$this->form_validation->set_rules('password', 'Contraseña','required|xss_clean');
+				$this->form_validation->set_message('xss_clean', 'Caracter(es) sospechoso(s) detectado(s)');
+
+
+				if($this->form_validation->run()!=FALSE){
+
 					$email = $this->input->post('email');
 					$password = $this->input->post('password');
 
-			if($this->Modelo_Usuario->login_user($email, $password) == TRUE){
-				$usuario = $this->Modelo_Usuario->login_user($email, $password);
+					if($this->Modelo_Usuario->login_user($email, $password) == TRUE){
+						$usuario = $this->Modelo_Usuario->login_user($email, $password);
 
-				foreach($usuario as $us){
-			        $datasession = array(
-			          'usuario_id'  => $us->id,
-			          'privilegios' => $us->privilegios,
-			          'nombre' => $us->nombre,
-			          //'grupo' => $us->idGrupo,
-			          'login_ok' => TRUE
-			        );
-				}
+						foreach($usuario as $us){
+					        $datasession = array(
+					          'usuario_id'  => $us->id,
+					          'privilegios' => $us->privilegios,
+					          'nombre' => $us->nombre,
+					          //'grupo' => $us->idGrupo,
+					          'login_ok' => TRUE
+					        );
+						}
 
-		        $this->session->set_userdata($datasession);
+				        $this->session->set_userdata($datasession);
 
-		        switch ($us->privilegios) {
-		        	case '2':
-		        		redirect('Administrador','refresh');
-		        		break;
-		        	
-		        	case'1':
-		        		redirect('Tutor','refresh');
-		        		break;
-		        	default:
-		        		exit('Usuario no Identificado.');
-		        		break;
-		        } 
+				        switch ($us->privilegios) {
+				        	case '2':
+				        		redirect('Administrador','refresh');
+				        		break;
+
+				        	case'1':
+				        		redirect('Tutor','refresh');
+				        		break;
+				        	default:
+				        		exit('Usuario no Identificado.');
+				        		break;
+				        }
+					}else{
+						return  "error";
+					}
+
 			}else{
-				return  "error";
+				$data['alerta'] = TRUE;
+				$this->load->view('Plantilla', $data);
 			}
-		
-		}
-
+    }
 		public function logout(){
 
 		        $datasession = array(

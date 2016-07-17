@@ -30,14 +30,17 @@
 											<?php echo form_open('Principal/inicio_sesion'); ?>
 												<fieldset>
 													<label class="block clearfix">
+														<span class="required"></span>
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Correo" name="email" autocomplete="off" />
+															<?php echo form_error('email'); ?>
+															<input type="email" class="form-control" placeholder="Correo" name="email" autocomplete="off" value="<?php echo set_value('email'); ?>"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
 													</label>
 
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
+													<label class="block clearfix"><span class=""></span>
+														<span class="block input-icon input-icon-right required">
+															<?php echo form_error('password'); ?>
 															<input type="password" class="form-control" placeholder="Contraseña" name="password" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
@@ -55,7 +58,9 @@
 													<div class="space-4"></div>
 												</fieldset>
 											<?php echo form_close(); ?>
-
+											<?php if($alerta == TRUE){
+												echo "<script> notificacion(); </script>";
+											} ?>
 											<div class="space-6"></div>
 										</div><!-- /.widget-main -->
 

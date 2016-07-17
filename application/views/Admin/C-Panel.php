@@ -60,7 +60,7 @@
             </div>
             <div class="box-body">
 				<div class="row">
-					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 						<div class="small-box bg-aqua">
 							<div class="inner">
 								<h3><?php echo $na ?></h3>
@@ -74,7 +74,7 @@
 							</a>
 						</div>
 					</div>
-					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 						<div class="small-box bg-aqua">
 							<div class="inner">
 								<h3><?php echo $ng ?></h3>
@@ -88,7 +88,7 @@
 							</a>
 						</div>
 					</div>
-					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 						<div class="small-box bg-aqua">
 							<div class="inner">
 								<h3><?php echo $nt ?></h3>
@@ -102,7 +102,7 @@
 							</a>
 						</div>
 					</div>
-					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 						<div class="small-box bg-orange">
 							<div class="inner">
 								<h3><?php echo $nc ?></h3>
@@ -116,7 +116,7 @@
 							</a>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 						<div class="info-box bg-red">
 							<span class="info-box-icon">
 								<i class="fa fa-exclamation"></i>
@@ -135,7 +135,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 						<div class="info-box bg-yellow">
 							<span class="info-box-icon">
 								<i class="fa fa-exclamation"></i>
@@ -154,7 +154,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 						<div class="info-box bg-blue">
 							<span class="info-box-icon">
 								<i class="fa fa-pencil-square-o"></i>
@@ -173,7 +173,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 						<div class="info-box bg-green">
 							<span class="info-box-icon">
 								<i class="fa fa-check"></i>
@@ -209,7 +209,7 @@
             </div>
             <div class="box-body">
 						<div class="row">
-					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">
 					        <a href="Personal">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
@@ -220,7 +220,7 @@
 					          </div>
 					        </a>
 					        </div>
-					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">
 					        <a href="Grupo">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
@@ -231,7 +231,7 @@
 					          </div>
 					        </a>
 					        </div>
-					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">
 					        <a href="Generacion">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-aqua"><i class="fa fa-calendar"></i></span>
@@ -242,7 +242,7 @@
 					          </div>
 					        </a>
 					        </div>
-					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">
 					        <a href="Especialidad">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-aqua"><i class="fa fa-graduation-cap"></i></span>
@@ -253,7 +253,7 @@
 					          </div>
 					        </a>
 					        </div>
-					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+					        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">
 					        <a href="Semestre">
 					          <div class="info-box">
 					            <span class="info-box-icon bg-aqua"><i class="fa fa-clock-o"></i></span>

@@ -19,8 +19,11 @@ class Modelo_Usuario extends CI_Model{
 
 				return $query->result();
 
-			}else{				
-				redirect('Principal','refresh');
+			}else{
+				$data['titulo'] = "Login";
+				$data['content'] = "login";
+				$data['alerta'] = TRUE;
+				$this->load->view('Plantilla', $data);
 			}
 		}
 

@@ -10,6 +10,7 @@
 
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap-xlgrid.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/4.2.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
@@ -28,7 +29,7 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/_all-skins.css">
 		<!-- ace settings handler -->
 		<script src="<?php echo base_url();?>assets/js/ace-extra.min.js"></script>
-		
+		<script src="<?php echo base_url();?>assets/js/System.js"></script>
 	</head>
 
-	<body class="no-skin">
+	<body class="no-skin" id="body">

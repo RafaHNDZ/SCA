@@ -316,8 +316,13 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
-
+$config['encryption_key'] = 'Mym_Alk4pon3';
+/*
+| Aes_Encript password.
+|
+|
+*/
+$config['aes_encryption_key'] ='';
 /*
 |--------------------------------------------------------------------------
 | Session Variables

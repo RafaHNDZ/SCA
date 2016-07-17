@@ -64,7 +64,7 @@ class Canalizacion extends CI_Controller {
 				 	// build array for the model
 
 					$form_data = array(
-											'id' => set_value(null),
+						            'id' => set_value(null),
 							       	'fecha' => set_value('fecha'),
 							       	'numeroControl' => set_value('numeroControl'),
 							       	'nombreAlumno' => set_value('nombreAlumno'),

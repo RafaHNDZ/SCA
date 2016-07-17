@@ -42,7 +42,7 @@ public function Registrar_Especialidad(){
 				$this->load->model('Modelo_Especialidad');
 			}
 
-			$data['titulo'] = "Lista de Grupos";
+			$data['titulo'] = "Registro de Especialidad";
 			$data['content'] = "Admin/frm_registroEspecialidad";
 
 			$this->form_validation->set_rules('nombre', 'Nombre', 'xss_clean|required|trim|max_length[30]');
@@ -56,17 +56,17 @@ public function Registrar_Especialidad(){
 			else // passed validation proceed to post success logic
 			{
 			 	// build array for the model
-
+				$nombre = $this->input->post('nombre');
 				$form_data = array(
 	                            'id' => set_value(0),
-						       	'nombre' => set_value('nombre')
+						       	'nombre' => $this->encrypt->encode($nombre)
 								);
 
 				// run insert model to write data to db
 
 				if ($this->Modelo_Especialidad->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
 				{
-					redirect('Especialidad/success');   // or whatever logic needs to occur
+					redirect('Especialidad','refresh');   // or whatever logic needs to occur
 				}
 				else
 				{

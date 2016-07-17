@@ -2,7 +2,6 @@
 
 		<div id="navbar" class="navbar navbar-default navbar-fixed-top">
 			<div class="navbar-container" id="navbar-container navbar-fixed">
-
 			<!--
 				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
 					<span class="sr-only">Toggle sidebar</span>
@@ -53,7 +52,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="logout">
+									<a href="<?php echo base_url();?>index.php/Principal/logout">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -66,6 +65,3 @@
 		</div>
 <?php }?>
 		<div class="main-container" id="main-container">
-			<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>

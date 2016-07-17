@@ -27,7 +27,7 @@
 	<div class="row">
 		<div class="box box-primary box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title"><?php echo $alumnos->nombreGrupo ?></h3>
+              <h3 class="box-title">Mi Grupo</h3>
             	<div class="box-tools pull-right">
                 	<!--<a href="../Alumno/Regitrar_Ficha" class="btn btn-box-tool btn-success">Registrar Nuevo Alumno</a> -->
               </div>
@@ -48,26 +48,32 @@
 		              <div class="separator"></div>
 		              <p class="center">Matricula: <?php echo $alumno['matricula']; ?></p>
 		              <div class="box-footer center">
-						<div class="btn-group">
-							<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle"> Opciones: </button>
-							<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-								<i class="ace-icon fa fa-angle-down icon-only"></i>
-							</button>
-								<ul class="dropdown-menu dropdown-default">
-									<li>
-										<a href="../../Canalizacion/Registro_Canalizacion/<?php echo $alumno['id']; ?>">Generar Canalización</a>
-									</li>
-									<li>
-										<a href="../../SesionPrivada/Registro_SesionPrivada/<?php echo $alumno['id']; ?>">Generar Entrevista Individual</a>
-									</li>
-									<li>
-										<div class="divider"></div>
-									</li>
-									<li>
-										<a href="" class="btn btn-danger btn-xs">Registrar a Baja</a>
-									</li>
-								</ul>
-						</div>
+										<div class="btn-group">
+											<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle"> Opciones: </button>
+											<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+												<i class="ace-icon fa fa-angle-down icon-only"></i>
+											</button>
+												<ul class="dropdown-menu dropdown-default">
+													<li>
+														<form action="<?php echo base_url();?>index.php/Canalizacion/Registro_Canalizacion" method="POST">
+														<input type="hidden" value="<?php echo $alumno['id']; ?>" id="id" name="id">
+														<input type="submit" class="btn btn-warning btn-xs" value="Generar Canalización" />
+													  </form>
+													</li>
+													<li>
+														<form action="<?php echo base_url();?>index.php/SesionPrivada/Registro_SesionPrivada" method="POST">
+														<input type="hidden" value="<?php echo $alumno['id']; ?>" id="id" name="id">
+														<input type="submit" class="btn btn-warning btn-xs" value="Generar Canalización" />
+													  </form>
+													</li>
+													<li>
+														<div class="divider"></div>
+													</li>
+													<li>
+														<a href="" class="btn btn-danger btn-xs">Registrar a Baja</a>
+													</li>
+												</ul>
+										</div>
 		              </div>
 		            </div>
 		           </div>
@@ -84,3 +90,6 @@
 		</div>
 	</div>
 </div>
+<script>
+
+</script>

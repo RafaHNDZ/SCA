@@ -47,17 +47,16 @@ class Modelo_Alumno extends CI_Model {
 	}
 
 	public function get_alumno_data($id){
-		$this->db->select('alumno.id, alumno.nombre as nomAlu, alumno.apellidoP, alumno.apellidoM, alumno.grupo_id, grupo.nombre, turno.nombreTurno');
+		$this->db->select('alumno.id, alumno.nombre as nomAlu, alumno.apellidoP, alumno.apellidoM, alumno.grupo_id, grupo.nombre as nombreGrupo, turno.nombreTurno');
 		$this->db->from('alumno');
-		$this->db->where('alumno.matricula',$id);
+		$this->db->where('alumno.id',$id);
 		$this->db->join('grupo','grupo.id = alumno.grupo_id');
 		$this->db->join('turno','turno.id = grupo.turno_id');
 		$consulta = $this->db->get();
 
 		if($consulta){
-			$resultado = $consulta->result();
-			echo var_dump($resultado);
-			return json_encode($resultado);
+			$resultado = $consulta->result_array();
+			return $resultado;
 		}else{
 			return "Sin Resultados";
 		}

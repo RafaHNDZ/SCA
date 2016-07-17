@@ -69,18 +69,12 @@ class SesionPrivada extends CI_Controller {
 		}
 	}
 
-		public function alumno_data(){
-
-			$id = $this->input->post('id');
-
-			if(strlen($id) < 11){
+		public function alumno_data($id){
 
 			$alumno = $this->Modelo_Alumno->get_alumno_data($id);
 
 				return $alumno;
-			}else{
-				echo "Matricula Invalida";
-			}
+
 		}
 
 		public function logout(){

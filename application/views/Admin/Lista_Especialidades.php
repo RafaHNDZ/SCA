@@ -54,6 +54,10 @@
 										</tr>
 										<?php } ?>
 									</tbody>
+									<?php $plain_text = 'Quimica';
+$ciphertext = $this->encryption->encrypt($plain_text);
+echo $this->encryption->decrypt($ciphertext);
+echo $ciphertext; ?>
 								</table>
 							</div>
 						</div>
