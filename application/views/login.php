@@ -33,7 +33,7 @@
 														<span class="required"></span>
 														<span class="block input-icon input-icon-right">
 															<?php echo form_error('email'); ?>
-															<input type="email" class="form-control" placeholder="Correo" name="email" autocomplete="off" value="<?php echo set_value('email'); ?>"/>
+															<input type="email" class="form-control" placeholder="Correo" name="email" autocomplete="on" value="<?php echo set_value('email'); ?>"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
 													</label>

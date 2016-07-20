@@ -39,14 +39,22 @@
 										<thead>
 											<tr>
 												<th>Nombre</th>
+												<th>E-Mail</th>
 												<th>Privilegios</th>
 												<th>Estado</th>
+												<th>Control</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php foreach($arrTut as $Tut){ ?>
 											<tr>
-												<td><?php echo $Tut['nombre']." ".$Tut['apellidoP']." ".$Tut['apellidoM'] ?></td>
+												<td>
+												<?php echo $Tut['nombre']." ".$Tut['apellidoP']." ".$Tut['apellidoM'] ?>
+													
+												</td>
+																								<td>
+												<?php echo $Tut['email'];?>
+												</td>
 												<td>
 													<?php switch ($Tut['privilegios']) {
 														case '2':
@@ -68,6 +76,12 @@
 															?> <button type="button" name="button" class="btn btn-default">Inactivo</button> <?php
 															break;
 													} ?>
+												</td>
+												<td>
+												<form action="Personal/mod_Personal" method="POST">
+												<input type="hidden" name="idTutor" id="idTutor" value="<?php echo $Tut['id'];?>">
+												<button class="btn btn-primary">Editar Información</button>
+												</form>
 												</td>
 											</tr>
 											<?php } ?>

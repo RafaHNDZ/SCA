@@ -9,7 +9,7 @@
               </li>
 
               <li>
-                <a class="../SesionPrivada">Lista de Sesiones Privadas</a>
+                <a href="../SesionPrivada">Lista de Sesiones Privadas</a>
               </li>
               <li>
                 <a class="active"><?php echo $titulo; ?></a>
@@ -41,31 +41,38 @@
 		<div class="col-xs-12">
       <?php // Change the css classes to suit your needs
 
-      $attributes = array('class' => 'form-horizontal', 'id' => '');
+      $attributes = array('class' => 'form-horizontal', 'id' => 'formulario');
       echo form_open('SesionPrivada/Registro_SesionPrivada', $attributes); ?>
 
       <div class="form-group">
+      <input name="idAlumno" id="idAlumno" type="hidden" value="<?php echo $id;?>">
+
         <label for="nombreAlumno" class="col-sm-3 control-label no-padding-right">Nombre del Alumno <span class="required">*</span></label>
         <?php echo form_error('nombreAlumno'); ?>
-        <input class="col-xs-10 col-sm-5" readonly="readonly" id="nombreAlumno" type="text" name="nombreAlumno" maxlength="110" value="<?php echo $dato['nomAlu']." ".$dato['apellidoP']." ".$dato['apellidoM']; ?>"  />
+        <input class="col-xs-10 col-sm-3" readonly="readonly" id="nombreAlumno" type="text" name="nombreAlumno" maxlength="110" value="<?php echo $dato['nomAlu']." ".$dato['apellidoP']." ".$dato['apellidoM']; ?>"  />
       </div>
 
+        <input class="col-xs-10 col-sm-2" readonly="readonly" name="idGrupo" type="hidden" value="<?php echo $dato['idGrupo']; ?>"  />
+
       <div class="form-group">
-        <label for="nombreGrupo" class="col-sm-3 control-label no-padding-right">Grupo <span class="required">*</span></label>
-        <input class="col-xs-10 col-sm-5" readonly="readonly" id="nombreGrupo" type="text" name="nombreGrupo" maxlength="110" value="<?php echo $dato['nombreGrupo']; ?>"  />
+        <label for="Grupo" class="col-sm-3 control-label no-padding-right">Grupo <span class="required">*</span></label>
+        <input class="col-xs-10 col-sm-2" readonly="readonly" id="Grupo" type="text" name="Grupo" maxlength="110" value="<?php echo $dato['nombreGrupo']; ?>"  />
         <?php echo form_error('nombreGrupo'); ?>
       </div>
 
       <div class="form-group">
         <label for="nombreTurno" class="col-sm-3 control-label no-padding-right">Turno <span class="required">*</span></label>
         <?php echo form_error('nombreTurno'); ?>
-        <input class="col-xs-10 col-sm-5" readonly="readonly" id="nombreTurno" type="text" name="nombreTurno" maxlength="110" value="<?php echo $dato['nombreTurno'];?>"  />
+        <input class="col-xs-10 col-sm-2" readonly="readonly" id="nombreTurno" type="text" name="nombreTurno" maxlength="110" value="<?php echo $dato['nombreTurno'];?>"  />
       </div>
+
+        <?php echo form_error('nombreTurno'); ?>
+        <input class="col-xs-10 col-sm-2" readonly="readonly" name="idTurno" type="hidden" value="<?php echo $dato['idTurno'];?>"  />
 
       <div class="form-group">
         <label for="fecha" class="col-sm-3 control-label no-padding-right">Fecha <span class="required">*</span></label>
         <?php echo form_error('fecha'); ?>
-        <input class="col-xs-10 col-sm-5" readonly="readonly" id="fecha" type="text" name="fecha"  value="<?php echo date('Y-m-d'); ?>"  />
+        <input class="col-xs-10 col-sm-2" readonly="readonly" id="fecha" type="text" name="fecha"  value="<?php echo date('Y-m-d'); ?>"  />
       </div>
 
       <div class="form-group">
@@ -106,7 +113,7 @@
 
       <div class="form-group">
         <div class="col-sm-3 control-label no-padding-right">
-          <?php echo form_submit( 'submit', 'Enviar','class="btn btn-primary"'); ?>
+          <?php echo form_submit( 'submit', 'Enviar','class="btn btn-primary"','id="formulario"'); ?>
         </div>
       </div>
 
@@ -115,29 +122,7 @@
       echo '<script>  sec_Warning(); </script>';
       ?> <a class="btn btn-primary" href="javascript:window.history.back();">&laquo; Volver atrás</a> <?php
     } ?>
-
 		</div>
 	</div>
 </div>
 </div>
-<script>
-
-$(document).ready(function() {
-    $("#resultadoBusqueda").html('<p>JQUERY VACIO</p>');
-});
-  function buscar() {
-      var textoBusqueda = $("input#busqueda").val();
-
-       if (textoBusqueda != "") {
-
-          $.post("<?php echo base_url();?>index.php/SesionPrivada/alumno_data", {id: textoBusqueda}, function(data) {
-              $("#resultadoBusqueda").html(data);
-              $("#nombreAlumno").val(data);
-              });
-       } else {
-          $("#resultadoBusqueda").html('<p>JQUERY VACIO</p>');
-          $("#nombreAlumno").val();
-          };
-    };
-
-</script>

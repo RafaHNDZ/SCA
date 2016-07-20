@@ -43,6 +43,7 @@
 											<th>Nombre del Alumno</th>
 											<th>Grupo</th>
 											<th>Fecha</th>
+											<th>Detalles</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -53,16 +54,9 @@
 											<td><?php echo $SP['fecha']; ?></td>
 											<td class="center">
 											<div class="btn-group">
-												<button data-toggle="dropdown" class="btn btn-primary dropdown-toogle">
-													Acciónes <i class="fa fa-angle-down icon-on-rigth"></i>
-												</button>
-													<ul class="dropdown-menu">
-														<li><a href="">Action 1</a></li>
-														<li><a href="">Action 2</a></li>
-														<li><a href="">Action 3</a></li>
-														<li class="divider"></li>
-														<li><a href="">Action 4</a></li>
-													</ul>
+												<button class="btn btn-success" name="ver_detalles" id="ver_detalles" data-toggle="modal" data-target="#myModal" onClick="ver_detalles(<?php echo $SP['id']?>);">Ver Detalles</button>
+												<a type="button" class="btn btn-primary" href="<?php echo base_url();?>index.php/SesionPrivada/toExcel/<?php echo $SP['id']?>"><i class="ace-icon fa fa-file-excel-o" aria-hidden="true"></i>Generar Excel</a>
+												<a type="button" class="btn btn-primary" href="<?php echo base_url();?>index.php/SesionPrivada/toXML/<?php echo $SP['id']?>"><i class="ace-icon fa fa-download" aria-hidden="true"></i>Generar XML</a>
 											</div>
 											</td>
 										</tr>
@@ -75,5 +69,63 @@
 				</div>
       </div>
 		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Detalles de la Sesión</h4>
+		      </div>
+		      <div class="modal-body" id="detalles"></div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+		        <button type="button" id="resultado" class="btn btn-primary" onclick="guardar()"><i class=" ace-icon fa fa-floppy-o" aria-hidden="true"></i>Guardar Cambios</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</div>
 </div>
+<!-- JavaScript -->
+<script type="text/javascript">
+	alert("JS");
+	function ver_detalles($id) {
+		//saco el valor accediendo al id del input = nombre
+		var id = $id;
+		//alert(id);
+			$.post("<?php echo base_url();?>index.php/SesionPrivada/get_detalles", {id_sesion:id}, function(data){
+				$("#detalles").html(data);
+			});
+		}
+	function guardar(){
+		var id = $("#idSesion").val();
+		var seguimiento = $("#seguimiento").val();
+		var resultados = $("#resultados").val();
+		var observaciones = $("#observaciones").val();
+
+		var parametros = {
+			"id_sesion":id,
+			"seguimiento":seguimiento,
+			"resultados":resultados,
+			"observaciones":observaciones
+		};
+        $.ajax({
+                data:  parametros,
+                url:   '<?php echo base_url();?>index.php/SesionPrivada/updateSesion',
+                type:  'post',
+                beforeSend: function () {
+                        $("#resultado").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        $("#resultado").html("Guardar Cambios");
+                        alert("Correcto");
+                },
+
+                error: function(response){
+                		alert("No se pudo actualizar el registro");
+                }
+
+        });
+	}
+</script>

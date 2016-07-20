@@ -10,11 +10,28 @@ class SesionPrivada extends CI_Controller {
 	}
 
   function index(){
-		$data['arrSesP'] = $this->Modelo_SesionPrivada->get_SesionPrivada();
-    $data['titulo'] = "Lista de Sesiones Privadas";
-    $data['content'] = "Tutor/Listas/Lista_SesionPrivada";
+	
+		if(!$this->session->userdata('login_ok')){
+			redirect('Principal','refresh');
+		}else{
 
-      $this->load->view('Plantilla', $data);
+			switch ($this->session->userdata('privilegios')) {
+					case '1':
+						redirect('Tutor','refresh');
+						break;
+					case '2':
+							$data['arrSesP'] = $this->Modelo_SesionPrivada->get_SesionPrivada();
+						    $data['titulo'] = "Lista de Sesiones Privadas";
+						    $data['content'] = "Tutor/Listas/Lista_SesionPrivada";
+
+						      $this->load->view('Plantilla', $data);
+						break;
+					default:
+						exit('El usuario no esta identificado.');
+						break;
+			}
+
+		}
   }
 
 	function Registro_SesionPrivada(){
@@ -23,10 +40,10 @@ class SesionPrivada extends CI_Controller {
     $data['content'] = "Tutor/Formularios/frm_sesionPrivada";
    // $data['arrAlu'] = $this->Modelo_Alumno->get_alumno_data($id_alumno);
 
-		$this->form_validation->set_rules('nombreAlumno', 'Nombre del Alumno', 'xss_clean|required|trim|max_length[110]');
-		$this->form_validation->set_rules('grupo', 'Grupo', 'xss_clean|required|trim|is_numeric|max_length[1]');
-		$this->form_validation->set_rules('turno', 'Turno', 'xss_clean|required|trim|is_numeric|max_length[1]');
-		$this->form_validation->set_rules('fecha', 'Fecha', 'xss_clean|required');
+		//$this->form_validation->set_rules('nombreAlumno', 'Nombre del Alumno', 'xss_clean|required|trim|max_length[110]');
+		//$this->form_validation->set_rules('grupo', 'Grupo', 'required|is_numeric');
+		//$this->form_validation->set_rules('turno', 'Turno', 'required|is_numeric');
+		//$this->form_validation->set_rules('fecha', 'Fecha', 'required');
 		$this->form_validation->set_rules('objetivo', 'Objetivo', 'xss_clean|required|trim|max_length[200]');
 		$this->form_validation->set_rules('problematica', 'Problematica', 'xss_clean|required|trim|max_length[200]');
 		$this->form_validation->set_rules('seguimiento', 'Seguimiento', 'xss_clean|required|trim|max_length[200]');
@@ -35,50 +52,130 @@ class SesionPrivada extends CI_Controller {
 
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
-		if ($this->form_validation->run() == FALSE) // validation hasn't been passed
-		{
+		if ($this->form_validation->run() == FALSE){
 			$this->load->view('Plantilla', $data);
-		}
-		else // passed validation proceed to post success logic
-		{
-		 	// build array for the model
+			//echo "Fallo Validacion";
+		}else{
 
 			$form_data = array(
+							'id' => set_value('0'),
 					       	'nombreAlumno' => set_value('nombreAlumno'),
-					       	'grupo' => set_value('grupo'),
-					       	'turno' => set_value('turno'),
+					       	'grupo' => set_value('idGrupo'),
+					       	'turno' => set_value('idTurno'),
 					       	'fecha' => set_value('fecha'),
 					       	'objetivo' => set_value('objetivo'),
 					       	'problematica' => set_value('problematica'),
 					       	'seguimiento' => set_value('seguimiento'),
 					       	'resultados' => set_value('resultados'),
-					       	'observaciones' => set_value('observaciones')
+					       	'observaciones' => set_value('observaciones'),
+					       	'alumno_id' => set_value('idAlumno')
 						);
 
-			// run insert model to write data to db
-
-			if ($this->Modelo_SesionPrivada->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
-			{
-				redirect('SesionPrivada/success');   // or whatever logic needs to occur
-			}
-			else
-			{
+			if ($this->Modelo_SesionPrivada->SaveForm($form_data) == TRUE){
+				redirect('SesionPrivada','refresh');
+			}else{
 			echo 'An error occurred saving your information. Please try again later';
-			// Or whatever error handling is necessary
 			}
 		}
 	}
 
-		public function alumno_data($id){
 
-			$alumno = $this->Modelo_Alumno->get_alumno_data($id);
-
-				return $alumno;
-
+		public function get_detalles(){
+			$id = $this->input->post('id_sesion');
+			$detalles = $this->Modelo_SesionPrivada->get_detalles($id);
+			foreach($detalles as $detalle){ /**
+				echo "<h5>Nombre del Alumno: ". $detalle['nombreAlumno'] . "</h5> ";
+				echo "<h5>Grupo: ". $detalle['nombreGrupo']. "</h5>";
+				echo "<h5>Turno: ". $detalle['nombreTurno']. "</h5><br>";
+				echo "<h5>Fecha de Registro: " .$detalle['fecha']. "</h5><br>";
+				echo "<h5>Objetivo de la Sesion: ". $detalle['objetivo']. "</h5><br>";
+				echo "<h5>Problematica Precentada: ".$detalle['problematica']. "</h5><br>";
+				echo "<h5>Seguimiento: ". $detalle['seguimiento']. "</h5><br>";
+				echo "<h5>Resultados: " . $detalle['resultados']. "</h5><br>";
+				echo "<h5>Observaciones: " . $detalle['observaciones']. "</h5><br>";
+				**/
+				?>
+				<form action="" method="POST" class="form-horizontal">
+					<div class="form-group">
+						<input type="hidden" name="idSesion" id="idSesion" value="<?php echo $detalle['id']?>">
+						<label for="nombre" class="col-sm-3 control-label no-padding-right">Nombre del Alumno</label>
+							<input name="nombre" class="col-xs-10 col-sm-3" type="text" readonly id="nombre" value="<?php echo $detalle['nombreAlumno'];?>">
+					</div>
+					<div class="form-group">
+						<label for="grupo" class="col-sm-3 control-label no-padding-right">Grupo</label>
+							<input name="grupo" type="text" readonly class="col-xs-10 col-sm-3" value="<?php echo $detalle['nombreGrupo'];?>">
+					</div>
+					<div class="form-group">
+						<label for="turno" class="col-sm-3 control-label no-padding-right">Turno</label>
+							<input name="turno" type="text" readonly class="col-xs-10 col-sm-3" value="<?php echo $detalle['nombreTurno'];?>">
+					</div>
+					<div class="form-group">
+						<label for="fecha" class="col-sm-3 control-label no-padding-right">Fecha</label>
+							<input name="fecha" type="text" readonly class="col-xs-10 col-sm-3" value="<?php echo $detalle['fecha'];?>">
+					</div>
+					<div class="form-group">
+						<label for="objetivo" class="col-sm-3 control-label no-padding-right">Objetivo</label>
+							<textarea readonly="readonly" name="objetivo" class="col-xs-10 col-sm-5">
+								<?php echo $detalle['objetivo'];?>
+							</textarea>
+					</div>
+					<div class="form-group">
+						<label for="problematica" class="col-sm-3 control-label no-padding-right">Problematica</label>
+							<textarea readonly name="problematica" class="col-xs-10 col-sm-5">
+								<?php echo $detalle['problematica'];?>
+							</textarea>
+					</div>
+					<div class="form-group">
+						<label for="seguimiento" class="col-sm-3 control-label no-padding-right">Seguimiento</label>
+							<textarea name="seguimiento" id="seguimiento" class="col-xs-10 col-sm-5">
+								<?php echo $detalle['seguimiento'];?>
+							</textarea>
+					</div>
+					<div class="form-group">
+						<label for="resultados" class="col-sm-3 control-label no-padding-right">Resultados</label>
+							<textarea name="resultados" id="resultados" class="col-xs-10 col-sm-5">
+								<?php echo $detalle['resultados'];?>
+							</textarea>
+					</div>
+					<div class="form-group">
+						<label for="observaciones" class="col-sm-3 control-label no-padding-right">Observaciones</label>
+							<textarea name="observaciones" id="observaciones" class="col-xs-10 col-sm-5">
+								<?php echo $detalle['observaciones'];?>
+							</textarea>
+					</div>
+				</form>
+				<?php
+			}
 		}
 
-		public function logout(){
-			redirect('Principal/logout','refresh');
+		public function updateSesion(){
+			$form_data = array(
+				'id' => $this->input->post('id_sesion'),
+				'seguimiento' => $this->input->post('seguimiento'),
+				'resultados '=> $this->input->post('resultados'),
+				'observaciones' => $this->input->post('observaciones')
+			);
+
+			if($this->Modelo_SesionPrivada->update($form_data) == TRUE){
+				return "Correcto";
+			}else{
+				return "Error!";
+			}
+		}
+
+		public function toExcel($id){
+			
+ 			$this->load->helper('mysql_to_excel');
+ 			to_excel($this->Modelo_SesionPrivada->toExcel($id),"MiExcel");
+		}
+
+		public function toXML($id){
+ 			$xml = $this->Modelo_SesionPrivada->toXML($id);
+ 			$this->load->helper('download');
+ 			$nombre = "Sesion Privada";
+ 			$nombre .=date("d-m-Y-H:i:s");
+ 			$nombre .= ".xml";
+ 				force_download($nombre,$xml);
 		}
 }
 ?>

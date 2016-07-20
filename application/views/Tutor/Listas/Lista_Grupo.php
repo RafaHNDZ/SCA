@@ -57,13 +57,13 @@
 													<li>
 														<form action="<?php echo base_url();?>index.php/Canalizacion/Registro_Canalizacion" method="POST">
 														<input type="hidden" value="<?php echo $alumno['id']; ?>" id="id" name="id">
-														<input type="submit" class="btn btn-warning btn-xs" value="Generar Canalización" />
+														<input type="submit" class="btn btn-warning" value="Generar Canalización" />
 													  </form>
 													</li>
 													<li>
 														<form action="<?php echo base_url();?>index.php/SesionPrivada/Registro_SesionPrivada" method="POST">
 														<input type="hidden" value="<?php echo $alumno['id']; ?>" id="id" name="id">
-														<input type="submit" class="btn btn-warning btn-xs" value="Generar Canalización" />
+														<input type="submit" class="btn btn-primary" value="Generar Sesión Privada" />
 													  </form>
 													</li>
 													<li>
