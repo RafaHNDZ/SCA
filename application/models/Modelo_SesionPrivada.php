@@ -75,5 +75,20 @@ class Modelo_SesionPrivada extends CI_Model {
 		$detalles = $this->db->get();
 		return $resultado = $detalles->result_array();
 	}
+
+	public function nun_sesiones(){
+
+	 $this->db->select('id, COUNT(id) as total');
+	 $this->db->from('sesionprivada');
+	 $this->db->group_by('id');
+	 $this->db->order_by('total', 'desc');
+	 $consulta = $this->db->get();
+
+		if($consulta != null){
+			return $resultado = $consulta->result_array();
+		}else{
+			return null;
+		}
+	}
 }
 ?>

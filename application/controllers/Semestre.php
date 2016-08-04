@@ -7,6 +7,7 @@ class Semestre extends CI_Controller{
 
     parent::__construct();
     $this->load->model('Modelo_Semestre');
+    $this->load->model('Modelo_Seguridad');
   }
 
   public function index(){
@@ -64,7 +65,7 @@ class Semestre extends CI_Controller{
 
         if ($this->Modelo_Semestre->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
         {
-          redirect('Semestre/success');   // or whatever logic needs to occur
+          redirect('Semestre','refresh');   // or whatever logic needs to occur
         }
         else
         {
@@ -80,8 +81,39 @@ class Semestre extends CI_Controller{
     redirect('index','refresh');
   }
 
-  public function logout(){
-    redirect('Principal/logout','refresh');
+  public function get_detalles(){
+    $id = $this->input->post('id_semestre');
+    $detalles = $this->Modelo_Semestre->get_detalles($id);
+    foreach($detalles as $dato);
+    ?>
+    <form class="form-horizontal" role="form" method="POST">
+      <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right" for="nombre">Especialidad:</label>
+        <div class="">
+          <input id="nombre" name="nombre" type="text" class="col-xs-10 col-sm-5" value="<?php echo $dato['nombreSemestre']?>">
+          <input id="id" name="id" type="hidden" value="<?php echo $dato['id']?>">
+        </div>
+      </div>
+    </form>
+    <?php
+  }
+
+  public function update($form_data){
+
+    $id = $this->input->post('id');
+    $nombre = $this->input->post('nombre');
+
+    $nombreL = $this->Modelo_Seguridad->limpiarCadena($nombre);
+
+    $form_data = array(
+      'id' => $id,
+      'nombreSemestre' => $nombreL
+      );
+    if($this->Modelo_Semestre->update($form_data) == true){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }

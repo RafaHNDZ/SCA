@@ -27,7 +27,15 @@ class Modelo_Generacion extends CI_Model {
 		}else{
 			return null;
 		}
-}
+	}
+
+	function detalles($id){
+		$this->db->select('id,nombre');
+		$this->db->from('generacion');
+		$this->db->where('generacion.id', $id);
+		$consulta = $this->db->get();
+			return $resultado = $consulta->result_array();
+	}
 
 	function delete($id){
 		$this->db->where('id',$id);
@@ -37,5 +45,15 @@ class Modelo_Generacion extends CI_Model {
 				echo "Error al borrar el registro";
 			}
 		}
+
+	public function update($form_data){
+		$this->db->where('generacion.id', $form_data['id']);
+		$this->db->update('generacion',$form_data);
+		if($this->db->affected_rows() == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
 ?>

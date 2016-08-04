@@ -1,4 +1,5 @@
-<?php if ($this->session->userdata('login_ok') == TRUE){ ?>
+<?php 
+if ($this->session->userdata('login_ok') == TRUE){ ?>
 			<div class="main-content">
 				<div class="main-content-inner">
 					<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
@@ -49,7 +50,8 @@
 										<tr>
 											<td><?php echo $Gen["nombre"]; ?></td>
 											<td class="center">
-											<a href="Generacion/del_Generacion/<?php echo $Gen['id']; ?>" class="btn btn-danger">Eliminar</a>
+											<a href="Generacion/del_Generacion/<?php echo $Gen['id'];?>" class="btn btn-danger">Eliminar</a>
+											<a data-toggle="modal" data-target="#Detalles" class="btn btn-warning" onclick="detalles(<?php echo $Gen['id'];?>)">Modificar</a>
 											</td>
 										</tr>
 										<?php } ?>
@@ -63,3 +65,65 @@
 		</div>
 	</div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="Detalles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div id="detalles"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" id="resultado" class="btn btn-primary" onclick="guardar();">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- JavaScript -->
+<script>
+	function detalles(id){
+		//alert(id);
+			$.post("<?php echo base_url();?>index.php/Generacion/get_detalles", {id_generacion:id}, function(data){
+				$("#detalles").html(data);
+			});
+	}
+	function guardar(){
+		var r = confirm("¡Cuidado!\nVas a actualizar un registro.\n¿Estas seguro?");
+		if (r == true){
+
+				var id = $("#id").val();
+				var nombre = $("#ciclo").val();
+
+				var parametros = {
+					"id":id,
+					"nombre":nombre
+				};
+		        $.ajax({
+		                data:  parametros,
+		                url:   '<?php echo base_url();?>index.php/Generacion/updateGeneracion',
+		                type:  'post',
+		                beforeSend: function () {
+		                        $("#resultado").html("Procesando, espere por favor...");
+		                },
+		                success:  function (response) {
+		                        $("#resultado").html("Guardar Cambios");
+		                        $("#Modal").modal('hide');
+		                        location.reload();
+		                        
+		                },
+
+		                error: function(response){
+		                		$("#resultado").html("Guardar Cambios");
+		                		alert("Ocurrio un error en la comunicacion.");
+		                }
+
+		        });
+		    }else{
+		    	$("#Modal").modal('hide');
+		    }
+	}
+</script>

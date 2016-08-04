@@ -89,7 +89,7 @@
 </div>
 <!-- JavaScript -->
 <script type="text/javascript">
-	alert("JS");
+	//alert("JS");
 	function ver_detalles($id) {
 		//saco el valor accediendo al id del input = nombre
 		var id = $id;
@@ -98,6 +98,7 @@
 				$("#detalles").html(data);
 			});
 		}
+
 	function guardar(){
 		var id = $("#idSesion").val();
 		var seguimiento = $("#seguimiento").val();

@@ -25,7 +25,11 @@ class SesionGrupal extends CI_Controller {
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
-
+			$this->load->model('Modelo_Grupo');
+			$this->load->model('Modelo_Tutor');
+			$data['sesionData'] = $this->Modelo_Grupo->get_detalles_grupo($this->session->userdata('usuario_id'));
+			$data['arrTut'] = $this->Modelo_Tutor->get_Tutor();
+			$data['arrGrup'] = $this->Modelo_Grupo->get_Grupo();
 			$data['titulo'] = "Registro de Sesión Grupal";
 	    	$data['content'] = "Tutor/Formularios/frm_sesionGrupal";
 
@@ -69,7 +73,7 @@ class SesionGrupal extends CI_Controller {
 
 				if ($this->Modelo_SesionGrupal->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
 				{
-					redirect('SesionGrupal/success');   // or whatever logic needs to occur
+					return false;   // or whatever logic needs to occur
 				}
 				else
 				{

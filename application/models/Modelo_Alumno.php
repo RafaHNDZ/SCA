@@ -20,7 +20,7 @@ class Modelo_Alumno extends CI_Model {
 	  }
   }
 
-  public function get_Ficha(){
+  public function get_Fichas(){
 		$this->db->select('alumno.id, alumno.nombre, apellidoP, apellidoM, fechaNacimiento, telefono, matricula, grupo_id, grupo.nombre as nombreGrupo');
 		$this->db->from('alumno');
 		$this->db->join('grupo','grupo.id = grupo_id');
@@ -47,7 +47,7 @@ class Modelo_Alumno extends CI_Model {
 	}
 
 	public function get_alumno_data($id){
-		$this->db->select('alumno.id, alumno.nombre as nomAlu, alumno.apellidoP, alumno.apellidoM, alumno.grupo_id, grupo.nombre as nombreGrupo, grupo.id as idGrupo, turno.id as idTurno, turno.nombreTurno');
+		$this->db->select('alumno.*, alumno.id as idAlumno, alumno.nombre as nomAlu, alumno.apellidoP, alumno.apellidoM, alumno.grupo_id, grupo.nombre as nombreGrupo, grupo.id as idGrupo, turno.id as idTurno, turno.nombreTurno');
 		$this->db->from('alumno');
 		$this->db->where('alumno.id',$id);
 		$this->db->join('grupo','grupo.id = alumno.grupo_id');

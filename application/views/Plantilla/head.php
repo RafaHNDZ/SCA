@@ -14,7 +14,8 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/4.2.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
-
+		<script src="<?php echo base_url();?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/datepicker/datepicker3.css" />
 		<!-- text fonts -->
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/fonts/fonts.googleapis.com.css" />
 
@@ -26,10 +27,23 @@
 
 		<!-- inline styles related to this page -->
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/AdminLTE.css">
-		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/_all-skins.css">
+		<!--
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/--all-skins.css">
+		-->
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/sca.css">
 		<!-- ace settings handler -->
 		<script src="<?php echo base_url();?>assets/js/ace-extra.min.js"></script>
 		<script src="<?php echo base_url();?>assets/js/System.js"></script>
 	</head>
 
 	<body class="no-skin" id="body">
+		<div id="preloader">
+		  <div id="status">&nbsp;
+				<!--<div class="progress">
+				  <div class="progress-bar progress-bar-striped active" role="progressbar"
+				  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+				    Cargando...
+				  </div>-->
+				</div>
+		</div>
+		</div>

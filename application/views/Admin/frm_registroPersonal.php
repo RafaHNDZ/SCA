@@ -41,7 +41,7 @@
 			<div class="form-group">
 			        <label for="nombre" class="col-sm-3 control-label no-padding-right">Nombre <span class="required">*</span></label>
 							<div class="col-sm-9">
-			        <input required="required" id="nombre" type="text" name="nombre" maxlength="30" value="<?php echo set_value('nombre'); ?>" class="col-xs-10 col-sm-5" />
+			        <input required="required" id="nombre" onkeyup="valid_nombre();" type="text" name="nombre" maxlength="30" value="<?php echo set_value('nombre'); ?>" class="col-xs-10 col-sm-5" />
 							<?php echo form_error('nombre'); ?>
 						</div>
 			</div>
@@ -49,7 +49,7 @@
 			<div class="form-group">
 			        <label for="apellido_paterno" class="col-sm-3 control-label no-padding-right">Apellido Paterno <span class="required">*</span></label>
 							<div class="col-sm-9">
-			        <input required="required" id="apellido_paterno" type="text" name="apellido_paterno" maxlength="40" value="<?php echo set_value('apellido_paterno'); ?> "class="col-xs-10 col-sm-5"  />
+			        <input required="required" id="apellido_paterno" onkeyup="valid_apelidoP();" type="text" name="apellido_paterno" maxlength="40" value="<?php echo set_value('apellido_paterno'); ?> "class="col-xs-10 col-sm-5"  />
 							<?php echo form_error('apellido_paterno'); ?>
 						</div>
 			</div>
@@ -57,7 +57,7 @@
 			<div class="form-group">
 			        <label for="apellido_materno" class="col-sm-3 control-label no-padding-right">Apellido Materno <span class="required">*</span></label>
 							<div class="col-sm-9">
-			        <input required="required" id="apellido_materno" type="text" name="apellido_materno" maxlength="40" value="<?php echo set_value('apellido_materno'); ?> "class="col-xs-10 col-sm-5"  />
+			        <input required="required" id="apellido_materno" onkeyup="valid_apelidoM();" type="text" name="apellido_materno" maxlength="40" value="<?php echo set_value('apellido_materno'); ?> "class="col-xs-10 col-sm-5"  />
 			        <?php echo form_error('apellido_materno'); ?>
 						</div>
 			</div>
@@ -84,14 +84,14 @@
 			                                                  '2' => 'Administrador'
 			                                                ); ?>
 
-			        <br /><?php echo form_dropdown('estado', $options, set_value('estado'),'class="col-xs-10 col-sm-3"','required="required"')?>
+			        <br /><?php echo form_dropdown('estado', $options, set_value('estado'),'required="required"','class="col-xs-10 col-sm-3"')?>
 							<?php echo form_error('estado'); ?>
 			</div>
 
 			<div class="form-group">
 			        <label for="email" class="col-sm-3 control-label no-padding-rigth">Email <span class="required">*</span></label>
 							<div class="col-sm-9">
-			        <input required="required" id="email" type="text" name="email" maxlength="40" value="<?php echo set_value('email'); ?>" class="col-xs-10 col-sm-5"  />
+			        <input required="required" id="email" onkeyup="valid_email();" type="text" name="email" maxlength="40" value="<?php echo set_value('email'); ?>" class="col-xs-10 col-sm-5"  />
 							<?php echo form_error('email'); ?>
 						</div>
 			</div>
@@ -99,7 +99,7 @@
 			<div class="form-group">
 			        <label for="password" class="col-sm-3 control-label no-padding-right">Contraseña <span class="required">*</span></label>
 							<div class="col-sm-9">
-			        <input required="required" id="password" type="password" name="password" maxlength="30" value="<?php echo set_value('password'); ?> "class="col-xs-10 col-sm-5"  />
+			        <input required="required" id="password" onkeyup="valid_pass();" type="password" name="password" maxlength="30" value="<?php echo set_value('password'); ?> "class="col-xs-10 col-sm-5"  />
 							<?php echo form_error('password'); ?>
 						</div>
 			</div>
@@ -107,7 +107,7 @@
 
 			<div class="form-group">
 				<div class="col-sm-3 control-label no-padding-right">
-			        <?php echo form_submit( 'submit', 'Registrar', 'class = "btn btn-primary"'); ?>
+			        <?php echo form_submit( 'submit', 'Registrar', 'class = "btn btn-primary"','id="enviar"','onclick="validar();"'); ?>
 				</div>
 			</div>
 
@@ -220,3 +220,62 @@
 		</div>
 	</div>
 </div>
+<script>
+
+	function valid_nombre(){
+		var nombre = $("#nombre").val();
+		if(nombre.length >= 30){
+			$("#nombre").css("border-color", "#F60E0E");
+		}else{
+			$("#nombre").css("border-color", "");
+		}
+		if(nombre.length <= 0){
+			$("#nombre").css("border-color", "#F60E0E");
+		}
+	};
+	function valid_apelidoP(){
+		var apeP = $("#apellido_paterno").val();
+		if(apeP.length >= 30){
+			$("#apellido_paterno").css("border-color", "#F60E0E");
+		}else{
+			$("#apellido_paterno").css("border-color", "");
+		}
+		if(apeP.length <= 0){
+			$("#apellido_paterno").css("border-color", "#F60E0E");
+		}
+	};
+	function valid_apelidoM(){
+		var apeM = $("#apellido_materno").val();
+		if(apeM.length >= 30){
+			$("#apellido_materno").css("border-color", "#F60E0E");
+		}else{
+			$("#apellido_materno").css("border-color", "");
+		}
+		if(apeM.length <= 0){
+			$("#apellido_materno").css("border-color", "#F60E0E");
+		}
+	};
+	function valid_email(){
+		var email = $("#email").val();
+		if(email.length >= 30){
+			$("#email").css("border-color", "#F60E0E");
+		}else{
+			$("#email").css("border-color", "");
+		}
+		if(email.length <= 0){
+			$("#email").css("border-color", "#F60E0E");
+		}
+	};
+	function valid_pass(){
+		var pass = $("#password").val();
+		if(pass.length >= 30){
+			$("#password").css("border-color", "#F60E0E");
+		}else{
+			$("#password").css("border-color", "");
+		}
+		if(pass.length <= 0){
+			$("#password").css("border-color", "#F60E0E", "box-shadow", "2px 2px 5px #999");
+		}
+	};
+
+</script>

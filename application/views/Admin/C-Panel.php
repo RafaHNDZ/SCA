@@ -34,6 +34,7 @@
 	foreach($numTutores as $t){
 		$nt++;
 	}
+	$numTutores = null;
 	$nc =0;
 	foreach($numCan as $c){
 		$nc++;
@@ -41,6 +42,10 @@
 	$nsg =0;
 	foreach($numSesG as $sg){
 		$nsg++;
+	}
+	$nsp = 0;
+	foreach($numSesP as $sp){
+		$nsp++;
 	}
 	 ?>
 <div class="page-content">
@@ -123,12 +128,12 @@
 							</span>
 							<div class="info-box-content">
 								<span class="info-box-text">Canalizaciones</span>
-								<span class="info-box-number">12,00</span>
+								<span class="info-box-number"><?php echo $nsp; ?></span>
 								<div class="progress">
 									<div class="progress-bar" style="width:70%"></div>
 								</div>
 								<span class="progress-description">
-									<a href="SesionGrupal" class="small-box-footer white text-center">
+									<a href="SesionPrivada" class="small-box-footer white text-center">
 										 Más Información <i class="fa fa-arrow-circle-right"></i>
 									</a>
 								</span>
@@ -143,44 +148,6 @@
 							<div class="info-box-content">
 								<span class="info-box-text">Grupos Canalizados</span>
 								<span class="info-box-number"><?php echo $nsg ?></span>
-								<div class="progress">
-									<div class="progress-bar" style="width:70%"></div>
-								</div>
-								<span class="progress-description">
-									<a href="SesionGrupal" class="small-box-footer white text-center">
-										 Más Información <i class="fa fa-arrow-circle-right"></i>
-									</a>
-								</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-						<div class="info-box bg-blue">
-							<span class="info-box-icon">
-								<i class="fa fa-pencil-square-o"></i>
-							</span>
-							<div class="info-box-content">
-								<span class="info-box-text">Entrevistas Grupales</span>
-								<span class="info-box-number">12,00</span>
-								<div class="progress">
-									<div class="progress-bar" style="width:70%"></div>
-								</div>
-								<span class="progress-description">
-									<a href="SesionGrupal" class="small-box-footer white text-center">
-										 Más Información <i class="fa fa-arrow-circle-right"></i>
-									</a>
-								</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-						<div class="info-box bg-green">
-							<span class="info-box-icon">
-								<i class="fa fa-check"></i>
-							</span>
-							<div class="info-box-content">
-								<span class="info-box-text">Sesiónes de Tutoreo</span>
-								<span class="info-box-number">12,00</span>
 								<div class="progress">
 									<div class="progress-bar" style="width:70%"></div>
 								</div>

@@ -33,7 +33,7 @@
 														<span class="required"></span>
 														<span class="block input-icon input-icon-right">
 															<?php echo form_error('email'); ?>
-															<input type="email" class="form-control" placeholder="Correo" name="email" autocomplete="on" value="<?php echo set_value('email'); ?>"/>
+															<input type="email" class="form-control" placeholder="Correo" name="email" autocomplete="on" value="<?php echo set_value('email'); ?>" required="required"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
 													</label>
@@ -41,7 +41,7 @@
 													<label class="block clearfix"><span class=""></span>
 														<span class="block input-icon input-icon-right required">
 															<?php echo form_error('password'); ?>
-															<input type="password" class="form-control" placeholder="Contraseña" name="password" />
+															<input type="password" class="form-control" placeholder="Contraseña" name="password" required="required"/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>

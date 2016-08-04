@@ -25,10 +25,10 @@ class Alumno extends CI_Controller {
 					redirect('Tutor','refresh');
 					break;
 				case '2':
-					$data['arrFicha'] = $this->Modelo_Alumno->get_Ficha();
+					$data['arrFicha'] = $this->Modelo_Alumno->get_Fichas();
 					$data['Calendario'] = $this->Modelo_Calendario->genera_calendario();
-			    $data['titulo'] = "Lista de Fichas";
-			    $data['content'] = "Tutor/Listas/Lista_Fichas";
+			    	$data['titulo'] = "Lista de Fichas";
+			    	$data['content'] = "Tutor/Listas/Lista_Fichas";
 
 			      $this->load->view('Plantilla', $data);
 						break;
@@ -137,7 +137,7 @@ class Alumno extends CI_Controller {
 						       'numero' => set_value('numero'),
 						       'colonia' => set_value('colonia'),
 						       'codigoPostal' => set_value('codigoPostal'),
-						       'id_alumno' => set_value('matricula')
+						       'alumno_id' => set_value('matricula')
 							  );
 
 			if ($this->Modelo_Direccion->SaveForm($form_data) == TRUE){
@@ -273,8 +273,184 @@ class Alumno extends CI_Controller {
 
 }
 
-	public function logout(){
-		redirect('Principal/logout','refresh');
+	public function alumno_data(){
+
+		$id = $this->input->post('id_alumno');
+		$detalles = $this->Modelo_Alumno->get_alumno_data($id);
+		foreach($detalles as $dato){
+		?>
+		<form class="form-horizontal" role="form">
+			<div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="nombre">Nombre</label>
+						<div class="col-sm-10">
+							<input type="text" id="nombre" name="nombre" class="col-xs-10 col-sm-3" value="<?php echo $dato['nomAlu']?>">
+							<input type="text" id="apellidoP" name="nombre" class="col-xs-10 col-sm-3" value="<?php echo $dato['apellidoP']?>">
+							<input type="text" id="apellidoM" name="nombre" class="col-xs-10 col-sm-3" value="<?php echo $dato['apellidoM']?>">
+						</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right" for="fechaNacimiento">Fecha de Nacimiento</label>
+					<div class="col-sm-9">
+						<input class="form-control date-picker" type="date" id="fechaNacimiento" name="fechaNacimiento" class="col-xs-10 col-sm-4" value="<?php echo $dato['fechaNacimiento']?>">
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right" for="matricula">Matricula</label>
+					<div class="col-sm-9">
+						<input type="text" id="matricula" name="matricula" class="col-xs-10 col-sm-4" value="<?php echo $dato['matricula']?>">
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right" for="telefono">Telefono</label>
+					<div class="col-sm-9">
+						<input type="text" id="telefono" name="telefono" class="col-xs-10 col-sm-4" value="<?php echo $dato['telefono']?>">
+					</div>
+			</div>
+			<?php
+			$direccion = $this->Modelo_Direccion->getDireccion($dato['matricula']);
+			foreach($direccion as $dir){}
+			?>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right" for="calle">Calle</label>
+					<div class="col-sm-9">
+						<input type="text" id="calle" name="calle" class="col-xs-10 col-sm-4" value="<?php echo $dir['calle']?>">
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right" for="numero">Numero</label>
+					<div class="col-sm-9">
+						<input type="text" id="numero" name="numero" class="col-xs-10 col-sm-4" value="<?php echo $dir['numero']?>">
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right" for="colonia">Colonia</label>
+					<div class="col-sm-9">
+						<input type="text" id="colonia" name="colonia" class="col-xs-10 col-sm-4" value="<?php echo $dir['colonia']?>">
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right" for="codigoPostal">Codigo Postal</label>
+					<div class="col-sm-9">
+						<input type="text" id="codigoPostal" name="codigoPostal" class="col-xs-10 col-sm-4" value="<?php echo $dir['codigoPostal']?>">
+					</div>
+			</div>
+		</form>
+		<?php }
+	}
+
+	public function getHistorial(){
+		$id = $this->input->post('id_alumno');
+		$detalles = $this->Modelo_HistorialFamiliar->getDetalles($id);
+		if($detalles != null){
+			foreach($detalles as $dato);
+			?>
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right"></label>
+						<div class="col-sm-9">
+							<input id="id" name="id" type="hidden" value="<?php echo $dato['id'];?>">
+							<input id="alumno_id" name="alumno_id" type="hidden" value="<?php echo $dato['alumno_id'];?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" form="situacionesFamiliares">Situaciones Familiares:</label>
+						<div class="col-xs-9">
+							<textarea id="situacionesFamiliares" name="situacionesFamiliares" maxlength="50" class="form-control limited"><?php echo $dato['situacionesFamiliares'];?></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="integrantes">Integrantes:</label>
+						<div class="col-xs-9">
+							<textarea id="integrantes" name="integrantes" maxlength="50" class="form-control limited"><?php echo $dato['integrantes'];?></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="lugar">Lugar:</label>
+						<div class="col-xs-9">
+						<select class="form-control" value="" id="lugar">
+							<option value="">No Definido</option>
+							<option value="1">Hijo Menor</option>
+							<option value="2">Hijo Mediano</option>
+							<option value="3">Hijo Mayor</option>
+						</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="relacion">Lugar:</label>
+						<div class="col-xs-9">
+						<select class="form-control" value="" id="relacion">
+							<option value="">No Definido</option>
+							<option value="1">Muy Buena</option>
+							<option value="2">Buena</option>
+							<option value="3">Regular</option>
+							<option value="4">Mala</option>
+							<option value="5">Muy Mala</option>
+						</select>
+						</div>
+					</div>
+				</form>
+				<script>
+		            $("#lugar").val(<?php echo $dato['lugar'];?>);
+		            $("#lugar").change();
+		          	$("#relacion").val(<?php echo $dato['relacionPaterna'];?>);
+		            $("#relacion").change();
+				</script>
+			<?php
+		}else{
+			return "No se ha encontrado el Historial";
+		}
+	}
+
+	public function getHistorialAC(){
+		$id = $this->input->post('id_alumno');
+		$detalles = $this->Modelo_HistorialAcademico->getDetalles($id);
+
+		if($detalles == null){
+			echo "Sin Datos";
+		}else{
+			foreach($detalles as $dato);
+			?>
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-rigth" form="promedioPrimaria">Promedio Primaria:</label>
+						<div class="col-sm-9">
+							<input type="hidden" name="id" id="id" value="<?php echo $dato['id']?>">
+							<input type="number" min="0" max="10" id="promedioPrimaria" name="promedioPrimaria" value="<?php echo $dato['promedioPrimaria']?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-rigth" form="promedioSecundariParcialUno">Promedio Primaria:</label>
+						<div class="col-sm-9">
+							<input type="hidden" name="id" id="id" value="<?php echo $dato['id']?>">
+							<input type="number" min="0" max="10" id="promedioSecundariParcialUno" name="promedioSecundariParcialUno" value="<?php echo $dato['promedioSecundariParcialUno']?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-rigth" form="promedioSecundariParcialDos">Promedio Primaria:</label>
+						<div class="col-sm-9">
+							<input type="hidden" name="id" id="id" value="<?php echo $dato['id']?>">
+							<input type="number" min="0" max="10" id="promedioSecundariParcialDos" name="promedioSecundariParcialDos" value="<?php echo $dato['promedioSecundariParcialDos']?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-rigth" form="promedioSecundariParcialTres">Promedio Primaria:</label>
+						<div class="col-sm-9">
+							<input type="hidden" name="id" id="id" value="<?php echo $dato['id']?>">
+							<input type="number" min="0" max="10" id="promedioSecundariParcialTres" name="promedioSecundariParcialTres" value="<?php echo $dato['promedioSecundariParcialTres']?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-rigth" form="promedioCicloAnterior">Promedio Primaria:</label>
+						<div class="col-sm-9">
+							<input type="hidden" name="id" id="id" value="<?php echo $dato['id']?>">
+							<input type="number" min="0" max="10" id="promedioCicloAnterior" name="promedioCicloAnterior" value="<?php echo $dato['promedioCicloAnterior']?>">
+						</div>
+					</div>
+				</form>
+			<?php
+		}
 	}
 
 }

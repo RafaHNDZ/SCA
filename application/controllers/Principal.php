@@ -10,18 +10,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		public function index(){
 
-			$data['titulo'] = "Login";
-			$data['content'] = "login";
-			$data['alerta'] = FALSE;
+			if($this->session->userdata('login_ok')){
+				switch ($this->session->userdata('privilegios')) {
+					case '1':
+						redirect('Tutor','refresh');
+						break;
 
-				$this->load->view('Plantilla', $data);
+					case '2':
+						redirect('Administrador','refresh');
+						break;
+				}
+			}else {
+				$data['titulo'] = "Login";
+				$data['content'] = "login";
+				$data['alerta'] = FALSE;
+
+					$this->load->view('Plantilla', $data);
+			}
 		}
 
 		public function inicio_sesion(){
 
 			$data['titulo'] = "Login";
 			$data['content'] = "login";
-			
+
 				$this->form_validation->set_rules('email', 'Correo', 'required|xss_clean');
 				$this->form_validation->set_rules('password', 'Contraseña','required|xss_clean');
 				$this->form_validation->set_message('xss_clean', 'Caracter(es) sospechoso(s) detectado(s)');

@@ -11,6 +11,7 @@ class Administrador extends CI_Controller{
 		$this->load->model('Modelo_Tutor');
 		$this->load->model('Modelo_Canalizacion');
 		$this->load->model('Modelo_SesionGrupal');
+		$this->load->model('Modelo_SesionPrivada');
 	}
 
 	public function index(){
@@ -29,6 +30,7 @@ class Administrador extends CI_Controller{
 						$data['numTutores'] = $this->Modelo_Tutor->num_tutores();
 						$data['numCan'] = $this->Modelo_Canalizacion->num_canalizaciones();
 						$data['numSesG'] = $this->Modelo_SesionGrupal->num_canalizacionesGrupales();
+						$data['numSesP'] = $this->Modelo_SesionPrivada->nun_sesiones();
 						$data['Calendario'] = $this->Modelo_Calendario->genera_calendario();
 						$data['titulo'] = "Panel de Control";
 						$data['content'] = "Admin/C-Panel";

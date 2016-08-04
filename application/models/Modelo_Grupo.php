@@ -26,9 +26,7 @@ class Modelo_Grupo extends CI_Model {
 		$this->db->join('semestre','semestre.id = semestre_id');
 		$this->db->join('tutor','tutor.id = tutor_id');
 		$this->db->join('generacion', 'generacion.id = generacion_id');
-	if(isset($datos['idG'])){
-		$this->db->where('id', $datos['id']);
-	}
+
 		$consulta = $this->db->get();
 		if($consulta != null){
 		return $resultado = $consulta->result_array();
@@ -39,8 +37,7 @@ class Modelo_Grupo extends CI_Model {
 
 	public function lista_grupo($id){
 
-		//$consulta = $this->db->query('select grupo.id, grupo.nombre, alumno.* from grupo inner join alumno on alumno.grupo_id = grupo.id where  grupo.tutor_id = "$id"');
-		$this->db->select('grupo.id, grupo.nombre as nombreGrupo, alumno.*');
+		$this->db->select('grupo.id as idGrupo, grupo.nombre as nombreGrupo, alumno.*');
 		$this->db->from('grupo');
 		$this->db->join('alumno','alumno.grupo_id = grupo.id');
 		$this->db->where('grupo.tutor_id',$id);
@@ -67,12 +64,54 @@ class Modelo_Grupo extends CI_Model {
 			}
 	}
 
+	function get_detalles($id){
+		$this->db->select('grupo.*,grupo.id as idGrupo, grupo.nombre as nombreGrupo, especialidad.id as idEsp, especialidad.nombre as nombreEspecialidad, turno.id as idTurno, turno.nombreTurno, semestre.id as idSemestre, semestre.nombreSemestre as nombreSemestre, tutor.id as idTutor, tutor.nombre as tut, tutor.apellidoP, tutor.apellidoM, generacion.id as idGeneracion, generacion.nombre as nombreGeneracion');
+		$this->db->from('grupo');
+		$this->db->join('especialidad','especialidad.id = especialidad_id');
+		$this->db->join('turno','turno.id = turno_id');
+		$this->db->join('semestre','semestre.id = semestre_id');
+		$this->db->join('tutor','tutor.id = tutor_id');
+		$this->db->join('generacion', 'generacion.id = generacion_id');
+		$this->db->where('grupo.id', $id);
+
+		$consulta = $this->db->get();
+		if($consulta != null){
+		return $resultado = $consulta->result_array();
+			}else{
+				return null;
+			}
+	}
+
 	function delete($id){
 		$this->db->where('id',$id);
 		if($this->db->delete('grupo') == true){
 			redirect('Grupo','refresh');
 		}else{
 			echo "Error al eliminar el registro";
+		}
+	}
+
+	public function update($form_data){
+		$this->db->where('grupo.id',$form_data['id']);
+		$this->db->update('grupo',$form_data);
+		if($this->db->affected_rows() == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function get_detalles_grupo($id){
+		$this->db->select('tutor.nombre, tutor.apellidoP, tutor.apellidoM, grupo.id as idGrupo, grupo.nombre, turno.id as idTurno, turno.nombreTurno');
+		$this->db->from('tutor');
+		$this->db->join('grupo','grupo.tutor_id = tutor.id');
+		$this->db->join('turno','turno.id = grupo.turno_id');
+		$this->db->where('tutor.id',$id);
+		$consulta = $this->db->get();
+		if($consulta !=null){
+			return $resultado = $consulta->result_array();
+		}else{
+			return "Sin Datos";
 		}
 	}
 }

@@ -6,6 +6,7 @@ class HistorialFamiliar extends CI_Controller {
     
  		parent::__construct();
 		$this->load->model('Modelo_HistorialFamiliar');
+		$this->load->model('Modelo_Seguridad');
 	}
 
 	function registrarHistorialFamiliar(){
@@ -46,6 +47,34 @@ class HistorialFamiliar extends CI_Controller {
 			}
 		}
 	}
+
+	public function updateHistorial(){
+		$id_hHF = $this->input->post('id_hHF');
+		$situacionesFamiliares = $this->input->post('situacionesFamiliares');
+		$integrantes = $this->input->post('integrantes');
+		$lugar = $this->input->post('lugar');
+		$relacion = $this->input->post('relacion');
+		$alumno_id = $this->input->post('alumno_id');
+
+		$situacionesFamiliaresL = $this->Modelo_Seguridad->limpiarCadena($situacionesFamiliares);
+		$integrantesL = $this->Modelo_Seguridad->limpiarCadena($integrantes);
+
+		$form_data = array(
+				'id' => $id_hHF,
+				'situacionesFamiliares' => $situacionesFamiliaresL,
+				'integrantes' => $integrantesL,
+				'lugar' => $lugar,
+				'relacionPaterna' => $relacion,
+				'alumno_id' => $alumno_id
+			);
+
+		if($this->Modelo_HistorialFamiliar->update($form_data) == TRUE){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+	
 	function success()
 	{
 			echo 'this form has been successfully submitted with all validation being passed. All messages or logic here. Please note

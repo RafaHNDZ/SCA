@@ -6,6 +6,7 @@ class Generacion extends CI_Controller {
 	{
  		parent::__construct();
 		$this->load->model('Modelo_Generacion');
+		$this->load->model('Modelo_Seguridad');
 	}
 
   public function index(){
@@ -78,8 +79,44 @@ class Generacion extends CI_Controller {
 		$this->Modelo_Generacion->delete($id);
 	}
 
-	public function logout(){
-		redirect('Principal/logout','refresh');
+	public function get_detalles(){
+		$id = $this->input->post('id_generacion');
+		$detalles = $this->Modelo_Generacion->detalles($id);
+		if($detalles === null){
+			echo "Sin Informacion.";
+		}else{
+			foreach($detalles as $dato);
+			?>
+			<form class="form-horizontal">
+				<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="ciclo">Ciclo:</label>
+					<div class="col-xs-10 col-sm-9">
+						<input type="text" id="ciclo" name="ciclo" value="<?php echo $dato['nombre'];?>">
+						<input type="hidden" id="id" name="id" value="<?php echo $dato['id'];?>">
+					</div>
+				</div>
+			</form>
+			<?php
+		}
 	}
+
+	public function updateGeneracion(){
+
+			$id = $this->input->post('id');
+			$nombre = $this->input->post('nombre');
+
+			$nombreL = $this->Modelo_Seguridad->limpiarCadena($nombre);
+
+			$form_data = array(
+				'id' => $id,
+				'nombre' => $nombreL
+				);
+			if($this->Modelo_Generacion->update($form_data) == true){
+				return true;
+			}else{
+				return false;
+			}
+	}
+
 
 }

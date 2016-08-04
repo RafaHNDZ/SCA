@@ -83,17 +83,7 @@ class SesionPrivada extends CI_Controller {
 		public function get_detalles(){
 			$id = $this->input->post('id_sesion');
 			$detalles = $this->Modelo_SesionPrivada->get_detalles($id);
-			foreach($detalles as $detalle){ /**
-				echo "<h5>Nombre del Alumno: ". $detalle['nombreAlumno'] . "</h5> ";
-				echo "<h5>Grupo: ". $detalle['nombreGrupo']. "</h5>";
-				echo "<h5>Turno: ". $detalle['nombreTurno']. "</h5><br>";
-				echo "<h5>Fecha de Registro: " .$detalle['fecha']. "</h5><br>";
-				echo "<h5>Objetivo de la Sesion: ". $detalle['objetivo']. "</h5><br>";
-				echo "<h5>Problematica Precentada: ".$detalle['problematica']. "</h5><br>";
-				echo "<h5>Seguimiento: ". $detalle['seguimiento']. "</h5><br>";
-				echo "<h5>Resultados: " . $detalle['resultados']. "</h5><br>";
-				echo "<h5>Observaciones: " . $detalle['observaciones']. "</h5><br>";
-				**/
+			foreach($detalles as $detalle){
 				?>
 				<form action="" method="POST" class="form-horizontal">
 					<div class="form-group">

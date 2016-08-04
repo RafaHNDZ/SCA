@@ -49,7 +49,7 @@
 			        <?php $options = array(
 			                              ''  => 'Selecciona un Estado',
 			                              '1'    => 'Activo',
-																		'0' => 'Inactivo'
+				    						'0' => 'Inactivo'
 			                              ); ?>
 
 			        <?php echo form_dropdown('estado', $options, set_value('estado'),'class="col-xs-10 col-sm-3"','required="required"')?>

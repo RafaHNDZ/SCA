@@ -29,7 +29,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">Mi Grupo</h3>
             	<div class="box-tools pull-right">
-                	<!--<a href="../Alumno/Regitrar_Ficha" class="btn btn-box-tool btn-success">Registrar Nuevo Alumno</a> -->
+                	<a href="../SesionGrupal/Registro_SesionGrupal" class="btn btn-box-tool btn-success">Registrar Sesión al Grupo</a>
               </div>
             </div>
             <div class="box-body">
@@ -57,20 +57,20 @@
 													<li>
 														<form action="<?php echo base_url();?>index.php/Canalizacion/Registro_Canalizacion" method="POST">
 														<input type="hidden" value="<?php echo $alumno['id']; ?>" id="id" name="id">
-														<input type="submit" class="btn btn-warning" value="Generar Canalización" />
+														<input type="submit" class="btn btn-warning btn-block" value="Generar Canalización" />
 													  </form>
 													</li>
 													<li>
 														<form action="<?php echo base_url();?>index.php/SesionPrivada/Registro_SesionPrivada" method="POST">
 														<input type="hidden" value="<?php echo $alumno['id']; ?>" id="id" name="id">
-														<input type="submit" class="btn btn-primary" value="Generar Sesión Privada" />
+														<input type="submit" class="btn btn-primary btn-block" value="Generar Sesión Privada" />
 													  </form>
 													</li>
 													<li>
 														<div class="divider"></div>
 													</li>
 													<li>
-														<a href="" class="btn btn-danger btn-xs">Registrar a Baja</a>
+														<a href="" class="btn btn-danger btn-xs btn-block">Registrar a Baja</a>
 													</li>
 												</ul>
 										</div>
@@ -80,9 +80,8 @@
 		      <?php }
 		      }else{ ?>
 		      	<div class="callout callout-warning">
-                <h4>!Alto¡</h4>
-
-                <p>No se encontraron datos del grupo</p>
+                <h4>!Alto¡</h4> 
+                <p>Sin grupo asignado.</p>
               </div>
 		      <?php	} ?>
 		         </div>

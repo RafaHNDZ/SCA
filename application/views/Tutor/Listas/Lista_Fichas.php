@@ -48,6 +48,9 @@
 											<th>Opciones</th>
 										</tr>
 									</thead>
+									<?php if($arrFicha == null){ ?>
+										<h4>Sin registros</h4>
+									<?php }else{?>
 									<tbody>
 										<?php foreach($arrFicha as $ficha){ ?>
 										<tr>
@@ -59,12 +62,14 @@
 											<td class="center">
 											<div class="btn-group">
 												<button data-toggle="dropdown" class="btn btn-primary dropdown-toogle">
-													Acciónes <i class="fa fa-angle-down icon-on-rigth"></i>
+													Opciones <i class="fa fa-angle-down icon-on-rigth"></i>
 												</button>
 													<ul class="dropdown-menu">
-														<li><a href="">Action 1</a></li>
-														<li><a href="">Action 2</a></li>
-														<li><a href="">Action 3</a></li>
+														<li><a data-toggle="modal" data-target="#Detalles" onclick="ver_detalles(<?php echo $ficha['id']?>)">Ver Detalles del Alumno</a></li>
+														<li><a data-toggle="modal" data-target="#Familiar" onclick="ver_hisFam(<?php echo $ficha['matricula']?>)">Ver Historial Familiar</a></li>
+														<li><a data-toggle="modal" data-target="#Academico" onclick="ver_hisAc(<?php echo $ficha['matricula']?>)">Ver Historial Academico</a></li>
+														<li><a href="">Ver Historial Medico</a></li>
+														<li><a href="">Ver Historial Social</a></li>
 														<li class="divider"></li>
 														<li><a href="">Action 4</a></li>
 													</ul>
@@ -72,6 +77,7 @@
 											</td>
 										</tr>
 										<?php }?>
+									<?php } ?>
 									</tbody>
 								</table>
 							</div>
@@ -82,3 +88,170 @@
 		</div>
 	</div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="Detalles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Ver Detalles</h4>
+      </div>
+      <div class="modal-body">
+       	<div id="detalles"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="Familiar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Historial Familiar</h4>
+      </div>
+      <div class="modal-body">
+       	<div id="detallesF"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" onclick="guardar_HF()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="Academico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Historial Academico</h4>
+      </div>
+      <div class="modal-body">
+       	<div id="detallesAc"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" onclick="guardar_HA()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- JavaScript -->
+<script src="<?php echo base_url();?>assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
+
+<script>
+	function ver_detalles(id){
+		event.preventDefault();
+		//alert(id);
+			$.post("<?php echo base_url();?>index.php/Alumno/alumno_data", {id_alumno:id}, function(data){
+				$("#detalles").html(data);
+			});
+	}
+
+	function ver_hisFam(id){
+			$.post("<?php echo base_url();?>index.php/Alumno/getHistorial", {id_alumno:id}, function(data){
+				$("#detallesF").html(data);
+			});
+	}
+
+	function guardar_HF(){
+		var r = confirm("¡Cuidado!\nVas a actualizar un registro.\n¿Estas seguro?");
+		if (r == true){
+
+				var id = $("#id").val();
+				var situacionesFamiliares = $("#situacionesFamiliares").val();
+				var integrantes = $("#integrantes").val();
+				var lugar = $("#lugar").val();
+				var relacion = $("#relacion").val();
+				var alumno_id = $("#alumno_id").val();
+
+				var parametros = {
+					"id_hHF":id,
+					"situacionesFamiliares":situacionesFamiliares,
+					"integrantes":integrantes,
+					"lugar":lugar,
+					"relacion":relacion,
+					"alumno_id":alumno_id
+				};
+		        $.ajax({
+		                data:  parametros,
+		                url:   '<?php echo base_url();?>index.php/HistorialFamiliar/updateHistorial',
+		                type:  'post',
+		                beforeSend: function () {
+		                        $("#resultado").html("Procesando, espere por favor...");
+		                },
+		                success:  function (response) {
+		                        $("#resultado").html("Guardar Cambios");
+		                        $("#Modal").modal('hide');
+		                        location.reload();
+
+		                },
+
+		                error: function(response){
+		                		$("#resultado").html("Guardar Cambios");
+		                		alert("No se pudo actualizar el registro");
+		                }
+
+		        });
+		    }else{
+		    	$("#Modal").modal('hide');
+		    }
+	}
+
+	function guardar_HF(){
+		var r = confirm("¡Cuidado!\nVas a actualizar un registro.\n¿Estas seguro?");
+		if (r == true){
+
+				var id = $("#id").val();
+				var promedioPrimaria = $("#promedioPrimaria").val();
+				var promedioSecundariParcialUno = $("#promedioSecundariParcialUno").val();
+				var promedioSecundariParcialDos = $("#promedioSecundariParcialDos").val();
+				var promedioSecundariParcialTres = $("#promedioSecundariParcialTres").val();
+				var promedioCicloAnterior = $("#promedioCicloAnterior").val();
+
+				var parametros = {
+					"id":id,
+					"promedioPrimaria":promedioPrimaria,
+					"promedioSecundariParcialUno":promedioSecundariParcialUno,
+					"promedioSecundariParcialDos":promedioSecundariParcialDos,
+					"promedioSecundariParcialTres":promedioSecundariParcialTres,
+					"promedioCicloAnterior":promedioCicloAnterior
+				};
+						$.ajax({
+										data:  parametros,
+										url:   '<?php echo base_url();?>index.php/HistorialAcademico/updateHistorial',
+										type:  'post',
+										beforeSend: function () {
+														$("#resultado").html("Procesando, espere por favor...");
+										},
+										success:  function (response) {
+														$("#resultado").html("Guardar Cambios");
+														$("#Modal").modal('hide');
+														location.reload();
+
+										},
+
+										error: function(response){
+												$("#resultado").html("Guardar Cambios");
+												alert("No se pudo actualizar el registro");
+										}
+
+						});
+				}else{
+					$("#Modal").modal('hide');
+				}
+	}
+
+	function ver_hisAc(id){
+			$.post("<?php echo base_url();?>index.php/Alumno/getHistorialAC", {id_alumno:id}, function(data){
+				$("#detallesAc").html(data);
+			});
+	}
+</script>

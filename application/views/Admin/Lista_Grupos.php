@@ -37,7 +37,7 @@
 					<div class="col-xs-12">
 						<div class="row">
 							<div class="col-xs-12">
-								<table id="tabla" class="table table-striped table-bordered table-hover">
+								<table id="tabla" class="table table-responsive table-striped table-bordered table-hover">
 									<thead>
 										<tr>
 											<th>Nombre</th>
@@ -72,7 +72,7 @@
 											<td><?php echo $Grupo['generacion'] ?></td>
 											<td>
 												<div class="btn-group">
-													<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#Modal"> Modificar </a>
+													<a class="btn btn-warning" data-toggle="modal" data-target="#Modal" onclick="ver_detalles(<?php echo $Grupo['id']?>);"> Modificar </a>
 													<a href="Grupo/del_Grupo/<?php echo $Grupo['id']?>" class="btn btn-danger"> Eliminar </a>
 												</div>
 											</td>
@@ -97,11 +97,11 @@
                 <h4 class="modal-title">Actualizar Registro</h4>
               </div>
               <div class="modal-body">
-                <p></p>
+                <div id="detalles"></div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="resultado" class="btn btn-warning" onclick="guardar();">Guardar Cambios</button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -111,3 +111,64 @@
         <!-- /.modal -->
       </div>
 </div>
+<script type="text/javascript">
+	//alert("JS");
+	function ver_detalles($id) {
+		//saco el valor accediendo al id del input = nombre
+		var id = $id;
+		//alert(id);
+			$.post("<?php echo base_url();?>index.php/Grupo/get_detalles", {id_grupo:id}, function(data){
+				$("#detalles").html(data);
+			});
+		}
+		
+	function guardar(){
+		var r = confirm("¡Cuidado!\nVas a actualizar un registro.\n¿Estas seguro?");
+		if (r == true){
+
+				var id = $("#idGrupo").val();
+				var nombreGrupo = $("#nombre").val();
+				var estado = $("#estado").val();
+				var especialidad = $("#especialidad").val();
+				var turno = $("#turno").val();
+				var semestre = $("#semestre").val();
+				var generacion = $("#generacion").val();
+				var estado = $("#estado").val();
+				var tutor = $("#tutor").val();
+
+				var parametros = {
+					"id_grupo":id,
+					"nombreGrupo":nombreGrupo,
+					"estado":estado,
+					"especialidad":especialidad,
+					"turno":turno,
+					"semestre":semestre,
+					"generacion":generacion,
+					"estado":estado,
+					"tutor":tutor
+				};
+		        $.ajax({
+		                data:  parametros,
+		                url:   '<?php echo base_url();?>index.php/Grupo/updateGrupo',
+		                type:  'post',
+		                beforeSend: function () {
+		                        $("#resultado").html("Procesando, espere por favor...");
+		                },
+		                success:  function (response) {
+		                        $("#resultado").html("Guardar Cambios");
+		                        $("#Modal").modal('hide');
+		                        location.reload();
+		                        
+		                },
+
+		                error: function(response){
+		                		$("#resultado").html("Guardar Cambios");
+		                		alert("No se pudo actualizar el registro");
+		                }
+
+		        });
+		    }else{
+		    	$("#Modal").modal('hide');
+		    }
+	}
+</script>

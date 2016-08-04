@@ -19,4 +19,18 @@ class Modelo_Direccion extends CI_Model {
 	  }
   	}
 
+  	public function getDireccion($id){
+  		$this->db->select('*');
+  		$this->db->from('direccion');
+  		$this->db->where('direccion.alumno_id',$id);
+		$consulta = $this->db->get();
+
+		if($consulta){
+			$resultado = $consulta->result_array();
+			return $resultado;
+		}else{
+			return "Sin Resultados";
+		}
+  	}
+
   }
