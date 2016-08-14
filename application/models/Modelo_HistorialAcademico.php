@@ -32,6 +32,11 @@ class Modelo_HistorialAcademico extends CI_Model {
 	public function update($form_data){
 		$this->db->where('historialacademico.id',$form_data['id']);
 		$this->db->update('historialacademico', $form_data);
+		if($this->db->affected_rows() == 1){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 }

@@ -5,7 +5,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="Administrador">Home</a>
+								<a href="<?php echo base_url();?>">Home</a>
 							</li>
 
 							<li>
@@ -75,6 +75,22 @@
 													<a class="btn btn-warning" data-toggle="modal" data-target="#Modal" onclick="ver_detalles(<?php echo $Grupo['id']?>);"> Modificar </a>
 													<a href="Grupo/del_Grupo/<?php echo $Grupo['id']?>" class="btn btn-danger"> Eliminar </a>
 												</div>
+												<div class="btn-group">
+													<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="true">
+														Reportes
+														<span class="ace-icon fa fa-caret-down icon-on-right"></span>
+													</button>
+														<ul class="dropdown-menu dropdown-warning">
+															<li>
+																<a href="<?php echo base_url();?>index.php/Grupo/toXML/<?php echo $Grupo['id']?>">Generar XML</a>
+															</li>
+
+															<li>
+																<a href="<?php echo base_url();?>index.php/Grupo/toExcel/<?php echo $Grupo['id']?>">Generar Excel</a>
+															</li>
+
+														</ul>
+												</div>
 											</td>
 										</tr>
 									<?php }?>
@@ -121,7 +137,7 @@
 				$("#detalles").html(data);
 			});
 		}
-		
+
 	function guardar(){
 		var r = confirm("¡Cuidado!\nVas a actualizar un registro.\n¿Estas seguro?");
 		if (r == true){
@@ -158,7 +174,7 @@
 		                        $("#resultado").html("Guardar Cambios");
 		                        $("#Modal").modal('hide');
 		                        location.reload();
-		                        
+
 		                },
 
 		                error: function(response){

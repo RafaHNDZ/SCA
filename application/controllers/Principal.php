@@ -1,6 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Funciones  para el manejo de Sesiones dentro de la apliación.
+ * 
+ * Dentro de esta clase se localizan metodos para obtener los datos de un
+ * usuario dentro de la base de datos y cargar estos dentro de una sesión
+ * de la aplicacion. INcluye un sistema para la supreción y destrucción de
+ * dicha sesión.
+ * 
+ * @author Rafael Hernández <rafa_hndz@outlook.com>
+ * 
+  */
+
 	class Principal extends CI_Controller{
 
 		public function __construct(){
@@ -52,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					          'usuario_id'  => $us->id,
 					          'privilegios' => $us->privilegios,
 					          'nombre' => $us->nombre,
-					          //'grupo' => $us->idGrupo,
+					          'imagen' => $us->imagen,
 					          'login_ok' => TRUE
 					        );
 						}

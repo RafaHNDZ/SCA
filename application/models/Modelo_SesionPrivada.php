@@ -20,8 +20,9 @@ class Modelo_SesionPrivada extends CI_Model {
 	}
 
   function get_SesionPrivada(){
-		$this->db->select('id,nombreAlumno,grupo,fecha');
+		$this->db->select('sesionprivada.id as idSesPri,nombreAlumno,grupo,fecha, grupo.nombre as nombreGrupo');
 		$this->db->from('sesionprivada');
+		$this->db->join('grupo', 'grupo.id = sesionprivada.grupo');
 		$consulta = $this->db->get();
 		if($consulta != null){
 		return $resultado = $consulta->result_array();
@@ -66,7 +67,7 @@ class Modelo_SesionPrivada extends CI_Model {
 			return $respuestaXML;
 		}
 
-	function get_detalles($id){
+	public function get_detalles($id){
 		$this->db->select('sesionprivada.*, turno.nombreTurno as nombreTurno, grupo.nombre as nombreGrupo');
 		$this->db->from('sesionprivada');
 		$this->db->join('turno','turno.id = sesionprivada.turno');

@@ -6,7 +6,7 @@ if ($this->session->userdata('login_ok') == TRUE){ ?>
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="Administrador">Home</a>
+								<a href="<?php echo base_url();?>">Home</a>
 							</li>
 
 							<li>

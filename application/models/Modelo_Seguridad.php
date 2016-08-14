@@ -28,6 +28,8 @@ class Modelo_Seguridad extends CI_Model {
 		$valor = str_ireplace("'","",$valor);
 		$valor = str_ireplace("*","",$valor);
 		$valor = str_ireplace(",","",$valor);
+		$valor = str_ireplace("FROM","",$valor);
+		$valor = str_ireplace("WHERE","",$valor);
 		return $valor;
 	}
 

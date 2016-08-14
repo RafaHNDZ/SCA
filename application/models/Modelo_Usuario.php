@@ -9,7 +9,7 @@ class Modelo_Usuario extends CI_Model{
 
 		public function login_user($email, $password){
 
-			$this->db->select('tutor.id, tutor.nombre, tutor.privilegios, tutor.estado');
+			$this->db->select('tutor.id, tutor.nombre, tutor.privilegios, tutor.estado, tutor.imagen');
 			$this->db->from('tutor');
 			$this->db->where('email', $email);
 			$this->db->where('password', $password);

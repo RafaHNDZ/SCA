@@ -1051,7 +1051,7 @@ pre.prettyprint {
     -webkit-box-shadow: none;
     box-shadow: none;
     min-height: 45px;
-    background: #438eb9;
+    background: #0E486A;
 }
 .navbar .navbar-text, .navbar .navbar-link {
     color: #fff;
@@ -3701,7 +3701,8 @@ body.mob-safari .sidebar.sidebar-fixed {
 }
 }.main-content-inner {
     float: left;
-    width: 100%}
+    width: 100%;
+}
 .main-content .sidebar:before {
     top: 150px;
 }

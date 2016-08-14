@@ -12,8 +12,9 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap-xlgrid.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/4.2.0/css/font-awesome.min.css" />
-
 		<!-- page specific plugin styles -->
+		<script src="<?php echo base_url();?>assets/js/jquery-ui.custom.min.js"></script>
+		<script src="<?php echo base_url();?>assets/js/ace-elements.min.js"></script>
 		<script src="<?php echo base_url();?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/datepicker/datepicker3.css" />
 		<!-- text fonts -->
@@ -33,6 +34,7 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/sca.css">
 		<!-- ace settings handler -->
 		<script src="<?php echo base_url();?>assets/js/ace-extra.min.js"></script>
+		<script src="<?php echo base_url();?>assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
 		<script src="<?php echo base_url();?>assets/js/System.js"></script>
 	</head>
 

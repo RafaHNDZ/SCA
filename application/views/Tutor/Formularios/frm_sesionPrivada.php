@@ -5,7 +5,7 @@
             <ul class="breadcrumb">
               <li>
                 <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="../Administrador">Home</a>
+                <a href="<?php echo base_url();?>">Home</a>
               </li>
 
               <li>
@@ -80,35 +80,35 @@
       	<?php echo form_error('objetivo'); ?>
 
 
-      	<?php echo form_textarea( array('required' => 'required', 'name' => 'objetivo', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('objetivo') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'objetivo', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5 limited', 'maxlength' => '200', 'cols' => '80', 'value' => set_value('objetivo') ) )?>
       </div>
       <div class="form-group">
         <label for="problematica" class="col-sm-3 control-label no-padding-right">Problematica <span class="required">*</span></label>
       	<?php echo form_error('problematica'); ?>
 
 
-      	<?php echo form_textarea( array('required' => 'required', 'name' => 'problematica', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('problematica') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'problematica', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5 limited', 'maxlength' => '200', 'cols' => '80', 'value' => set_value('problematica') ) )?>
       </div>
       <div class="form-group">
         <label for="seguimiento" class="col-sm-3 control-label no-padding-right">Seguimiento <span class="required">*</span></label>
       	<?php echo form_error('seguimiento'); ?>
 
 
-      	<?php echo form_textarea( array('required' => 'required', 'name' => 'seguimiento', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('seguimiento') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'seguimiento', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5 limited', 'maxlength' => '200', 'cols' => '80', 'value' => set_value('seguimiento') ) )?>
       </div>
       <div class="form-group">
         <label for="resultados" class="col-sm-3 control-label no-padding-right">Resultados <span class="required">*</span></label>
       	<?php echo form_error('resultados'); ?>
 
 
-      	<?php echo form_textarea( array('required' => 'required', 'name' => 'resultados', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('resultados') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'resultados', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5 limited', 'maxlength' => '200', 'cols' => '80', 'value' => set_value('resultados') ) )?>
       </div>
       <div class="form-group">
         <label for="observaciones" class="col-sm-3 control-label no-padding-right">Observaciones <span class="required">*</span></label>
       	<?php echo form_error('observaciones'); ?>
 
 
-      	<?php echo form_textarea( array('required' => 'required', 'name' => 'observaciones', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('observaciones') ) )?>
+      	<?php echo form_textarea( array('required' => 'required', 'name' => 'observaciones', 'rows' => '5', 'class' => 'col-xs-10 col-sm-5 limited', 'maxlength' => '200', 'cols' => '80', 'value' => set_value('observaciones') ) )?>
       </div>
 
       <div class="form-group">
@@ -126,3 +126,13 @@
 	</div>
 </div>
 </div>
+<script src="<?php echo base_url();?>assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('textarea.limited').inputlimiter({
+      limit: 200,
+      remText: '%n caracteres%s restantes...',
+      limitText: 'Maximo Permitido : %n.'
+    });
+  });
+</script>

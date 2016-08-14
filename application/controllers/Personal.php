@@ -1,10 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Funciones  para el manejo de Personal dentro de la apliación.
+ * 
+ * Dentro de esta clase se localizan metodos para la agregación de registros
+ * a la base de datos de la aplicaion, estos tienen relación sobre los datos
+ * del Personal que empleara el sistema. Ademas de agregar, tambien incluye la 
+ * modificación de la informacion y la eliminacion de esta misma. 
+ * Así como otras utilidades relacionadas a esta enotras clases.
+ * 
+ * @author Rafael Hernández <rafa_hndz@outlook.com>
+ * 
+  */
+
 class Personal extends CI_Controller{
 	function __construct(){
 			parent::__construct();
 			$this->load->model('Modelo_Tutor');
+			$this->keycrypt = $this->config->item("encryption_key");
 		}
 	public function index(){
 
@@ -16,9 +30,19 @@ class Personal extends CI_Controller{
 					redirect('Tutor','refresh');
 					break;
 				case '2':
+				//$this->output->enable_profiler(true);
+
+					$page=3;
+					$this->load->library('pagination');
+					$config['base_url'] = base_url() . 'index.php/Personal/pagina';
+					$config['total_rows'] = $this->Modelo_Tutor->total();
+					$config['per_page'] = $page;
+					$config['num_links'] = 20;
+					$this->pagination->initialize($config);
+
 					$data['titulo'] = "Lista de Personal";
 					$data['content'] = "Admin/Lista_Personal";
-					$data['arrTut'] = $this->Modelo_Tutor->get_Tutor();
+					$data['arrTut'] = $this->Modelo_Tutor->paginados($config['per_page'],$this->uri->segment(3));
 
 						$this->load->view('Plantilla',$data);
 				break;
@@ -58,11 +82,10 @@ class Personal extends CI_Controller{
 			else // passed validation proceed to post success logic
 			{
 				// build array for the model
-
 				$form_data = array(
 							'id' => set_value(0),
-              				'nombre' => set_value('nombre'),
-              				'apellidoP' => set_value('apellido_paterno'),
+              'nombre' => set_value('nombre'),
+              'apellidoP' => set_value('apellido_paterno'),
 							'apellidoM' => set_value('apellido_materno'),
 							'privilegios' => set_value('privilegios'),
 							'estado' => set_value('estado'),
@@ -111,18 +134,29 @@ class Personal extends CI_Controller{
 							{
 								$this->load->view('Plantilla',$data);
 							}
-							else // passed validation proceed to post success logic
-							{
-								// build array for the model
+							else {
+								$nombreCampo = 'imagen';
+					 			$config['upload_path'] = "./imagenes/";
+					 			$config['allowed_types'] ="png|jpg|gif|jpeg";
+					 			$config['max_size'] = "28000";
+					 			$nombreImagen = $_FILES['imagen']['name'];
 
+					 			$this->load->library('upload', $config);
+
+					 			if(!$this->upload->do_upload($nombreCampo)){
+					 				echo $this->upload->display_errors();
+					 				return $this->upload->display_errors();
+					 			}else{
+					 			$data['uploadSuccess'] = $this->upload->data();
 								$form_data = array(
 											'id' => set_value('idTutor'),
-				              				'nombre' => set_value('nombre'),
-				              				'apellidoP' => set_value('apellido_paterno'),
+											'nombre' => set_value('nombre'),
+											'apellidoP' => set_value('apellido_paterno'),
 											'apellidoM' => set_value('apellido_materno'),
 											'privilegios' => set_value('privilegios'),
 											'estado' => set_value('estado'),
 											'email' => set_value('email'),
+											'imagen' => $nombreImagen,
 											'password' => set_value('password')
 											);
 
@@ -133,9 +167,10 @@ class Personal extends CI_Controller{
 									echo "Error";
 								}
 				break;
+					 			}
 
 			}
-			
+
 		}
 	}
 }

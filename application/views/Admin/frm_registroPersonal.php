@@ -5,7 +5,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="../Administrador">Home</a>
+								<a href="<?php echo base_url();?>">Home</a>
 							</li>
 
 							<li>
@@ -115,8 +115,8 @@
 			}else{
 
 // FOrmulario de Actualización de Datos de Tutor
-			foreach($arrTut as $Dato)			
-			$attributes = array('class' => 'form-horizontal', 'id' => '');
+			foreach($arrTut as $Dato)
+			$attributes = array('class' => 'form-horizontal', 'id' => '', 'enctype' => 'multipart/form-data');
 			echo form_open('Personal/mod_Personal', $attributes); ?>
 
 			<div class="form-group">
@@ -143,11 +143,16 @@
 			        <?php echo form_error('apellido_materno'); ?>
 						</div>
 			</div>
-
+			<div class="form-group">
+				<label for="imagen" class="col-sm-3 control-label no-padding-right">Imagen a Subir:</label>
+				<div class="col-sm-9">
+					<input type="file" name="imagen" id="imagen">
+				</div>
+			</div>
 			<div class="form-group">
 			        <label for="privilegios" class="col-sm-3 control-label no-padding-right">Privilegios <span class="required">*</span></label>
 
-			        <?php 					
+			        <?php
 			        	switch ($Dato['privilegios']) {
 			        		case '1':
 			        						$options = array(
@@ -155,7 +160,7 @@
 			                                                  '2' => 'Administrador'
 			                                                  );
 			        			break;
-			        		
+
 			        		case '2':
 			        						$options = array(
 			                                                  '2' => 'Administrador',
@@ -170,20 +175,20 @@
 
 			<div class="form-group">
 			        <label for="estado" class="col-sm-3 control-label no-padding-right">Estado <span class="required">*</span></label>
-			        <?php 
+			        <?php
 			        	switch ($Dato['estado']) {
 			        		case '1':
 			        						$options = array(
 			                                                  '1'    => 'Activo',
 			                                                  '0' => 'Inactivo'
-			                                                ); 
+			                                                );
 			        			break;
-			        		
+
 			        		default:
 			        						$options = array(
 			                                                  '0' => 'Inactivo',
 			                                                  '1'    => 'Activo'
-			                                                ); 
+			                                                );
 			        			break;
 			        	}
 

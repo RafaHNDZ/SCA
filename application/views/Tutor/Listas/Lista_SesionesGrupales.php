@@ -49,20 +49,20 @@
 									<tbody>
 										<?php foreach($arrSesG as $SG){ ?>
 										<tr>
-											<td><?php echo $SG['nombre']; ?></td>
-											<td><?php echo $SG['nombreGrupo']; ?></td>
-											<td><?php echo $SG['fecha']; ?></td>
+											<td><?php echo $SG->nombre; ?></td>
+											<td><?php echo $SG->nombreGrupo; ?></td>
+											<td><?php echo $SG->fecha; ?></td>
 											<td class="center">
 											<div class="btn-group">
 												<button data-toggle="dropdown" class="btn btn-primary dropdown-toogle">
 													Acciónes <i class="fa fa-angle-down icon-on-rigth"></i>
 												</button>
 													<ul class="dropdown-menu">
-														<li><a data-toggle="modal" data-target="#myModal" onclick="detalles(<?php echo $SG['sesGrupId'];?>);">Ver Detalles</a></li>
-														<li><a href="<?php echo base_url();?>index.php/SesionGrupal/toExcel/<?php echo $SG['sesGrupId'];?>">Generar Excel</a></li>
-														<li><a href="<?php echo base_url();?>index.php/SesionGrupal/toXML/<?php echo $SG['sesGrupId'];?>">Generar XML</a></li>
+														<li><a data-toggle="modal" data-target="#myModal" onclick="detalles(<?php echo $SG->sesGrupId;?>);">Ver Detalles</a></li>
+														<li><a href="<?php echo base_url();?>index.php/SesionGrupal/toExcel/<?php echo $SG->sesGrupId;?>">Generar Excel</a></li>
+														<li><a href="<?php echo base_url();?>index.php/SesionGrupal/toXML/<?php echo $SG->sesGrupId;?>">Generar XML</a></li>
 														<li class="divider"></li>
-														<li><a onclick="eliminar(<?php echo $SG['sesGrupId']?>);">Eliminar</a></li>
+														<li><a onclick="eliminar(<?php echo $SG->sesGrupId?>);">Eliminar</a></li>
 													</ul>
 											</div>
 											</td>

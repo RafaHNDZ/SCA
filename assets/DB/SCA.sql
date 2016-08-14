@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-08-2016 a las 08:11:13
+-- Tiempo de generación: 13-08-2016 a las 07:33:26
 -- Versión del servidor: 5.7.13-0ubuntu0.16.04.2
 -- Versión de PHP: 7.0.8-0ubuntu0.16.04.2
 
@@ -43,10 +43,21 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`id`, `nombre`, `apellidoP`, `apellidoM`, `imagen`, `fechaNacimiento`, `telefono`, `matricula`, `grupo_id`) VALUES
-(21, 'Juan', 'Poso', 'Mendez', '', '1993-07-17', 2147483647, '13001754', 4),
-(22, 'Chumino', 'Trollenzio', 'Ramoz', '', '2016-07-19', 234234234, '3224234', 6),
-(23, 'Panfilo', 'Comosea', 'NombreFeo', '', '2016-06-14', 324234234, '232342424243', 7),
-(24, 'Fernando', 'Fer', 'Ferchas', '', '2016-07-28', 2147483647, '13001700', 7);
+(21, 'Raul', 'Poso', 'Mendez', '', '1993-07-17', 2147483647, '13001754', 4),
+(25, 'ererer', 'ererer', 'fsdfsdf', 'spartan-race-logo.jpg', '1993-07-17', 554335454, '234234', 4);
+
+--
+-- Disparadores `alumno`
+--
+DELIMITER $$
+CREATE TRIGGER `updateHistoriales` AFTER DELETE ON `alumno` FOR EACH ROW BEGIN
+delete historialacademico.* from historialacademico where historialacademico.alumno_id = OLD.matricula;
+delete historialeconomico.* from historialeconomico where historialeconomico.alumno_id = OLD.matricula; 
+delete historialfamiliar.* from historialfamiliar where historialfamiliar.alumno_id = OLD.matricula;
+delete historialmedico.* from historialmedico where historialmedico.alumno_id = OLD.matricula;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -59,7 +70,7 @@ CREATE TABLE `canalizacion` (
   `fecha` date NOT NULL,
   `numeroControl` varchar(10) CHARACTER SET utf8 COLLATE utf8_slovenian_ci NOT NULL,
   `nombreAlumno` varchar(110) CHARACTER SET utf8 COLLATE utf8_slovenian_ci NOT NULL,
-  `semestre` varchar(10) CHARACTER SET utf8 COLLATE utf8_slovenian_ci NOT NULL,
+  `semestre` varchar(20) CHARACTER SET utf8 COLLATE utf8_slovenian_ci NOT NULL,
   `edad` int(2) NOT NULL,
   `nombreTutor` varchar(110) CHARACTER SET utf8 COLLATE utf8_slovenian_ci NOT NULL,
   `especialidad` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
@@ -68,6 +79,13 @@ CREATE TABLE `canalizacion` (
   `observaciones` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `alumno_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `canalizacion`
+--
+
+INSERT INTO `canalizacion` (`id`, `fecha`, `numeroControl`, `nombreAlumno`, `semestre`, `edad`, `nombreTutor`, `especialidad`, `problematica`, `solicitud`, `observaciones`, `alumno_id`) VALUES
+(1, '2016-08-08', '13001700', 'Fernando Fer Ferchas', 'Primer Sem', 23, 'Rafael Hernández Ramírez', 'Quimica', 'problematica ', 'solicitudes', 'observacion', 24);
 
 -- --------------------------------------------------------
 
@@ -81,7 +99,6 @@ CREATE TABLE `direccion` (
   `numero` int(5) DEFAULT NULL,
   `colonia` varchar(45) DEFAULT NULL,
   `codigoPostal` int(6) DEFAULT NULL,
-  `id_alumno` int(10) NOT NULL,
   `alumno_id` int(15) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -89,9 +106,10 @@ CREATE TABLE `direccion` (
 -- Volcado de datos para la tabla `direccion`
 --
 
-INSERT INTO `direccion` (`idDireccion`, `calle`, `numero`, `colonia`, `codigoPostal`, `id_alumno`, `alumno_id`) VALUES
-(7, 'Leon Rojas', 18, 'Francisco Aguilera', 30177, 13001754, 13001754),
-(8, 'sdfsdf', 12, 'sdfsdfsdf', 0, 0, 13001700);
+INSERT INTO `direccion` (`idDireccion`, `calle`, `numero`, `colonia`, `codigoPostal`, `alumno_id`) VALUES
+(7, 'Leon Rojas', 18, 'Francisco Aguilera', 30177, 13001754),
+(8, 'sdfsdf', 12, 'sdfsdfsdf', 0, 13001700),
+(9, 'sdfsdf', 3343, 'sdfsdf', 345656, 234234);
 
 -- --------------------------------------------------------
 
@@ -180,8 +198,8 @@ CREATE TABLE `historialacademico` (
 --
 
 INSERT INTO `historialacademico` (`id`, `promedioPrimaria`, `promedioSecundariParcialUno`, `promedioSecundariParcialDos`, `promedioSecundariParcialTres`, `promedioCicloAnterior`, `estatus`, `alumno_id`) VALUES
-(3, 10, 10, 10, 10, 10, 0, 13001754),
-(4, 10, 9, 9, 9, 9, 0, 13001700);
+(3, 10, 8, 10, 8, 10, 0, 13001754),
+(5, 8, 8, 8, 8, 8, 0, 234234);
 
 -- --------------------------------------------------------
 
@@ -206,8 +224,8 @@ CREATE TABLE `historialeconomico` (
 --
 
 INSERT INTO `historialeconomico` (`id`, `dependeDe`, `viveCon`, `ingresoFamiliarMensual`, `trabajo`, `necesitaTrabajo`, `causaTrabajo`, `estatus`, `alumno_id`) VALUES
-(4, '1', '1', 20000, '2', 'Necesitas de ese trabajo', 'Cual es la causa', 0, 13001754),
-(5, '1', '2', 23, '2', 'dfdfd', 'dfdfdfdf', 0, 13001700);
+(4, '1', '2', 20000, '2', '                  Necesitas de ese trabajo        ', '                  Cual es la causa  ', 0, 13001754),
+(6, '1', '1', 232323, '1', 'dsadadsads', 'asdasdads', 0, 234234);
 
 -- --------------------------------------------------------
 
@@ -231,7 +249,7 @@ CREATE TABLE `historialfamiliar` (
 
 INSERT INTO `historialfamiliar` (`id`, `situacionesFamiliares`, `integrantes`, `lugar`, `relacionPaterna`, `estatus`, `alumno_id`) VALUES
 (1, 'Situaciones Familiares de toda lafamilia', 'Integrantes de tu familia de toda lafamilia', '3', '2', 0, 13001754),
-(2, 'sdfsdfsd', 'sdfsdfs', '1', '1', 0, 13001700);
+(3, 'sdads', 'asdadsas', '1', '3', 0, 234234);
 
 -- --------------------------------------------------------
 
@@ -260,8 +278,8 @@ CREATE TABLE `historialmedico` (
 --
 
 INSERT INTO `historialmedico` (`id`, `enfermedades`, `tratamiento`, `tratamientoAnterior`, `tipoTratamiento`, `hospitalizacion`, `motivoHospitalizacion`, `operaciones`, `motivoOperacion`, `padeceEnfermedad`, `enfermedadCronica`, `estatus`, `alumno_id`) VALUES
-(6, 'Enfermedades Padecidas', '2', 'Tratamientos Anteriores', 'Tipo de Tratamiento', '2', 'Motivo', '2', 'Motivo 2', 'Enfermedad', 'Enfermedades Cronicas', 0, 13001754),
-(7, 'sdfsfsdf', '1', 'sdfsfd', 'sfdsdfs', '1', 'sfdsfdsfsdfs', '1', 'sdfsdfsdfsdf', 'sfdsdfsdfsdfs', 'sfdsfsdfdsf', 0, 13001700);
+(6, '              Enfermedades         lllllll                      ', '1', '                        Tratamientos Anteriores lkkllklkl                     ', '                        Tipo de Tratamiento                                   ', '1', '                         Motivo                                   ', '1', '                         Motivo                                   ', '                                        Enfermedad                                   ', '                                        Enfermedades Cronicas                                   ', 0, 13001754),
+(8, 'asdasd', '1', 'asdadsad', 'asdasdas', '1', 'asdasdad', '1', 'adadsa', 'asdasdsad', 'asdasdads', 0, 234234);
 
 -- --------------------------------------------------------
 
@@ -304,6 +322,13 @@ CREATE TABLE `sesiongrupal` (
   `grupo_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `sesiongrupal`
+--
+
+INSERT INTO `sesiongrupal` (`id`, `nombreTutor`, `grupo`, `turno`, `mes`, `numeroSesion`, `fecha`, `objetivo`, `problematica`, `remediales`, `resultados`, `observaciones`, `grupo_id`) VALUES
+(2, '2', '4', '2', '2', 2, '2016-08-07', 'dsffsdfdsf', 'sdfsdfsf', 'sdfsfdsdf', 'dsfsdfsdfsdf', 'fsdfsfdsfdsfds', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -329,9 +354,10 @@ CREATE TABLE `sesionprivada` (
 --
 
 INSERT INTO `sesionprivada` (`id`, `nombreAlumno`, `grupo`, `turno`, `fecha`, `objetivo`, `problematica`, `seguimiento`, `resultados`, `observaciones`, `alumno_id`) VALUES
-(1, 'Juan Poso Mendez', '4', '4', '2016-07-20', 'Objetivo', 'Problematica', 'Seguimiento       ', 'Resultados       ', 'Observaciones       ', 21),
-(2, 'Panfilo Comosea NombreFeo', '7', '5', '2016-07-20', 'sgsdfhgjkfyuthgfdfgfeee', 'lkjbvgfrtyuivnjbsdbfusbdf', 'Ya no es tan feo       ', 'Uso peluca          ', 'Loco       ', 23),
-(3, 'Panfilo Comosea NombreFeo', '7', '5', '2016-07-20', 'ljbhbdfusdiusd', 'sdfsdfsdfsd', '        zsfasdfasdfsdf       ', '        htrwerdfasdfasdfswds       ', '        ljljlkjljljljl       ', 23);
+(1, 'Juan Poso Mendez', '4', '4', '2016-07-20', 'Objetivo', 'Problematica', 'Seguimiento', 'Resultados       ', 'Observaciones       ', 21),
+(2, 'Panfilo Comosea NombreFeo', '7', '5', '2016-07-20', 'sgsdfhgjkfyuthgfdfgfeee', 'lkjbvgfrtyuivnjbsdbfusbdf', '        Ya no es tan feo         dss     ', '        Uso peluca                 ', '        Loco              ', 23),
+(3, 'Panfilo Comosea NombreFeo', '7', '5', '2016-07-20', 'ljbhbdfusdiusd', 'sdfsdfsdfsd', '        zsfasdfasdfsdf   ssdsd    ', '        htrwerdfasdfasdfswds                     ', '        ljljlkjljljljl                     ', 23),
+(4, 'ererer ererer fsdfsdf', '4', '4', '2016-08-12', 'sdasas', 'asdasd', 'asdsa', 'asdasda', 'asdasd', 25);
 
 -- --------------------------------------------------------
 
@@ -363,23 +389,25 @@ CREATE TABLE `tutor` (
   `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `apellidoP` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `apellidoM` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
-  `password` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `privilegios` tinyint(1) NOT NULL,
   `estado` int(1) NOT NULL,
-  `email` varchar(40) COLLATE utf8_spanish_ci NOT NULL
+  `email` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `imagen` varchar(150) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tutor`
 --
 
-INSERT INTO `tutor` (`id`, `nombre`, `apellidoP`, `apellidoM`, `password`, `privilegios`, `estado`, `email`) VALUES
-(2, 'Rafael', 'Hernández', 'Ramírez', 'pass', 2, 1, 'rafa_hndz@outlook.com'),
-(3, 'Raul', 'Manchester', 'Blanco', 'pass', 2, 1, 'raul@gmail.com'),
-(4, 'Demostracion', 'Del', 'Sistema', 'demo', 1, 2, 'demo@demo.com'),
-(5, 'Azalia', 'Sosa', 'Calderon', 'zeldalian', 1, 1, 'zelda19lia@gmail.com'),
-(6, 'Alejandra', 'Padilla', 'García', '1234567', 1, 1, 'ber_alejandra@hotmail.com'),
-(7, 'sonia', 'dominguez', 'luna', '1985', 1, 1, 'sonyadl576@gmail.com');
+INSERT INTO `tutor` (`id`, `nombre`, `apellidoP`, `apellidoM`, `password`, `privilegios`, `estado`, `email`, `imagen`) VALUES
+(2, 'Rafael', 'Hernández', 'Ramírez', 'pass', 2, 1, 'rafa_hndz@outlook.com', 'spartan-race-logo.jpg'),
+(3, 'Raul', 'Manchester', 'Blanco', 'pass', 2, 1, 'raul@gmail.com', '45.png'),
+(4, 'Demostracion', 'Del', 'Sistema', 'demo', 1, 2, 'demo@demo.com', ''),
+(5, 'Azalia', 'Sosa', 'Calderon', 'zeldalian', 1, 1, 'zelda19lia@gmail.com', ''),
+(6, 'Alejandra', 'Padilla', 'García', '1234567', 1, 1, 'ber_alejandra@hotmail.com', ''),
+(7, 'sonia', 'dominguez', 'luna', '1985', 1, 1, 'sonyadl576@gmail.com', ''),
+(8, 'rewrw', 'wrwer', 'werwerew', 'pass', 1, 1, 'rafa@gmail.com', '');
 
 --
 -- Índices para tablas volcadas
@@ -498,17 +526,17 @@ ALTER TABLE `tutor`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `canalizacion`
 --
 ALTER TABLE `canalizacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `idDireccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idDireccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
@@ -528,22 +556,22 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT de la tabla `historialacademico`
 --
 ALTER TABLE `historialacademico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `historialeconomico`
 --
 ALTER TABLE `historialeconomico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `historialfamiliar`
 --
 ALTER TABLE `historialfamiliar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `historialmedico`
 --
 ALTER TABLE `historialmedico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `semestre`
 --
@@ -553,12 +581,12 @@ ALTER TABLE `semestre`
 -- AUTO_INCREMENT de la tabla `sesiongrupal`
 --
 ALTER TABLE `sesiongrupal`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `sesionprivada`
 --
 ALTER TABLE `sesionprivada`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `turno`
 --
@@ -568,7 +596,7 @@ ALTER TABLE `turno`
 -- AUTO_INCREMENT de la tabla `tutor`
 --
 ALTER TABLE `tutor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

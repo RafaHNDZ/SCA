@@ -10,7 +10,7 @@ class SesionPrivada extends CI_Controller {
 	}
 
   function index(){
-	
+
 		if(!$this->session->userdata('login_ok')){
 			redirect('Principal','refresh');
 		}else{
@@ -105,33 +105,23 @@ class SesionPrivada extends CI_Controller {
 					</div>
 					<div class="form-group">
 						<label for="objetivo" class="col-sm-3 control-label no-padding-right">Objetivo</label>
-							<textarea readonly="readonly" name="objetivo" class="col-xs-10 col-sm-5">
-								<?php echo $detalle['objetivo'];?>
-							</textarea>
+							<textarea disabled name="objetivo" class="col-xs-10 col-sm-5"><?php echo $detalle['objetivo'];?></textarea>
 					</div>
 					<div class="form-group">
 						<label for="problematica" class="col-sm-3 control-label no-padding-right">Problematica</label>
-							<textarea readonly name="problematica" class="col-xs-10 col-sm-5">
-								<?php echo $detalle['problematica'];?>
-							</textarea>
+							<textarea disabled name="problematica" class="col-xs-10 col-sm-5"><?php echo $detalle['problematica'];?></textarea>
 					</div>
 					<div class="form-group">
 						<label for="seguimiento" class="col-sm-3 control-label no-padding-right">Seguimiento</label>
-							<textarea name="seguimiento" id="seguimiento" class="col-xs-10 col-sm-5">
-								<?php echo $detalle['seguimiento'];?>
-							</textarea>
+							<textarea name="seguimiento" required="required" id="seguimiento" class="col-xs-10 col-sm-5"><?php echo $detalle['seguimiento'];?></textarea>
 					</div>
 					<div class="form-group">
 						<label for="resultados" class="col-sm-3 control-label no-padding-right">Resultados</label>
-							<textarea name="resultados" id="resultados" class="col-xs-10 col-sm-5">
-								<?php echo $detalle['resultados'];?>
-							</textarea>
+							<textarea name="resultados" id="resultados" class="col-xs-10 col-sm-5"><?php echo $detalle['resultados'];?></textarea>
 					</div>
 					<div class="form-group">
 						<label for="observaciones" class="col-sm-3 control-label no-padding-right">Observaciones</label>
-							<textarea name="observaciones" id="observaciones" class="col-xs-10 col-sm-5">
-								<?php echo $detalle['observaciones'];?>
-							</textarea>
+							<textarea name="observaciones" id="observaciones" class="col-xs-10 col-sm-5"><?php echo $detalle['observaciones'];?></textarea>
 					</div>
 				</form>
 				<?php
@@ -154,7 +144,7 @@ class SesionPrivada extends CI_Controller {
 		}
 
 		public function toExcel($id){
-			
+
  			$this->load->helper('mysql_to_excel');
  			to_excel($this->Modelo_SesionPrivada->toExcel($id),"MiExcel");
 		}
@@ -167,5 +157,7 @@ class SesionPrivada extends CI_Controller {
  			$nombre .= ".xml";
  				force_download($nombre,$xml);
 		}
+
+
 }
 ?>

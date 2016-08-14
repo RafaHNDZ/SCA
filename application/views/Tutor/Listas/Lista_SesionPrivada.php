@@ -5,7 +5,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="Administrador">Home</a>
+								<a href="<?php echo base_url();?>">Home</a>
 							</li>
 							<li>
 								<a class="active"><?php echo $titulo; ?></a>
@@ -50,13 +50,13 @@
 										<?php foreach($arrSesP as $SP){ ?>
 										<tr>
 											<td><?php echo $SP['nombreAlumno']; ?></td>
-											<td><?php echo $SP['grupo']; ?></td>
+											<td><?php echo $SP['nombreGrupo']; ?></td>
 											<td><?php echo $SP['fecha']; ?></td>
 											<td class="center">
 											<div class="btn-group">
-												<button class="btn btn-success" name="ver_detalles" id="ver_detalles" data-toggle="modal" data-target="#myModal" onClick="ver_detalles(<?php echo $SP['id']?>);">Ver Detalles</button>
-												<a type="button" class="btn btn-primary" href="<?php echo base_url();?>index.php/SesionPrivada/toExcel/<?php echo $SP['id']?>"><i class="ace-icon fa fa-file-excel-o" aria-hidden="true"></i>Generar Excel</a>
-												<a type="button" class="btn btn-primary" href="<?php echo base_url();?>index.php/SesionPrivada/toXML/<?php echo $SP['id']?>"><i class="ace-icon fa fa-download" aria-hidden="true"></i>Generar XML</a>
+												<button class="btn btn-success" name="ver_detalles" id="ver_detalles" data-toggle="modal" data-target="#myModal" onClick="ver_detalles(<?php echo $SP['idSesPri']?>);">Ver Detalles</button>
+												<a type="button" class="btn btn-primary" href="<?php echo base_url();?>index.php/SesionPrivada/toExcel/<?php echo $SP['idSesPri']?>"><i class="ace-icon fa fa-file-excel-o" aria-hidden="true"></i>Generar Excel</a>
+												<a type="button" class="btn btn-primary" href="<?php echo base_url();?>index.php/SesionPrivada/toXML/<?php echo $SP['idSesPri']?>"><i class="ace-icon fa fa-download" aria-hidden="true"></i>Generar XML</a>
 											</div>
 											</td>
 										</tr>
@@ -80,7 +80,7 @@
 		      <div class="modal-body" id="detalles"></div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-		        <button type="button" id="resultado" class="btn btn-primary" onclick="guardar()"><i class=" ace-icon fa fa-floppy-o" aria-hidden="true"></i>Guardar Cambios</button>
+		        <button type="post" id="resultado" class="btn btn-primary" onclick="guardar()"><i class=" ace-icon fa fa-floppy-o" aria-hidden="true"></i>Guardar Cambios</button>
 		      </div>
 		    </div>
 		  </div>
@@ -120,7 +120,8 @@
                 },
                 success:  function (response) {
                         $("#resultado").html("Guardar Cambios");
-                        alert("Correcto");
+                        alert("Actualizado");
+                        $('#myModal').modal('hide');
                 },
 
                 error: function(response){

@@ -5,7 +5,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="Administrador">Home</a>
+								<a href="<?php echo base_url();?>">Home</a>
 							</li>
 
 							<li>
@@ -36,14 +36,19 @@
 		         <div class="row">
             <?php
         if($alumnos){
-             foreach($alumnos as $alumno){?>
+             foreach($alumnos as $alumno){
+							 if($alumno['imagen'] == null){
+								 $imagen = "default.png";
+							 }else{
+								 $imagen = $alumno['imagen'];
+							 }?>
 		           <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
 		            <div class="box box-primary box-solid">
 		              <div class="box-header with-border">
 		                <h4 class="box-title"><?php echo $alumno['nombre']." ".$alumno['apellidoP']." ".$alumno['apellidoM']; ?></h4>
 		              </div>
 		              <div class="box-body">
-		                <img class="img-responsive img-thumbnail center" src="<?php echo base_url();?>/assets/avatars/profile-pic.jpg" alt="100%" width="100%">
+		                <img class="img-responsive img-thumbnail center" src="<?php echo base_url();?>imagenes/alumnos/<?php echo $imagen?>" alt="100%" width="100%">
 		              </div>
 		              <div class="separator"></div>
 		              <p class="center">Matricula: <?php echo $alumno['matricula']; ?></p>
@@ -66,12 +71,6 @@
 														<input type="submit" class="btn btn-primary btn-block" value="Generar Sesión Privada" />
 													  </form>
 													</li>
-													<li>
-														<div class="divider"></div>
-													</li>
-													<li>
-														<a href="" class="btn btn-danger btn-xs btn-block">Registrar a Baja</a>
-													</li>
 												</ul>
 										</div>
 		              </div>
@@ -80,7 +79,7 @@
 		      <?php }
 		      }else{ ?>
 		      	<div class="callout callout-warning">
-                <h4>!Alto¡</h4> 
+                <h4>!Alto¡</h4>
                 <p>Sin grupo asignado.</p>
               </div>
 		      <?php	} ?>

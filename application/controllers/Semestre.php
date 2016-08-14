@@ -1,6 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Funciones  para el manejo de Semestres dentro de la apliación.
+ * 
+ * Dentro de esta clase se localizan metodos para la agregación de registros
+ * a la base de datos de la aplicaion, estos tienen relación sobre los datos
+ * de Semestres que empleara el sistema. Ademas de agregar, tambien incluye la 
+ * modificación de la informacion y la eliminacion de esta misma. 
+ * Así como otras utilidades relacionadas a esta enotras clases.
+ * 
+ * @author Rafael Hernández <rafa_hndz@outlook.com>
+ * 
+  */
+
 class Semestre extends CI_Controller{
 
   function __construct(){

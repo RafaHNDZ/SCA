@@ -15,7 +15,6 @@
                 <a class="active"><?php echo $titulo; ?></a>
               </li>
             </ul><!-- /.breadcrumb -->
-
             <div class="nav-search" id="nav-search">
               <form class="form-search">
                 <span class="input-icon">
@@ -47,29 +46,34 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
             <?php
-            $attributes = array('class' => 'form-horizontal', 'id' => '');
+            $attributes = array('class' => 'form-horizontal', 'id' => '', 'enctype' => 'multipart/form-data');
             echo form_open('Alumno/Regitrar_Ficha', $attributes); ?>
 
             <div class="form-group">
                     <label for="nombre" class="col-sm-3 control-label no-padding-right">Nombre <span class="required">*</span></label>
                     <?php echo form_error('nombre'); ?>
-                    <input id="nombre" type="text" name="nombre" maxlength="30" value="<?php echo set_value('nombre'); ?>" class="col-xs-10 col-sm-5" />
+                    <input placeholder="Coloca aqui tu(s) nombre(s)" id="nombre" type="text" name="nombre" maxlength="30" value="<?php echo set_value('nombre'); ?>" class="col-xs-10 col-sm-5" />
             </div>
 
             <div class="form-group">
                     <label for="apellidoP" class="col-sm-3 control-label no-padding-right">Apellido Paterno <span class="required">*</span></label>
                     <?php echo form_error('apellidoP'); ?>
-                    <input id="apellidoP" type="text" name="apellidoP" maxlength="40" value="<?php echo set_value('apellidoP'); ?>" class="col-xs-10 col-sm-5" />
+                    <input placeholder="Coloca aqui tu primer apellido" id="apellidoP" type="text" name="apellidoP" maxlength="40" value="<?php echo set_value('apellidoP'); ?>" class="col-xs-10 col-sm-5" />
             </div>
 
             <div class="form-group">
                     <label for="apellidoM" class="col-sm-3 control-label no-padding-right">Apellido Materno <span class="required">*</span></label>
                     <?php echo form_error('apellidoM'); ?>
-                    <input id="apellidoM" type="text" name="apellidoM" maxlength="40" value="<?php echo set_value('apellidoM'); ?>" class="col-xs-10 col-sm-5" />
+                    <input placeholder="Coloca aqui tu segudo apellido" id="apellidoM" type="text" name="apellidoM" maxlength="40" value="<?php echo set_value('apellidoM'); ?>" class="col-xs-10 col-sm-5" />
             </div>
-
             <div class="form-group">
-                    <label for="fechaNacimiento"class="col-sm-3 control-label no-padding-right">Fecha de Nacimiento</label>
+            <label for="imagen" class="ace-file-input"></label>
+              <div class="col-sm-5">
+                <input type="file" name="imagen" value="imagen" class="" id="id-input-file-2">
+              </div>
+            </div>
+            <div class="form-group">
+                    <label for="fechaNacimiento" class="col-sm-3 control-label no-padding-right">Fecha de Nacimiento</label>
                     <?php echo form_error('fechaNacimiento'); ?>
                     <input id="fechaNacimiento" type="date" name="fechaNacimiento"  value="<?php echo set_value('fechaNacimiento'); ?>" class="col-xs-10 col-sm-5" />
             </div>
@@ -77,13 +81,13 @@
             <div class="form-group">
                     <label for="telefono" class="col-sm-3 control-label no-padding-right">Telefono <span class="required">*</span></label>
                     <?php echo form_error('telefono'); ?>
-                    <input id="telefono" type="text" name="telefono" maxlength="10" value="<?php echo set_value('telefono'); ?>" class="col-xs-10 col-sm-5" />
+                    <input placeholder="Coloca aqui tu numero telefonico" id="telefono" type="text" name="telefono" maxlength="10" value="<?php echo set_value('telefono'); ?>" class="col-xs-10 col-sm-5" />
             </div>
 
             <div class="form-group">
                     <label for="matricula" class="col-sm-3 control-label no-padding-right">Matricula <span class="required">*</span></label>
                     <?php echo form_error('matricula'); ?>
-                    <input id="matricula" type="text" name="matricula"  value="<?php echo set_value('matricula'); ?>" class="col-xs-10 col-sm-5" />
+                    <input placeholder="Coloca aqui tu numero de matricula" id="matricula" type="text" name="matricula"  value="<?php echo set_value('matricula'); ?>" class="col-xs-10 col-sm-5" />
             </div>
 
             <div class="form-group">
@@ -94,7 +98,7 @@
                       <?php foreach($arrGrupo as $Grupo){ ?>
                           <option value="<?php echo $Grupo['id']?>"><?php echo $Grupo['grup']?></option>
                           option
-                      <?php } ?>  
+                      <?php } ?>
                     </select>
             </div>
 
@@ -103,30 +107,30 @@
             <div class="form-group">
                     <label for="calle" class="col-sm-3 control-label no-padding-right">Calle <span class="required">*</span></label>
                     <?php echo form_error('calle'); ?>
-                    <input id="calle" type="text" name="calle" maxlength="45" value="<?php echo set_value('calle'); ?>" class="col-xs-10 col-sm-5" />
+                    <input placeholder="Coloca en nombre de tu calle aqui" id="calle" type="text" name="calle" maxlength="45" value="<?php echo set_value('calle'); ?>" class="col-xs-10 col-sm-5" />
             </div>
 
             <div class="form-group">
                     <label for="numero" class="col-sm-3 control-label no-padding-right">Numero <span class="required">*</span></label>
                     <?php echo form_error('numero'); ?>
-                    <input id="numero" type="text" name="numero" maxlength="5" value="<?php echo set_value('numero'); ?>" class="col-xs-10 col-sm-5" />
+                    <input placeholder="Coloca el numero de tu casa aqui" id="numero" type="text" name="numero" maxlength="5" value="<?php echo set_value('numero'); ?>" class="col-xs-10 col-sm-5" />
             </div>
 
             <div class="form-group">
                     <label for="colonia" class="col-sm-3 control-label no-padding-right">Colonia <span class="required">*</span></label>
                     <?php echo form_error('colonia'); ?>
-                    <input id="colonia" type="text" name="colonia" maxlength="45" value="<?php echo set_value('colonia'); ?>" class="col-xs-10 col-sm-5" />
+                    <input placeholder="Coloca el nombre de tu colonia aqui" id="colonia" type="text" name="colonia" maxlength="45" value="<?php echo set_value('colonia'); ?>" class="col-xs-10 col-sm-5" />
             </div>
 
             <div class="form-group">
                     <label for="codigoPostal" class="col-sm-3 control-label no-padding-right">Codigo Postal<span class="required">*</span></label>
                     <?php echo form_error('codigoPostal'); ?>
-                    <input id="codigoPostal" type="text" name="codigoPostal" maxlength="6" value="<?php echo set_value('codigoPostal'); ?>" class="col-xs-10 col-sm-5" />
+                    <input placeholder="Coloca el codigo postal de tu zona" id="codigoPostal" type="text" name="codigoPostal" maxlength="6" value="<?php echo set_value('codigoPostal'); ?>" class="col-xs-10 col-sm-5" />
             </div>
 
 
             <div class="form-group" class="col-sm-3 control-label no-padding-right">
-                    
+
             </div>
 
           </div>
@@ -138,14 +142,14 @@
                 <?php echo form_error('situacionesFamiliares'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'situacionesFamiliares','class' => 'col-xs-10 col-sm-5', 'rows' => '5', 'cols' => '80', 'value' => set_value('situacionesFamiliares') ) )?>
+                <?php echo form_textarea( array( 'name' => 'situacionesFamiliares','class' => 'col-xs-10 col-sm-5 limited', 'rows' => '5', 'cols' => '80', 'value' => set_value('situacionesFamiliares') ) )?>
               </div>
               <div class="form-group">
                       <label for="integrantes" class="col-sm-3 control-label no-padding-right">Integrantes de tu familia <span class="required">*</span></label>
                 <?php echo form_error('integrantes'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'integrantes', 'rows' => '5' ,'class'=>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('integrantes') ) )?>
+                <?php echo form_textarea( array( 'name' => 'integrantes', 'rows' => '5' ,'class'=>'col-xs-10 col-sm-5 limited', 'cols' => '80', 'value' => set_value('integrantes') ) )?>
               </div>
               <div class="form-group">
                       <label for="lugar" class="col-sm-3 control-label no-padding-right">Lugar que ocupas en la familia <span class="required">*</span></label>
@@ -185,7 +189,7 @@
                 <?php echo form_error('enfermedades'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'enfermedades', 'rows' => '5', 'class' =>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('enfermedades') ) )?>
+                <?php echo form_textarea( array( 'name' => 'enfermedades', 'rows' => '5', 'class' =>'col-xs-10 col-sm-5 limited', 'cols' => '80', 'value' => set_value('enfermedades') ) )?>
               </div>
               <div class="form-group">
                       <label for="tratamiento" class="col-sm-3 control-label no-padding-right">¿Recibes algun tipo de tratamiento? <span class="required">*</span></label>
@@ -205,14 +209,14 @@
                 <?php echo form_error('tratamientoAnterior'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'tratamientoAnterior', 'rows' => '5','class' =>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('tratamientoAnterior') ) )?>
+                <?php echo form_textarea( array( 'name' => 'tratamientoAnterior', 'rows' => '5','class' =>'col-xs-10 col-sm-5 limited', 'cols' => '80', 'value' => set_value('tratamientoAnterior') ) )?>
               </div>
               <div class="form-group">
                       <label for="tipoTratamiento" class="col-sm-3 control-label no-padding-right">Tipo de Tratamiento <span class="required">*</span></label>
                 <?php echo form_error('tipoTratamiento'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'tipoTratamiento', 'rows' => '5','class' =>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('tipoTratamiento') ) )?>
+                <?php echo form_textarea( array( 'name' => 'tipoTratamiento', 'rows' => '5','class' =>'col-xs-10 col-sm-5 limited', 'cols' => '80', 'value' => set_value('tipoTratamiento') ) )?>
               </div>
               <div class="form-group">
                       <label for="hospitalizacion" class="col-sm-3 control-label no-padding-right">Has tenido alguna Hospitalización <span class="required">*</span></label>
@@ -248,21 +252,21 @@
                 <?php echo form_error('motivoOperacion'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'motivoOperacion', 'rows' => '5','class' =>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('motivoOperacion') ) )?>
+                <?php echo form_textarea( array( 'name' => 'motivoOperacion', 'rows' => '5','class' =>'col-xs-10 col-sm-5 limited', 'cols' => '80', 'value' => set_value('motivoOperacion') ) )?>
               </div>
               <div class="form-group">
                       <label for="padeceEnfermedad" class="col-sm-3 control-label no-padding-right">Enfermedad <span class="required">*</span></label>
                 <?php echo form_error('padeceEnfermedad'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'padeceEnfermedad', 'rows' => '5','class' =>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('padeceEnfermedad') ) )?>
+                <?php echo form_textarea( array( 'name' => 'padeceEnfermedad', 'rows' => '5','class' =>'col-xs-10 col-sm-5 limited', 'cols' => '80', 'value' => set_value('padeceEnfermedad') ) )?>
               </div>
               <div class="form-group">
                       <label for="enfermedadCronica" class="col-sm-3 control-label no-padding-right">Enfermedades Cronicas <span class="required">*</span></label>
                 <?php echo form_error('enfermedadCronica'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'enfermedadCronica', 'rows' => '5','class' =>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('enfermedadCronica') ) )?>
+                <?php echo form_textarea( array( 'name' => 'enfermedadCronica', 'rows' => '5','class' =>'col-xs-10 col-sm-5 limited', 'cols' => '80', 'value' => set_value('enfermedadCronica') ) )?>
               </div>
             </div>
 
@@ -297,8 +301,8 @@
 
               <div class="form-group">
                       <label for="ingresoFamiliarMensual" class="col-sm-3 control-label no-padding-right">Ingresos Familiares <span class="required">*</span></label>
-                      <input class="col-xs-10 col-sm-5" id="ingresoFamiliarMensual" type="text" name="ingresoFamiliarMensual" maxlength="6" value="<?php echo set_value('ingresoFamiliarMensual'); ?>"  /> 
-                      <?php echo form_error('ingresoFamiliarMensual'); ?>                      
+                      <input class="col-xs-10 col-sm-5" id="ingresoFamiliarMensual" type="text" name="ingresoFamiliarMensual" maxlength="6" value="<?php echo set_value('ingresoFamiliarMensual'); ?>"  />
+                      <?php echo form_error('ingresoFamiliarMensual'); ?>
               </div>
 
               <div class="form-group">
@@ -317,14 +321,14 @@
                 <?php echo form_error('necesitaTrabajo'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'necesitaTrabajo', 'rows' => '5', 'class' =>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('necesitaTrabajo') ) )?>
+                <?php echo form_textarea( array( 'name' => 'necesitaTrabajo', 'rows' => '5', 'class' =>'col-xs-10 col-sm-5 limited', 'cols' => '80', 'value' => set_value('necesitaTrabajo') ) )?>
               </div>
               <div class="form-group">
                       <label for="causaTrabajo" class="col-sm-3 control-label no-padding-right">Cual es la causa <span class="required">*</span></label>
                 <?php echo form_error('causaTrabajo'); ?>
 
 
-                <?php echo form_textarea( array( 'name' => 'causaTrabajo', 'rows' => '5', 'class' =>'col-xs-10 col-sm-5', 'cols' => '80', 'value' => set_value('causaTrabajo') ) )?>
+                <?php echo form_textarea( array( 'name' => 'causaTrabajo', 'rows' => '5', 'class' =>'col-xs-10 col-sm-5 limited', 'cols' => '80', 'value' => set_value('causaTrabajo') ) )?>
               </div>
             </div>
           </div>
@@ -378,3 +382,13 @@
 		</div>
 	</div>
 </div>
+<script src="<?php echo base_url();?>assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('textarea.limited').inputlimiter({
+      limit: 200,
+      remText: '%n caracteres%s restantes...',
+      limitText: 'Maximo Permitido : %n.'
+    });
+  });
+</script>

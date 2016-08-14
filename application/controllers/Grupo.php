@@ -1,6 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Tiene funciones para el manejo de Grupos dentro de la apliación.
+ * 
+ * Dentro de esta clase se localizan metodos para la agregación de registros
+ * a la base de datos de la aplicaion, estos tienen relación sobre los datos
+ * de un Grupo. Ademas de agregar, tambien incluye la modificación de
+ * la informacion y la eliminacion de esta misma. Así como otras utilidades
+ * relacionadas a esta enotras clases.
+ * 
+ * @author Rafael Hernández <rafa_hndz@outlook.com>
+ * 
+  */
+
 class Grupo extends CI_Controller{
 
 		function __construct(){
@@ -110,7 +123,7 @@ class Grupo extends CI_Controller{
 		$id_tutor = $this->session->userdata('usuario_id');
 
 		$data['alumnos'] = $this->Modelo_Grupo->lista_grupo($id_tutor);
-		$data['titulo'] = "Lista de Grupos";
+		$data['titulo'] = "Mi Grupo";
 		$data['content'] = "Tutor/Listas/Lista_Grupo";
 
 		$this->load->view('Plantilla', $data);
@@ -247,9 +260,35 @@ class Grupo extends CI_Controller{
 		$sesion = $this->Modelo_Grupo->get_detalles_grupo($id);
 		foreach($sesion as $dato){}?>
 			<form class="form-horizontal" role="form" method="POST">
-	  
+
 			</form>
-		<?php	
+		<?php
+	}
+
+	public function toXML($id){
+ 		$xml = $this->Modelo_Grupo->toXML($id);
+ 		$this->load->helper('download');
+ 		$nombre = "Grupo";
+ 		$nombre .=date("d-m-Y-H:i:s");
+ 		$nombre .= ".xml";
+ 			force_download($nombre,$xml);
+	}
+
+	public function toExcel($id){
+
+ 		$this->load->helper('mysql_to_excel');
+		$nombre = "Grupo";
+ 		$nombre .=date("d-m-Y-H:i:s");
+ 		to_excel($this->Modelo_Grupo->toExcel($id),$nombre);
+	}
+
+	public function delete(){
+		$id = $this->input->post('id');
+		if($this->Modelo_Grupo->delete($id) == true){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 }

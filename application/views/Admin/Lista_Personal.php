@@ -5,7 +5,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="Administrador">Home</a>
+								<a href="<?php echo base_url();?>">Home</a>
 							</li>
 
 							<li>
@@ -49,14 +49,14 @@
 											<?php foreach($arrTut as $Tut){ ?>
 											<tr>
 												<td>
-												<?php echo $Tut['nombre']." ".$Tut['apellidoP']." ".$Tut['apellidoM'] ?>
-													
+												<?php echo $Tut->nombre." ".$Tut->apellidoP." ".$Tut->apellidoM ?>
+
 												</td>
 																								<td>
-												<?php echo $Tut['email'];?>
+												<?php echo $Tut->email;?>
 												</td>
 												<td>
-													<?php switch ($Tut['privilegios']) {
+													<?php switch ($Tut->privilegios) {
 														case '2':
 															?> <button type="button" name="button" class="btn btn-warning">Administrador</button> <?php
 															break;
@@ -67,7 +67,7 @@
 													} ?>
 												</td>
 												<td>
-													<?php switch ($Tut['estado']) {
+													<?php switch ($Tut->estado) {
 														case '1':
 															?> <button type="button" name="button" class="btn btn-success">Activo</button> <?php
 															break;
@@ -78,8 +78,8 @@
 													} ?>
 												</td>
 												<td>
-												<form action="Personal/mod_Personal" method="POST">
-												<input type="hidden" name="idTutor" id="idTutor" value="<?php echo $Tut['id'];?>">
+												<form action="<?php echo base_url();?>index.php/Personal/mod_Personal" method="POST">
+												<input type="hidden" name="idTutor" id="idTutor" value="<?php echo $Tut->id;?>">
 												<button class="btn btn-primary">Editar Información</button>
 												</form>
 												</td>
@@ -87,6 +87,7 @@
 											<?php } ?>
 										</tbody>
 									</table>
+									<?php echo $this->pagination->create_links() ?>
 								</div>
 							</div>
             </div>

@@ -42,7 +42,7 @@ class Modelo_Grupo extends CI_Model {
 		$this->db->join('alumno','alumno.grupo_id = grupo.id');
 		$this->db->where('grupo.tutor_id',$id);
 		$consulta = $this->db->get();
-		
+
 			if($consulta != null){
 				return $resultado = $consulta->result_array();
 			}else{
@@ -53,8 +53,8 @@ class Modelo_Grupo extends CI_Model {
 	public function num_grupos(){
 
 		 $this->db->select('id, COUNT(id) as total');
-		 $this->db->group_by('id'); 
-		 $this->db->order_by('total', 'desc'); 
+		 $this->db->group_by('id');
+		 $this->db->order_by('total', 'desc');
 		 $consulta = $this->db->get('grupo', 10);
 
 			if($consulta != null){
@@ -62,6 +62,16 @@ class Modelo_Grupo extends CI_Model {
 			}else{
 				return null;
 			}
+	}
+
+	public function numAl($id){
+		$query ='select count(id) as numeroAlumnos from alumno where alumno.grupo_id = (select id from grupo WHERE grupo.tutor_id = {$id})';
+		$query = $this->db->get('alumno');
+		$numAl = 0;
+		foreach($query->result() as $con){
+			$numAl ++;
+		}
+		return $numAl;
 	}
 
 	function get_detalles($id){
@@ -114,4 +124,31 @@ class Modelo_Grupo extends CI_Model {
 			return "Sin Datos";
 		}
 	}
+
+	public function toExcel($id){
+		//Obtener los nombres de los campos
+		$fields = $this->db->field_data('grupo');
+		$this->db->where('grupo.id',$id);
+		$query = $this->db->get('grupo');
+		return array(
+				"fields" => $fields,
+				"query"  => $query
+			);
+	}
+	
+	public function toXML($id){
+		$this->load->dbutil();
+		$this->db->where('grupo.id',$id);
+		$consulta = $this->db->get('grupo');
+		$config = array(
+			'root' => 		'Grupo',
+			'element' =>	'grupo',
+			'newline' => 	"\n",
+			'tab' =>		"\t"
+			);
+		$respuestaXML = $this->dbutil->xml_from_result($consulta, $config);
+
+			return $respuestaXML;
+		}
+
 }
